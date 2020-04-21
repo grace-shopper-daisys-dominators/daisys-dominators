@@ -26,3 +26,23 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const {firstName, lastName, email, password} = req.body
+    // **Destructuring the body SHOULD prevent user from setting isAdmin to true upon user creation; isAdmin should only be able to be modified by another admin.
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      email,
+      password
+    })
+    if (newUser) {
+      res.status(201).send(newUser)
+    } else {
+      res.status(500).send('Unable to create user.')
+    }
+  } catch (err) {
+    next(err)
+  }
+})
