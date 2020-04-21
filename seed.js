@@ -1,5 +1,5 @@
 const {green, red} = require('chalk')
-const {db} = require('./server/db')
+const db = require('./server/db/db')
 
 const seed = async () => {
   try {
