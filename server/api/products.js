@@ -20,3 +20,16 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    // Figure out why the post is not working
+    const newProduct = await Product.create(req.body)
+
+    if (newProduct) {
+      res.status(201).json(newProduct)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
