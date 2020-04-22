@@ -36,7 +36,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    // const currentUser = {} || req.user.dataValues
+    const currentUser = req.user.dataValues
     const id = req.params.id
 
     // I'm not sure how to eloquently test this route with postman since I don't know how to add a "user" attribute to the request there, but I tested it as best I could and I think it works!
@@ -46,7 +46,7 @@ router.put('/:id', async (req, res, next) => {
       if (updatedProduct) {
         res.send('Update successful!')
       } else {
-        res.status(304).send('Update failed.')
+        throw new Error('Update failed.')
       }
     } else {
       res.status(401).send('You are not authorized to edit products.')
