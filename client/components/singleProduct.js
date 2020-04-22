@@ -28,8 +28,8 @@ export class SingleProduct extends Component {
         <div>
           <h1>{name}</h1>
           <p>Rating: {rating}</p>
-          <p>Price: {price}</p>
           <hr />
+          <p>Price: {price}</p>
           <p>Description: {description}</p>
           <p>Type: {color}</p>
           <p>Region: {region}</p>
