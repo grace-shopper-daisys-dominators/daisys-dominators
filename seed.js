@@ -142,6 +142,7 @@ const products = [
     rating: 3
   }
 ]
+
 const seed = async () => {
   try {
     await db.sync({force: true})
