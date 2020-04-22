@@ -25,7 +25,7 @@ const Product = db.define('product', {
     type: Sequelize.STRING
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2)
+    type: Sequelize.INTEGER
   },
   size: {
     type: Sequelize.INTEGER
