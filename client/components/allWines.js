@@ -20,7 +20,7 @@ class AllWines extends React.Component {
               <img src={wine.imageUrl} />
               <h2> {wine.color} </h2>
               <h2> {wine.price} </h2>
-              <Link to={`/products/${campus.id}`}>view wine</Link>
+              <Link to={`/products/${wine.id}`}>view wine</Link>
             </div>
           )
         })}
