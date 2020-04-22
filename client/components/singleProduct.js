@@ -1,27 +1,49 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {link} from 'react-router-dom'
 import {getSingleProduct} from '../store/singleProduct.js'
 
-class SingleProduct extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
   }
 
   render() {
-    // console.log(this.props.product)
-    return <div>Single Product Info</div>
+    const {
+      name,
+      imageURL,
+      color,
+      description,
+      price,
+      region,
+      size,
+      year,
+      rating
+    } = this.props.product
+
+    return (
+      <div>
+        <div>
+          <img src={imageURL} />
+        </div>
+        <div>
+          <h1>{name}</h1>
+          <p>Rating: {rating}</p>
+          <p>Price: {price}</p>
+          <hr />
+          <p>Description: {description}</p>
+          <p>Type: {color}</p>
+          <p>Region: {region}</p>
+          <p>Size: {size}</p>
+          <p>Year: {year}</p>
+        </div>
+      </div>
+    )
   }
 }
 
-const mapState = state => {
-  return {
-    product: state.product
-  }
-}
+const mapState = state => ({
+  product: state.singleProduct
+})
 
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId))

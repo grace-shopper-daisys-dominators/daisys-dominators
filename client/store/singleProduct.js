@@ -8,7 +8,7 @@ const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 /**
  * INITIAL STATE
  */
-const singleProduct = []
+const singleProduct = {}
 
 /**
  * ACTION CREATORS
@@ -24,8 +24,7 @@ export const setSingleProduct = product => ({
 export const getSingleProduct = productId => {
   return async dispatch => {
     try {
-      const res = await axios.get(`api/products/${productId}`)
-      console.log('singleProduct', res.data)
+      const res = await axios.get(`/api/products/${productId}`)
       dispatch(setSingleProduct(res.data))
     } catch (err) {
       console.error(err, 'UNABLE TO GET SINGLE PRODUCT')
