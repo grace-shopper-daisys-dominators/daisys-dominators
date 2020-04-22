@@ -2,9 +2,9 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 1
+  status: {
+    type: Sequelize.ENUM,
+    values: ['pending', 'completed', 'credit card declined']
   }
 })
 
