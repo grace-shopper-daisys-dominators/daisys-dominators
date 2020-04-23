@@ -1,10 +1,7 @@
 const {green, red} = require('chalk')
 const db = require('./server/db/db')
 
-const User = require('./server/db/models/user')
-const Product = require('./server/db/models/product')
-const Order = require('./server/db/models/order')
-const Cart = require('./server/db/models/cart')
+const {User, Product, Order} = require('./server/db/models/index')
 
 const users = [
   {
@@ -12,12 +9,7 @@ const users = [
     lastName: 'Berry',
     isAdmin: true,
     email: 'strawberry@gmail.com',
-    password: '1234',
-    order: [
-      {
-        status: 'pending'
-      }
-    ]
+    password: '1234'
   },
   {
     firstName: 'Jon',
@@ -147,7 +139,6 @@ const products = [
 
 const orders = [
   {
-    userId: 1,
     status: 'pending'
   }
 ]
@@ -168,11 +159,12 @@ const seed = async () => {
       })
     )
 
-    await Promise.all(
-      orders.map(order => {
-        return Order.create(order, {include: [Cart]})
-      })
-    )
+    const testOrders = await Order.create({
+      status: 'pending',
+      userId: 1
+    })
+
+    // return testOrders
 
     console.log(green('Seeding success!'))
 
