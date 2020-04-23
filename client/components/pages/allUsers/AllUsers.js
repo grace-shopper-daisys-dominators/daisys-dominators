@@ -31,11 +31,9 @@ export class AllUsers extends Component {
   }
 }
 
-const mapState = state => {
-  return {
-    users: state.allUsers
-  }
-}
+const mapState = state => ({
+  users: state.allUsers.all
+})
 
 const mapDispatch = dispatch => ({
   getAllUsers: () => dispatch(getAllUsers())

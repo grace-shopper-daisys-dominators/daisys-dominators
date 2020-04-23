@@ -7,7 +7,7 @@ import {me} from './store'
 import SingleProduct from './components/SingleProduct'
 import Homepage from './components/pages/homePage'
 import AllUsers from './components/pages/allUsers/AllUsers'
-
+import SingleUser from './components/pages/singleUser/SingleUser'
 /**
  * COMPONENT
  */
@@ -24,6 +24,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/users" component={AllUsers} />
+        <Route exact path="/users/:userId" component={SingleUser} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/" component={Homepage} />

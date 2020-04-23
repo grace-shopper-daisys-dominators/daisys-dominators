@@ -3,18 +3,21 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
-const GET_SINGLE_USER = 'GET_SINGLE_USER'
 const GET_ALL_USERS = 'GET_ALL_USERS'
+const GET_SINGLE_USER = 'GET_SINGLE_USER'
 
 /**
  * INITIAL STATE
  */
-const allTheUsers = []
+const allTheUsers = {
+  all: [],
+  singleUser: {}
+}
 /**
  * ACTION CREATORS
  */
-const setSingleUser = user => ({type: GET_SINGLE_USER, user})
 const setAllUsers = users => ({type: GET_ALL_USERS, users})
+const setSingleUser = user => ({type: GET_SINGLE_USER, user})
 
 /**
  * THUNK CREATORS
@@ -45,9 +48,9 @@ export const getSingleUser = userId => {
 export default function(state = allTheUsers, action) {
   switch (action.type) {
     case GET_ALL_USERS:
-      return action.users
+      return {...state, all: action.users}
     case GET_SINGLE_USER:
-      return action.user
+      return {singleUser: action.user}
     default:
       return state
   }
