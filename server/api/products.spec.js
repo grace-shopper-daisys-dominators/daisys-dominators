@@ -8,7 +8,6 @@ describe('Product routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
-
   describe('/api/products', () => {
     beforeEach(() => {
       return Product.create({
@@ -43,10 +42,12 @@ describe('Product routes', () => {
     //       .expect(200)
 
     //       console.log(res.body)
+    //       console.log(res.body)
 
     //       expect(res.body[0].description).to.be.equal("Wine for cats!")
     //     })
 
+    //   })
     //   })
   })
 })
