@@ -29,11 +29,17 @@ router.post('/', async (req, res, next) => {
     const {imageURL, region, size, year, rating} = req.body
     const optionals = {imageURL, region, size, year, rating}
 
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
     for (let key in optionals) {
       if (optionals[key]) productObj[key] = optionals[key]
     }
 
-    const currentUser = req.user.dataValues
     if (currentUser.isAdmin) {
       const newProduct = await Product.create(productObj)
 
@@ -43,7 +49,7 @@ router.post('/', async (req, res, next) => {
         res.status(500).send('Unable to create product.')
       }
     } else {
-      res.status(401).send('You are not authorized to create products.')
+      res.status(401).send('Log in with admin account to add products.')
     }
   } catch (err) {
     next(err)
@@ -52,7 +58,13 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const currentUser = {} //req.user.dataValues
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
     const id = req.params.id
 
     const {
@@ -83,9 +95,7 @@ router.put('/:id', async (req, res, next) => {
       if (reqBody[key]) productObj[key] = reqBody[key]
     }
 
-    // I'm not sure how to eloquently test this route with postman since I don't know how to add a "user" attribute to the request there, but I tested it as best I could and I think it works!
-
-    if (!currentUser.isAdmin) {
+    if (currentUser.isAdmin) {
       const updatedProduct = await Product.update(productObj, {where: {id: id}})
       if (updatedProduct) {
         res.send('Update successful!')
@@ -93,7 +103,7 @@ router.put('/:id', async (req, res, next) => {
         throw new Error('Update failed.')
       }
     } else {
-      res.status(401).send('You are not authorized to edit products.')
+      res.status(401).send('Log in with admin account to edit products.')
     }
   } catch (err) {
     next(err)

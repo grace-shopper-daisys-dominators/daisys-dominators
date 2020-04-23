@@ -69,7 +69,13 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const currentUser = req.user.dataValues
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
     const id = req.params.id
 
     const {firstName, lastName, email, password, isAdmin} = req.body
