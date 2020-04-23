@@ -104,7 +104,7 @@ router.put('/:id', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: 1}
+      currentUser = {}
     }
 
     const order = await Order.findByPk(req.params.id)
@@ -124,6 +124,33 @@ router.put('/:id', async (req, res, next) => {
       }
     } else {
       res.status(304).send('Log in to update your orders.')
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
+    const order = await Order.findByPk(req.params.id)
+
+    if (currentUser.id === order.userId || currentUser.isAdmin) {
+      const deleteOrder = await Order.destroy({where: {id: req.params.id}})
+
+      if (deleteOrder) {
+        res.status(204).send('Order deleted.')
+      } else {
+        res.status(304).send('Failed to delete order.')
+      }
+    } else {
+      res.status(304).send('Log in to delete orders.')
     }
   } catch (err) {
     next(err)
