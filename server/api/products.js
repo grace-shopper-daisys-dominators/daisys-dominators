@@ -109,3 +109,29 @@ router.put('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
+    const id = req.params.id
+
+    if (currentUser.isAdmin) {
+      const deleted = await Product.destroy({where: {id: id}})
+      if (deleted) {
+        res.status(204).send('Product deleted.')
+      } else {
+        res.status(304).send('Failed to delete product.')
+      }
+    } else {
+      res.status(401).send('Log in with admin account to delete products.')
+    }
+  } catch (err) {
+    next(err)
+  }
+})
