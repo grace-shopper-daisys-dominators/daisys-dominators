@@ -159,10 +159,10 @@ const seed = async () => {
       })
     )
 
-    const testOrders = await Order.create({
-      status: 'pending',
-      userId: 1
-    })
+    // const testOrders = await Order.create({
+    //   status: 'pending',
+    //   userId: 1
+    // })
 
     // return testOrders
 
