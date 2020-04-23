@@ -1,10 +1,9 @@
 import axios from 'axios'
-import history from '../history'
 
 /**
  * ACTION TYPES
  */
-const GET_SINGLE_USER = 'GET_USER'
+const GET_SINGLE_USER = 'GET_SINGLE_USER'
 const GET_ALL_USERS = 'GET_ALL_USERS'
 
 /**
@@ -30,16 +29,16 @@ export const getAllUsers = () => {
     }
   }
 }
-// export const getSingleUser = (userId) => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await axios.get(`/api/users/${userId}`)
-//       dispatch(setSingleUser(res.data))
-//     } catch (err) {
-//       console.error(err, 'USER NOT FOUND')
-//     }
-//   }
-// }
+export const getSingleUser = userId => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(`/api/users/${userId}`)
+      dispatch(setSingleUser(res.data))
+    } catch (err) {
+      console.error(err, 'USER NOT FOUND')
+    }
+  }
+}
 /**
  * REDUCER
  */
@@ -47,8 +46,8 @@ export default function(state = allTheUsers, action) {
   switch (action.type) {
     case GET_ALL_USERS:
       return action.users
-    // case GET_SINGLE_USER:
-    //   return action.user
+    case GET_SINGLE_USER:
+      return action.user
     default:
       return state
   }

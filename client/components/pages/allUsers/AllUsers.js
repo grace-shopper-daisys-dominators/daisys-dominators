@@ -8,7 +8,26 @@ export class AllUsers extends Component {
   }
   render() {
     const {users} = this.props
-    return <div>get all users</div>
+    return (
+      <div>
+        {users.map(user => {
+          return (
+            <div key={user.id}>
+              <h1>User:</h1>
+              <p>
+                <b>Firstname:</b> {user.firstName}
+              </p>
+              <p>
+                <b>Lastname:</b> {user.lastName}
+              </p>
+              <p>
+                <b>Email:</b> {user.email}
+              </p>
+            </div>
+          )
+        })}
+      </div>
+    )
   }
 }
 
