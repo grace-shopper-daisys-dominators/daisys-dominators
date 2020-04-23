@@ -72,6 +72,30 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.get('/me/current', async (req, res, next) => {
+  try {
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
+    if (currentUser.id) {
+      const cart = await Order.findAll({
+        where: {status: 'pending', userId: currentUser.id},
+        include: Product
+      })
+
+      res.json(cart)
+    } else {
+      res.send('Log in to view your cart.')
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     let currentUserId

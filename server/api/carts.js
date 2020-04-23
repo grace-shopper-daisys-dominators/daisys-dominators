@@ -40,7 +40,7 @@ const sequelize = require('sequelize')
 //   } catch (err) {
 //     next(err)
 //   }
-// })
+// })gi
 
 router.post('/', async (req, res, next) => {
   try {
@@ -84,7 +84,7 @@ router.put('/:id', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: 3}
+      currentUser = {}
     }
     const {price, operation, orderId} = req.body
     const {userId} = await Order.findByPk(orderId)
