@@ -3,12 +3,7 @@ const db = require('./server/db/db')
 
 const User = require('./server/db/models/user')
 const Product = require('./server/db/models/product')
-// firstName: 'Shirley',
-// lastName: 'Berry',
-// isAdmin: 'true',
-// email: 'strawberry@gmail.com',
-// password: '1234
-//
+
 const users = [
   {
     firstName: 'Shirley',
@@ -158,16 +153,6 @@ const seed = async () => {
         return User.create(user)
       })
     )
-
-    console.log(green('Seeding success!'))
-
-    /*------------------------USERS------------------------- */
-
-    // const exampleUser = await User.create({})
-
-    /*------------------------WINES------------------------- */
-
-    // const exampleWine = await Wine.create({})
   } catch (err) {
     console.log(red(err))
   }
