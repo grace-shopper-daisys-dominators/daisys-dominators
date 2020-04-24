@@ -4,24 +4,44 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin']
-    })
-    res.json(users)
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
+    if (currentUser.isAdmin) {
+      const users = await User.findAll({
+        attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin']
+      })
+      res.json(users)
+    } else {
+      res.status(401).send('Log in to admin account to view user data.')
+    }
   } catch (err) {
     next(err)
   }
 })
 
-// Find out where logged in user is stored for isAdmin function!!
-
 router.get('/:id', async (req, res, next) => {
   try {
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
     const id = req.params.id
-    const user = await User.findByPk(id, {
-      attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin']
-    })
-    res.json(user)
+
+    if (currentUser.isAdmin) {
+      const user = await User.findByPk(id, {
+        attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin']
+      })
+      res.json(user)
+    } else {
+      res.status(401).send('Log in to admin account to view user data.')
+    }
   } catch (err) {
     next(err)
   }
@@ -49,20 +69,58 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const currentUser = req.user.dataValues
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
     const id = req.params.id
 
-    // I'm not sure how to eloquently test this route with postman since I don't know how to add a "user" attribute to the request there, but I tested it as best I could and I think it works!
+    const {firstName, lastName, email, password, isAdmin} = req.body
+    const reqBody = {firstName, lastName, email, password, isAdmin}
+    let productObj = {}
+
+    for (let key in reqBody) {
+      if (reqBody[key]) productObj[key] = reqBody[key]
+    }
 
     if (currentUser.isAdmin) {
-      const updatedUser = await User.update(req.body, {where: {id: id}})
+      const updatedUser = await User.update(productObj, {where: {id: id}})
       if (updatedUser > 0) {
         res.send('Update successful!')
       } else {
         throw new Error('Update failed.')
       }
     } else {
-      res.status(401).send('You are not authorized to edit users.')
+      res.status(401).send('Log in to admin account to edit users.')
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
+    const id = req.params.id
+
+    if (currentUser.isAdmin) {
+      const deleted = await User.destroy({where: {id: id}})
+      if (deleted) {
+        res.status(204).send('User deleted.')
+      } else {
+        res.status(304).send('Failed to delete user.')
+      }
+    } else {
+      res.status(401).send('Log in with admin account to delete users.')
     }
   } catch (err) {
     next(err)

@@ -1,14 +1,8 @@
 const {green, red} = require('chalk')
 const db = require('./server/db/db')
 
-const User = require('./server/db/models/user')
-const Product = require('./server/db/models/product')
-// firstName: 'Shirley',
-// lastName: 'Berry',
-// isAdmin: 'true',
-// email: 'strawberry@gmail.com',
-// password: '1234
-//
+const {User, Product, Order} = require('./server/db/models/index')
+
 const users = [
   {
     firstName: 'Shirley',
@@ -392,6 +386,12 @@ const products = [
   }
 ]
 
+const orders = [
+  {
+    status: 'pending'
+  }
+]
+
 const seed = async () => {
   try {
     await db.sync({force: true})
@@ -407,6 +407,13 @@ const seed = async () => {
         return User.create(user)
       })
     )
+
+    // const testOrders = await Order.create({
+    //   status: 'pending',
+    //   userId: 1
+    // })
+
+    // return testOrders
 
     console.log(green('Seeding success!'))
 
