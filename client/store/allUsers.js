@@ -3,6 +3,7 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
+const ADD_NEW_USER = 'ADD_NEW_USER'
 const GET_ALL_USERS = 'GET_ALL_USERS'
 const GET_SINGLE_USER = 'GET_SINGLE_USER'
 
@@ -18,7 +19,7 @@ const allTheUsers = {
  */
 const setAllUsers = users => ({type: GET_ALL_USERS, users})
 const setSingleUser = user => ({type: GET_SINGLE_USER, user})
-
+const setNewUser = newUser => ({type: ADD_NEW_USER, newUser})
 /**
  * THUNK CREATORS
  */
@@ -42,6 +43,22 @@ export const getSingleUser = userId => {
     }
   }
 }
+
+export const addNewUser = (firstName, lastName, email, password) => {
+  return async dispatch => {
+    try {
+      const res = await axios.post('api/users', {
+        firstName,
+        lastName,
+        email,
+        password
+      })
+      dispatch(setNewUser(res.data))
+    } catch (err) {
+      console.error(err, 'USER NOT FOUND')
+    }
+  }
+}
 /**
  * REDUCER
  */
@@ -51,6 +68,8 @@ export default function(state = allTheUsers, action) {
       return {...state, all: action.users}
     case GET_SINGLE_USER:
       return {singleUser: action.user}
+    case ADD_NEW_USER:
+      return {...state, all: action.newUser}
     default:
       return state
   }
