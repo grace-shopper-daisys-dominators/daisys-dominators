@@ -23,24 +23,24 @@ const sequelize = require('sequelize')
 //   }
 // })
 
-// router.get('/:id', async (req, res, next) => {
-//   try {
-//     let currentUser
-//     if (req.user) {
-//       currentUser = req.user.dataValues
-//     } else {
-//       currentUser = {}
-//     }
+router.get('/:id', async (req, res, next) => {
+  try {
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
 
-//     const cart = Cart.findByPk(req.params.id, {include: User})
+    const cart = Cart.findByPk(req.params.id, {include: User})
 
-//     if (currentUser.id === cart.user.id || currentUser.isAdmin){
-//       res.json(cart)
-//     }
-//   } catch (err) {
-//     next(err)
-//   }
-// })gi
+    if (currentUser.id === cart.user.id || currentUser.isAdmin) {
+      res.json(cart)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/', async (req, res, next) => {
   try {
