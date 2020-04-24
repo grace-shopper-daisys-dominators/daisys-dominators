@@ -30,7 +30,7 @@ export class AllUsers extends Component {
                 </div>
               )
             })
-          : ''}
+          : 'No users yet!'}
       </div>
     )
   }
