@@ -117,9 +117,12 @@ const mapSignUpDispatch = dispatch => {
       const lastName = evt.target.lastName.value
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(addNewUser(firstName, lastName, email, password, formName))
-      // TODO: add error handling for accounts that already exists!
-      dispatch(auth(email, password, 'login'))
+      if (!email) {
+        dispatch(addNewUser(firstName, lastName, email, password, formName))
+        dispatch(auth(email, password, 'login'))
+      } else {
+        dispatch(auth(email, password, 'login'))
+      }
     }
   }
 }
