@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
 import {addToCart} from '../store/cart'
+import {logout} from '../store'
+import {user} from '../store/user'
+import {persistedState} from '../store'
 
 export class SingleProduct extends Component {
   componentDidMount() {
@@ -9,7 +12,9 @@ export class SingleProduct extends Component {
   }
 
   handleClick = id => {
+    if (!isLoggedIn) this.props.addToLocalStorage()
     this.props.addToCart(id)
+    console.log('herrrrrreeeee', this.props.user)
   }
 
   render() {
@@ -25,6 +30,9 @@ export class SingleProduct extends Component {
       rating
     } = this.props.product
 
+    const user = this.props.user
+    console.log('USER====>', user)
+    console.log('LOCAL STORAGE===>', localStorage)
     return (
       <div>
         <div>
@@ -55,12 +63,15 @@ export class SingleProduct extends Component {
 }
 
 const mapState = state => ({
-  product: state.singleProduct
+  product: state.singleProduct,
+  user: state.user,
+  isLoggedIn: !!state.user.id
 })
 
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
-  addToCart: id => dispatch(addToCart(id))
+  addToCart: id => dispatch(addToCart(id)),
+  addToLocalStorage: id => dispatch(addToLocalStorage(id))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
