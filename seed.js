@@ -24,7 +24,7 @@ const products = [
   {
     name: 'Shobborook Romanee Tuff',
     imageURL: 'https://www.bottleking.com/labels/B50882.png',
-    color: 'red',
+    color: 'RED',
     region: 'Barossa Valley, Australia',
     price: 30.0,
     size: 750,
@@ -36,7 +36,7 @@ const products = [
   {
     name: 'Rosenblum Cellars Rockpile Road Zinfandel',
     imageURL: 'https://www.bottleking.com/labels/B50882.png',
-    color: 'red',
+    color: 'RED',
     region: 'Rockpile, USA',
     price: 34.0,
     size: 750,
@@ -48,7 +48,7 @@ const products = [
   {
     name: 'Domaine Laurent Habrard Crozes-Hermitage',
     imageURL: 'https://www.bottleking.com/labels/B50882.png',
-    color: 'red',
+    color: 'RED',
     region: 'Rhone, France',
     price: 35.0,
     size: 750,
@@ -61,7 +61,7 @@ const products = [
     name: 'Weingut Leitz Rudesheimer Berg Kaisersteinfels Terrassen Riesling',
     imageURL:
       'https://cdn10.bigcommerce.com/s-i53ly/products/2131/images/1641/white_wine__86383.1517846952.1280.1280.jpg?c=2',
-    color: 'white',
+    color: 'WHITE',
     region: 'Rheingau, Germany',
     price: 39.0,
     size: 750,
@@ -74,7 +74,7 @@ const products = [
     name: 'Domaine Marius Delarche Pernand-Vergelesses Blanc',
     imageURL:
       'https://cdn10.bigcommerce.com/s-i53ly/products/2131/images/1641/white_wine__86383.1517846952.1280.1280.jpg?c=2',
-    color: 'white',
+    color: 'WHITE',
     region: 'Cote de Beaune, France',
     price: 29.0,
     size: 750,
@@ -87,7 +87,7 @@ const products = [
     name: 'Biblia Chora Ovilos White Assyrtiko-Semillon',
     imageURL:
       'https://cdn10.bigcommerce.com/s-i53ly/products/2131/images/1641/white_wine__86383.1517846952.1280.1280.jpg?c=2',
-    color: 'white',
+    color: 'WHITE',
     region: 'Macedonis, Greece',
     price: 38.0,
     size: 750,
@@ -100,7 +100,7 @@ const products = [
     name: 'Domaine Comte Abbatucci Ajiaccio Faustine Vieelles Vignes Rose',
     imageURL:
       'https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/h1e/h66/12291739680798.png',
-    color: 'rosé',
+    color: 'ROSÉ',
     region: 'Corsica, France',
     price: 28.0,
     size: 750,
@@ -113,7 +113,7 @@ const products = [
     name: 'Domaine du Gros Nore Bandol Rose',
     imageURL:
       'https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/h1e/h66/12291739680798.png',
-    color: 'rosé',
+    color: 'ROSÉ',
     region: 'Provence, France',
     price: 34.0,
     size: 750,
@@ -126,7 +126,7 @@ const products = [
     name: 'Chene Bleu Rose',
     imageURL:
       'https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/h1e/h66/12291739680798.png',
-    color: 'rosé',
+    color: 'ROSÉ',
     region: 'IGP Vaucluse, France',
     price: 27.0,
     size: 750,
