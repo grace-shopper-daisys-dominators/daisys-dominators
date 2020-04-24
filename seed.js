@@ -313,41 +313,80 @@ const products = [
     rating: 4
   },
   {
-    name: 'Domaine Comte Abbatucci Ajiaccio Faustine Vieelles Vignes Rose',
+    name: 'Réserve des Vignerons Saumur Rosé',
     imageURL:
-      'https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/h1e/h66/12291739680798.png',
-    color: 'rosé',
-    region: 'Corsica, France',
-    price: 28.0,
+      'https://www.winedeals.com/media/catalog/product/cache/400a650acef16caf799ce948294c4e36/r/e/res_vignerons_saumur_rose_15_750.png',
+    color: 'ROSÉ',
+    region: 'France, Loire',
+    price: 27.0,
     size: 750,
     description:
-      'Rosé is a type of wine made from red wine grapes, produced in a similar manner to red wine, but with reduced time fermenting with grape skins. This reduced skin contact gives rosé a pink hue and lighter flavor than that of red wine.',
+      'This Loire rosé is bright and crisp, yet still has a soft touch of summer fruits — think strawberries and raspberries. 100% Cabernet Franc.',
     year: 2019,
     rating: 4
   },
   {
-    name: 'Domaine du Gros Nore Bandol Rose',
+    name: 'Kiwi Cuvée Bin 52 Cabernet Franc Rosé Wine',
     imageURL:
-      'https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/h1e/h66/12291739680798.png',
-    color: 'rosé',
-    region: 'Provence, France',
-    price: 34.0,
+      'https://www.winedeals.com/kiwi-cuvee-bin-52-cabernet-franc-rose-wine-2018-750-ml-90563.html',
+    color: 'ROSÉ',
+    region: 'France, Vin de Pays',
+    price: 29.0,
     size: 750,
     description:
-      'Rosé is a type of wine made from red wine grapes, produced in a similar manner to red wine, but with reduced time fermenting with grape skins. This reduced skin contact gives rosé a pink hue and lighter flavor than that of red wine.',
+      'Impressive with its pale pink color and notes of wild flowers, tart raspberry, and strawberry. Pair with a tortellini salad.',
     year: 2018,
-    rating: 5
+    rating: 3
   },
   {
-    name: 'Chene Bleu Rose',
+    name: 'Sheldrake Point Dry Rosé',
     imageURL:
-      'https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/h1e/h66/12291739680798.png',
-    color: 'rosé',
-    region: 'IGP Vaucluse, France',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/s/h/sheldrake_point_dry_rose_mv_750.png',
+    color: 'ROSÉ',
+    region: 'United States, New York',
+    price: 31.0,
+    size: 750,
+    description:
+      'The 2019 vintage offers classic aromatics of strawberries and cream with a burst of spring flowers. The palate opens with bright acidity highlighting white cherry, and is rounded out with a pithy citrus finish.',
+    year: 2019,
+    rating: 4
+  },
+  {
+    name: 'Deer Run Winery Pebble Beach Blush',
+    imageURL:
+      'https://www.winedeals.com/reserve-des-vignerons-saumur-rose-2018-750-ml-90161.html',
+    color: 'ROSÉ',
+    region: 'United States, New York, Finger Lakes',
     price: 27.0,
     size: 750,
     description:
-      'Rosé is a type of wine made from red wine grapes, produced in a similar manner to red wine, but with reduced time fermenting with grape skins. This reduced skin contact gives rosé a pink hue and lighter flavor than that of red wine.',
+      'Deer Run Pebble Beach Blush, is a light, summery blush that has more peach character than ever. Light, crisp, and refreshing, the palate is characterized by sweet white fruits. Intermingled with a touch of acidity and minerality, the finish is very clean with a bit of bite. This beautiful wine is great as your go-to party wine and pairs wonderfully with fruit desserts and angel-food cake.',
+    year: 2018,
+    rating: 3
+  },
+  {
+    name: 'Johnson Estate Chautauqua Blush',
+    imageURL:
+      'https://www.winedeals.com/media/catalog/product/cache/400a650acef16caf799ce948294c4e36/j/o/johnson_estate_chaut_blush_nv_750.png',
+    color: 'ROSÉ',
+    region: 'United States, New York',
+    price: 19.0,
+    size: 750,
+    description:
+      'The delicate color of the wine reflects the light red hue of the grape, and the wine`s full, fragrant and fruitful sweetness is delightfully reminiscent of the Delaware`s fully-ripened flavor.',
+    year: 2018,
+    rating: 4
+  },
+  {
+    name: 'Liberty Vineyards Lucy’s In The Sky',
+    imageURL:
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/l/i/liberty_vyd_lucy_nv_750.png',
+    color: 'ROSÉ',
+    region: 'United States, New York',
+    price: 24.0,
+    size: 750,
+    description:
+      'Destemming and slight crushing, both the free run juice and pressed juices are vinified in stainless steel.',
     year: 2019,
     rating: 3
   }
