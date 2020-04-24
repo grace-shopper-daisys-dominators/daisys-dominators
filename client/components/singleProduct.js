@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
+import {addToCart} from '../store/cart'
 
 export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
+  }
+
+  handleClick = id => {
+    this.props.addToCart(id)
   }
 
   render() {
@@ -36,6 +41,14 @@ export class SingleProduct extends Component {
           <p>Size: {size}</p>
           <p>Year: {year}</p>
         </div>
+        <div>
+          <button
+            type="submit"
+            onClick={() => this.props.addToCart(this.props.productId)}
+          >
+            Add to cart
+          </button>
+        </div>
       </div>
     )
   }
@@ -46,7 +59,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  singleProduct: productId => dispatch(getSingleProduct(productId))
+  singleProduct: productId => dispatch(getSingleProduct(productId)),
+  addToCart: id => dispatch(addToCart(id))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
