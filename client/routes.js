@@ -6,6 +6,9 @@ import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import SingleProduct from './components/SingleProduct'
 import HomePage from './components/pages/HomePage'
+import redWines from './components/pages/redWines'
+import whiteWines from './components/pages/whiteWines'
+import roseWines from './components/pages/roseWines'
 
 /**
  * COMPONENT
@@ -25,6 +28,10 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/products/redWines" component={redWines} />
+        <Route exact path="/products/whiteWines" component={whiteWines} />
+        <Route exact path="/products/roseWines" component={roseWines} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

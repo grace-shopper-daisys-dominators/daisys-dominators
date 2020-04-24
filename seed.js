@@ -61,15 +61,15 @@ const products = [
     rating: 5
   },
   {
-    name: 'Marciano Estate Cabernet Sauvignon',
+    name: 'Kuleto Estate Cabernet Sauvignon',
     imageURL:
-      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/m/a/marciano_estate_cab_750.jpg',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/k/u/kuleto_cab_12_750.png',
     color: 'RED',
     region: 'United States, California',
     price: 80.0,
     size: 750,
     description:
-      'From the small block of iron-rich soil that forms the core of the Marciano Estate Cabernet Sauvignon, the 2016 vintage produced a distinctive wine with impressive power, depth and purity. Estate Cabernet Franc adds further luxuriance to the wine. The Enticing flavors of cherry and cassis complement layered notes of vanilla bean, mocha and blonde tobacco. polished tannins and supple texture frame the wine’s sustained and graceful finish.',
+      'The wine offers blackberries, candied fruits, and high-toned herbs on the nose and has a juiciness on the palate that is consistent with the fruit flavors and tremendous focus. The oak treatment supports but doesn’t overwhelm the flavors and provides a nice lengthy backbone through the wine. ',
     year: 2016,
     rating: 4
   },
@@ -100,14 +100,15 @@ const products = [
     rating: 4
   },
   {
-    name: 'Cafaggio Basilica del Cortaccio',
-    imageURL: '',
+    name: 'Basilica Cafaggio Single Estate Chianti Classico',
+    imageURL:
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/c/a/cafaggio_sngl_est_chi_cls_15_750.png',
     color: 'RED',
     region: 'Italy, Tuscany',
     price: 69.0,
     size: 750,
     description:
-      'Cedary and woodsy notes lead off as this red settles into plum, leather and tobacco flavors, though it is still firmly structured and dry on the finish, with a lightly astringent feel. Sweet fruit returns in the end. Best from 2019 through 2032. 2,000 cases made.',
+      'This is an easy-drinking wine with a softly layered and fleshed out personality. The 2015 Chianti Classico Basilica Cafaggio Single Estate is a well-priced and easily available wine with some 110,000 bottles produced. It consists of 100% Sangiovese made with minimal oak aging. The simplicity presented here is refreshing and bright.',
     year: 2014,
     rating: 4
   },
