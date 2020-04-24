@@ -117,12 +117,8 @@ const mapSignUpDispatch = dispatch => {
       const lastName = evt.target.lastName.value
       const email = evt.target.email.value
       const password = evt.target.password.value
-      if (!email) {
-        dispatch(addNewUser(firstName, lastName, email, password, formName))
-        dispatch(auth(email, password, 'login'))
-      } else {
-        dispatch(auth(email, password, 'login'))
-      }
+      dispatch(addNewUser(firstName, lastName, email, password, formName))
+      dispatch(auth(email, password, 'login'))
     }
   }
 }

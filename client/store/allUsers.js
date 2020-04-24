@@ -55,7 +55,7 @@ export const addNewUser = (firstName, lastName, email, password) => {
       })
       dispatch(setNewUser(res.data))
     } catch (err) {
-      console.error(err, 'USER NOT FOUND')
+      console.error(err, 'UNABLE TO CREATE USER')
     }
   }
 }
