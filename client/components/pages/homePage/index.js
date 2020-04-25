@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchWinesFromServer} from '../../../store/allWines'
 import AllWines from '../../allWines'
+import AddNewProduct from '../../newProductForm'
 import './style.css'
 
 class HomePage extends React.Component {
@@ -9,8 +10,17 @@ class HomePage extends React.Component {
     this.props.getAllWines()
   }
   render() {
+    const {isAdmin} = this.props.user
+
     return (
       <div>
+        {isAdmin ? (
+          <div>
+            <AddNewProduct />
+          </div>
+        ) : (
+          ''
+        )}
         <div className="halo" />
         <div>
           <span className="intro intro--the">The</span>
@@ -38,8 +48,10 @@ class HomePage extends React.Component {
 }
 
 const mapState = state => {
+  // console.log(state.user)
   return {
-    wines: state.allWines.all
+    wines: state.allWines.all,
+    user: state.user
   }
 }
 
