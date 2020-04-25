@@ -34,7 +34,7 @@ export const fetchWinesFromServer = () => {
 
 export const addNewWine = (
   name,
-  imageURl,
+  imageURL,
   color,
   region,
   price,
@@ -44,9 +44,9 @@ export const addNewWine = (
 ) => {
   return async dispatch => {
     try {
-      const res = await axios.post('api/products', {
+      const res = await axios.post('/api/products', {
         name,
-        imageURl,
+        imageURL,
         color,
         region,
         price,
