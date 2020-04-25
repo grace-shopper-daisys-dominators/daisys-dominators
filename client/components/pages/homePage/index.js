@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchWinesFromServer} from '../../../store/allWines'
 import AllWines from '../../allWines'
-import AddNewProduct from '../../newProductForm'
+import AddNewProduct from '../../NewProductForm'
 import './style.css'
 
 class HomePage extends React.Component {
@@ -48,7 +48,6 @@ class HomePage extends React.Component {
 }
 
 const mapState = state => {
-  // console.log(state.user)
   return {
     wines: state.allWines.all,
     user: state.user
