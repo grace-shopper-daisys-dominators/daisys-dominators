@@ -1,15 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import AddNewProduct from './NewProductForm'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {firstName} = props.user
+  const {firstName, isAdmin} = props.user
 
   return (
     <div>
+      {isAdmin ? (
+        <div>
+          <AddNewProduct />
+        </div>
+      ) : (
+        ''
+      )}
       <h3>Welcome, {firstName} !</h3>
     </div>
   )

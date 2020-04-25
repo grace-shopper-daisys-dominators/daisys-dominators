@@ -18,7 +18,7 @@ export class NewProductForm extends Component {
           <br /> <br />
           <input type="text" name="region" placeholder="Region" />
           <br /> <br />
-          <input type="text" name="price" placeholder="Price" />
+          <input type="number" name="price" placeholder="Price" />
           <br /> <br />
           <input type="text" name="size" placeholder="size" />
           <br /> <br />

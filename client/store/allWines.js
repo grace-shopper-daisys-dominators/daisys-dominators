@@ -33,7 +33,7 @@ export const fetchWinesFromServer = () => {
 }
 
 export const addNewWine = (
-  wineName,
+  name,
   imageURl,
   color,
   region,
@@ -45,7 +45,7 @@ export const addNewWine = (
   return async dispatch => {
     try {
       const res = await axios.post('api/products', {
-        wineName,
+        name,
         imageURl,
         color,
         region,
@@ -54,6 +54,7 @@ export const addNewWine = (
         description,
         year
       })
+      console.log('all-wines', res.data)
       dispatch(setNewWine(res.data))
     } catch (err) {
       console.log(err)
