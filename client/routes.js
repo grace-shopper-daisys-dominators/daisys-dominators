@@ -8,10 +8,7 @@ import SingleProduct from './components/SingleProduct'
 import HomePage from './components/pages/homePage'
 import AllUsers from './components/pages/allUsers/AllUsers'
 import SingleUser from './components/pages/singleUser/SingleUser'
-import RedWines from './components/pages/redWines'
-import RoseWines from './components/pages/roseWines'
-import WhiteWines from './components/pages/whiteWines'
-
+import RedWine from './components/pages/RedWines'
 /**
  * COMPONENT
  */
@@ -27,14 +24,12 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/products/:productId" component={SingleProduct} />
-        <Route exact path="/home/rosewines" component={RoseWines} />
-        <Route exact path="/home/redwines" component={RedWines} />
-        <Route exact path="/home/whitewines" component={WhiteWines} />
         <Route exact path="/users" component={AllUsers} />
         <Route exact path="/users/:userId" component={SingleUser} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/redwines" component={RedWine} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
