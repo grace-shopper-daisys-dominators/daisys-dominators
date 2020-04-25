@@ -1,6 +1,6 @@
 import React from 'react'
 // import {Link} from 'Link'
-
+// This note should be deleted
 const roseWines = () => {
   return (
     <div>
