@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 
 const allWines = props => {
   const {wines} = props
+
   return (
     <div>
       <h1>ALL WINES</h1>
@@ -14,11 +15,11 @@ const allWines = props => {
                 <img src={wine.imageURL} />
                 <h2> {wine.color} </h2>
                 <h2> ${wine.price}</h2>
-                <Link to={`/products/${wine.id}`}>view wine</Link>
+                <Link to={`products/${wine.id}`}>view wine</Link>
               </div>
             )
           })
-        : 'We are sold out!'}
+        : 'We are currently sold out!'}
     </div>
   )
 }

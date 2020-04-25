@@ -9,7 +9,6 @@ export class NewProductForm extends Component {
     return (
       <div>
         <form onSubmit={handleSubmit}>
-          <h3>Add New Item</h3>
           <input type="text" name="name" placeholder="wine name" />
           <br /> <br />
           <input type="text" name="imageURL" placeholder="Image URL" />
@@ -20,13 +19,13 @@ export class NewProductForm extends Component {
           <br /> <br />
           <input type="number" name="price" placeholder="Price" />
           <br /> <br />
-          <input type="text" name="size" placeholder="size" />
+          <input type="number" name="size" placeholder="size" />
           <br /> <br />
           <input type="text" name="description" placeholder="description" />
           <br /> <br />
           <input type="text" name="year" placeholder="year" />
           <br /> <br />
-          <button>Add New Item</button>
+          <button type="submit">Add New Item</button>
         </form>
       </div>
     )
