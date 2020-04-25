@@ -5,7 +5,6 @@ import {addNewWine} from '../store/allWines'
 export class NewProductForm extends Component {
   render() {
     const {handleSubmit} = this.props
-
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -32,6 +31,12 @@ export class NewProductForm extends Component {
   }
 }
 
+const mapState = state => {
+  console.log('this is state', state)
+  return {
+    allWines: state.allWines.all
+  }
+}
 const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
@@ -60,4 +65,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(null, mapDispatch)(NewProductForm)
+export default connect(mapState, mapDispatch)(NewProductForm)

@@ -10,10 +10,10 @@ const getWines = wines => {
   }
 }
 
-const setNewWine = wine => {
+const setNewWine = newWine => {
   return {
     type: ADD_NEW_WINE,
-    wine
+    newWine
   }
 }
 
@@ -54,10 +54,9 @@ export const addNewWine = (
         description,
         year
       })
-      console.log('all-wines', res.data)
       dispatch(setNewWine(res.data))
     } catch (err) {
-      console.log(err)
+      console.log(err, 'UNABLE TO ADD NEW PRODUCT')
     }
   }
 }
@@ -67,7 +66,7 @@ export default function allWinesReducer(state = initialState, action) {
     case GET_WINES:
       return {...state, all: action.wines}
     case ADD_NEW_WINE:
-      return {...state, all: action.wine}
+      return {...state, all: action.newWine}
     default:
       return state
   }

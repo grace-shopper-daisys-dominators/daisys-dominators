@@ -19,7 +19,7 @@ const allWines = props => {
               </div>
             )
           })
-        : 'We are currently sold out!'}
+        : ''}
     </div>
   )
 }
