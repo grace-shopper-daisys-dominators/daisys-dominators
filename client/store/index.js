@@ -1,14 +1,12 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
-import throttle from 'lodash/throttle'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import singleProduct from './singleProduct'
 import allWines from './allWines'
-import {loadState, saveState} from './localStorage'
-
-export const persistedState = loadState()
+// import throttle from 'lodash/throttle'
+// import {loadState, saveState} from './localStorage'
 
 const reducer = combineReducers({
   user,
@@ -20,15 +18,17 @@ const middleware = composeWithDevTools(
 )
 const store = createStore(reducer, middleware)
 
+// export const persistedState = loadState()
+
 // const store = createStore(reducer, persistedState)
 
-store.subscribe(
-  throttle(() => {
-    saveState({
-      addToLocalStorage: store.getState().addToLocalStorage
-    })
-  }, 1000)
-)
+// store.subscribe(
+//   throttle(() => {
+//     saveState({
+//       addToLocalStorage: store.getState().addToLocalStorage
+//     })
+//   }, 1000)
+// )
 
 export default store
 export * from './user'

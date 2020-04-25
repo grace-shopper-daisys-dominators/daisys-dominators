@@ -2,21 +2,36 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
 import {addToCart} from '../store/cart'
-import {logout} from '../store'
-import {user} from '../store/user'
-import {persistedState} from '../store'
+import {addToLocalStorage} from '../store/localStorage'
+// import {logout} from '../store'
+// import {user} from '../store/user'
+// import {persistedState} from '../store'
 
 export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
   }
 
-  handleClick = id => {
-    if (!isLoggedIn) this.props.addToLocalStorage()
-    this.props.addToCart(id)
-    console.log('herrrrrreeeee', this.props.user)
-  }
+  handleClick = () => {
+    const currProduct = this.props.product
 
+    if (this.props.user.email) {
+      this.props.addToCart(currProduct.id)
+    } else {
+      console.log('IM HERE=====>')
+      //addToLocalStorage(currProduct.id)
+    }
+
+    // localStorage.setItem('cart', JSON.stringify(currProduct))
+    // console.log('LOCAL STORAGE', localStorage)
+
+    //localStorage.removeItem('cart')
+
+    var currProductInCart = localStorage.getItem('cart')
+    console.log('currProductInCart: ', JSON.parse(currProductInCart))
+
+    // //this.props.addToCart(id)
+  }
   render() {
     const {
       name,
@@ -29,10 +44,6 @@ export class SingleProduct extends Component {
       year,
       rating
     } = this.props.product
-
-    const user = this.props.user
-    console.log('USER====>', user)
-    console.log('LOCAL STORAGE===>', localStorage)
     return (
       <div>
         <div>
@@ -52,7 +63,9 @@ export class SingleProduct extends Component {
         <div>
           <button
             type="submit"
-            onClick={() => this.props.addToCart(this.props.productId)}
+            onClick={() => this.handleClick()}
+            // console.log(localStorage, this.props.product)}
+            // onClick={() => this.props.addToCart(this.props.productId)}
           >
             Add to cart
           </button>
@@ -64,14 +77,12 @@ export class SingleProduct extends Component {
 
 const mapState = state => ({
   product: state.singleProduct,
-  user: state.user,
-  isLoggedIn: !!state.user.id
+  user: state.user
 })
 
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
-  addToCart: id => dispatch(addToCart(id)),
-  addToLocalStorage: id => dispatch(addToLocalStorage(id))
+  addToCart: id => dispatch(addToCart(id))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
