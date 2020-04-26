@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchWinesFromServer, deleteWine} from '../../../store/allWines'
 import {Link} from 'react-router-dom'
-// import AllWines from '../../allWines'
 import './style.css'
 
 class HomePage extends React.Component {
@@ -17,7 +16,6 @@ class HomePage extends React.Component {
         <h1>ALL WINES</h1>
         {wines
           ? wines.map(wine => {
-              console.log('component wine', wine.id)
               return (
                 <div className="container" key={wine.id}>
                   <h2> {wine.name} </h2>
