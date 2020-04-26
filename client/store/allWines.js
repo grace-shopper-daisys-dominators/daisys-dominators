@@ -36,7 +36,6 @@ export const addNewWine = newWineInfo => {
   return async dispatch => {
     try {
       const res = await axios.post('/api/products', newWineInfo)
-      console.log('reducer', res.data)
       dispatch(setNewWine(res.data))
     } catch (err) {
       console.log(err, 'UNABLE TO ADD NEW PRODUCT')
@@ -49,7 +48,7 @@ export default function allWinesReducer(state = initialState, action) {
     case GET_WINES:
       return {...state, all: action.wines}
     case ADD_NEW_WINE:
-      return {...state, all: action.newWine}
+      return {...state, all: [...state.all, action.newWine]}
     default:
       return state
   }
