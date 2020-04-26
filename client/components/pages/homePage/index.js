@@ -13,9 +13,11 @@ class HomePage extends React.Component {
     const {wines} = this.props
     return (
       <div>
+        {/** transfer code from allWines file component here to be able to add delete button and use the class component to access handle delete */}
         <h1>ALL WINES</h1>
         {wines
           ? wines.map(wine => {
+              console.log('component wine', wine.id)
               return (
                 <div className="container" key={wine.id}>
                   <h2> {wine.name} </h2>

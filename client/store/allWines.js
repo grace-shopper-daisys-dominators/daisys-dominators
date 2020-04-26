@@ -50,10 +50,10 @@ export const addNewWine = newWineInfo => {
   }
 }
 
-export const deleteWine = wineId => {
+export const deleteWine = id => {
   return async dispatch => {
     try {
-      const res = await axios.delete(`/api/products/${wineId}`)
+      const res = await axios.delete(`/api/products/${id}`)
       dispatch(deletedWine(res.data))
     } catch (err) {
       console.log(err, 'UNABLE TO DELETE PRODUCT')
@@ -68,7 +68,7 @@ export default function allWinesReducer(state = initialState, action) {
       return {...state, all: [...state.all, action.newWine]}
     case DELETE_WINE:
       const filtered = state.all.filter(wine => wine.id !== action.wineId)
-      return {...state, filtered}
+      return {...state, all: filtered}
     default:
       return state
   }

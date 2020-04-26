@@ -123,11 +123,14 @@ router.delete('/:id', async (req, res, next) => {
 
     if (currentUser.isAdmin) {
       const deleted = await Product.destroy({where: {id: id}})
-      if (deleted) {
-        res.status(204).send('Product deleted.')
-      } else {
-        res.status(304).send('Failed to delete product.')
-      }
+      // ADDED THIS LINE TO SEND ID TO FRONT END
+      res.send(id)
+      // NOTE: checks below prevent id to be send to the front end...
+      // if (deleted) {
+      //   res.status(204).send('Product deleted.')
+      // } else {
+      //   res.status(304).send('Failed to delete product.')
+      // }
     } else {
       res.status(401).send('Log in with admin account to delete products.')
     }
