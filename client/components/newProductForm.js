@@ -13,7 +13,8 @@ export class NewProductForm extends Component {
       price: '',
       size: '',
       description: '',
-      year: ''
+      year: '',
+      rating: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -29,7 +30,8 @@ export class NewProductForm extends Component {
       [e.target.price]: e.target.value,
       [e.target.size]: e.target.value,
       [e.target.description]: e.target.value,
-      [e.target.year]: e.target.value
+      [e.target.year]: e.target.value,
+      [e.target.rating]: e.target.rating
     })
   }
 
@@ -43,9 +45,21 @@ export class NewProductForm extends Component {
       price: this.state.price,
       size: this.state.size,
       description: this.state.description,
-      year: this.state.year
+      year: this.state.year,
+      rating: this.state.rating
     }
     this.props.addNewWine(newWine)
+    this.setState({
+      name: '',
+      imageURL: '',
+      color: '',
+      region: '',
+      price: '',
+      size: '',
+      description: '',
+      year: '',
+      rating: ''
+    })
   }
   render() {
     return (
@@ -108,10 +122,17 @@ export class NewProductForm extends Component {
           />
           <br /> <br />
           <input
-            ype="text"
+            type="text"
             name="year"
             value={this.state.year}
             placeholder="year"
+            onChange={e => this.handleChange(e)}
+          />
+          <input
+            type="number"
+            name="rating"
+            value={this.state.rating}
+            placeholder="rating"
             onChange={e => this.handleChange(e)}
           />
           <br /> <br />

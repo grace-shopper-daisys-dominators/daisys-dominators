@@ -10,7 +10,7 @@ const allWines = props => {
       {wines
         ? wines.map(wine => {
             return (
-              <div key={wine.id}>
+              <div className="container" key={wine.id}>
                 <h2> {wine.name} </h2>
                 <img src={wine.imageURL} />
                 <h2> {wine.color} </h2>

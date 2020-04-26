@@ -36,6 +36,7 @@ export const addNewWine = newWineInfo => {
   return async dispatch => {
     try {
       const res = await axios.post('/api/products', newWineInfo)
+      console.log('reducer', res.data)
       dispatch(setNewWine(res.data))
     } catch (err) {
       console.log(err, 'UNABLE TO ADD NEW PRODUCT')
