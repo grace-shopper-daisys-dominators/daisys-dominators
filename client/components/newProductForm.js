@@ -128,6 +128,7 @@ export class NewProductForm extends Component {
             placeholder="year"
             onChange={e => this.handleChange(e)}
           />
+          <br /> <br />
           <input
             type="number"
             name="rating"
