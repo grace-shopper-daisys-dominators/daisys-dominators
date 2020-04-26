@@ -67,8 +67,10 @@ export default function allWinesReducer(state = initialState, action) {
     case ADD_NEW_WINE:
       return {...state, all: [...state.all, action.newWine]}
     case DELETE_WINE:
-      const filtered = state.all.filter(wine => wine.id !== action.wineId)
-      return {...state, all: filtered}
+      return {
+        ...state,
+        all: state.all.filter(wine => wine.id !== action.wineId)
+      }
     default:
       return state
   }
