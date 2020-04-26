@@ -32,28 +32,10 @@ export const fetchWinesFromServer = () => {
   }
 }
 
-export const addNewWine = (
-  name,
-  imageURL,
-  color,
-  region,
-  price,
-  size,
-  description,
-  year
-) => {
+export const addNewWine = newWineInfo => {
   return async dispatch => {
     try {
-      const res = await axios.post('/api/products', {
-        name,
-        imageURL,
-        color,
-        region,
-        price,
-        size,
-        description,
-        year
-      })
+      const res = await axios.post('/api/products', newWineInfo)
       dispatch(setNewWine(res.data))
     } catch (err) {
       console.log(err, 'UNABLE TO ADD NEW PRODUCT')
