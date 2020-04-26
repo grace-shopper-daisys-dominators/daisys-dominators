@@ -19,7 +19,7 @@ const allWines = props => {
               </div>
             )
           })
-        : ''}
+        : ' '}
     </div>
   )
 }
