@@ -48,7 +48,6 @@ export class NewProductForm extends Component {
     this.props.addNewWine(newWine)
   }
   render() {
-    // const {handleSubmit} = this.props
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
