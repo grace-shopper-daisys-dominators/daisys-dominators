@@ -11,6 +11,7 @@ export const UserHome = props => {
 
   return (
     <div>
+      <h3>Welcome, {firstName} !</h3>
       {isAdmin ? (
         <div>
           <AddNewProduct />
@@ -18,7 +19,6 @@ export const UserHome = props => {
       ) : (
         ''
       )}
-      <h3>Welcome, {firstName} !</h3>
     </div>
   )
 }
