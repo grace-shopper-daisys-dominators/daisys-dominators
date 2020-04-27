@@ -1,5 +1,5 @@
 const db = require('./server/db/db')
-
+// remove chalk for now
 const {User, Product, Order} = require('./server/db/models/index')
 
 const users = [
