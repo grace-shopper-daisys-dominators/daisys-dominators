@@ -27,33 +27,6 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
     <nav>
       {isLoggedIn ? (
         <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">HOME</Link>
-          <Link to="/orders">ORDER HISTORY</Link>
-          <Link to="/carts">CART</Link>
-          <a href="#" onClick={handleClick}>
-            LOGOUT
-          </a>
-          {isAdmin ? (
-            <div>
-              <Link to="/home">HOME</Link>
-              <Link to="/users">USERS</Link>
-              <a href="#" onClick={handleClick}>
-                LOGOUT
-              </a>
-            </div>
-          ) : (
-            <div>
-              <Link to="/home">HOME</Link>
-              <a href="#" onClick={handleClick}>
-                LOGOUT
-              </a>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
           <Link to="/">
             <span className="all-wines" style={{display: 'block'}}>
               ALL WINES
@@ -74,9 +47,38 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
               ROSÉ
             </span>
           </Link>
+          {isAdmin ? <Link to="/users">USERS</Link> : ''}
+          <a href="#" onClick={handleClick}>
+            LOGOUT
+          </a>
+          <Link to="/orders">ORDER HISTORY</Link>
           <Link to="/cart">CART</Link>
+        </div>
+      ) : (
+        <div>
+          <Link to="/">
+            <span className="all-wines" style={{display: 'block'}}>
+              ALL WINES
+            </span>
+          </Link>
+          <Link to="/redwines">
+            <span className="red" style={{display: 'block'}}>
+              RED WINE
+            </span>
+          </Link>
+          <Link to="/whitewines">
+            <span className="white" style={{display: 'block'}}>
+              WHITE WINE
+            </span>
+          </Link>
+          <Link to="/rosewines">
+            <span className="rose" style={{display: 'block'}}>
+              ROSÉ
+            </span>
+          </Link>
           <Link to="/login">LOG IN</Link>
           <Link to="/signup">SIGN UP</Link>
+          <Link to="/cart">CART</Link>
         </div>
       )}
     </nav>
