@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
+import UpdateProductForm from '../components/updateProductForm'
 
 export class SingleProduct extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ export class SingleProduct extends Component {
           <p>Size: {size}</p>
           <p>Year: {year}</p>
         </div>
+        <UpdateProductForm />
       </div>
     )
   }
