@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Order} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -58,6 +58,7 @@ router.post('/', async (req, res, next) => {
       password
     })
     if (newUser) {
+      Order.create({status: 'pending', userId: newUser.id})
       res.status(201).send(newUser)
     } else {
       res.status(500).send('Unable to create user.')

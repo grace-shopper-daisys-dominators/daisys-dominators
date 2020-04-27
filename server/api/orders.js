@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, User, Cart, Product} = require('../db/models')
+const {Order, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -66,6 +66,30 @@ router.get('/:id', async (req, res, next) => {
       res.json(order)
     } else {
       res.send("Only admins can view other people's orders.")
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/me/current', async (req, res, next) => {
+  try {
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
+    if (currentUser.id) {
+      const cart = await Order.findAll({
+        where: {status: 'pending', userId: currentUser.id},
+        include: Product
+      })
+
+      res.json(cart)
+    } else {
+      res.send('Log in to view your cart.')
     }
   } catch (err) {
     next(err)

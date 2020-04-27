@@ -1,52 +1,46 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-//import {getSingleProduct} from '../store/singleProduct.js'
+import {Link} from 'react-router-dom'
+import {fetchWinesFromServer} from '../../store/allWines'
 
-export class RedWines extends Component {
+class RedWines extends Component {
   componentDidMount() {
-    //this.props.singleProduct(this.props.match.params.productId)
+    this.props.getAllWines()
   }
-
   render() {
-    const {
-      name,
-      imageURL,
-      color,
-      description,
-      price,
-      region,
-      size,
-      year,
-      rating
-    } = this.props.product
+    const {wines} = this.props
+    const redWines = wines.filter(wine => wine.color.toLowerCase() === 'red')
 
     return (
       <div>
-        <div>
-          <img src={imageURL} />
-        </div>
-        <div>
-          <h1>{name}</h1>
-          <p>Rating: {rating}</p>
-          <hr />
-          <p>Price: {price}</p>
-          <p>Description: {description}</p>
-          <p>Type: {color}</p>
-          <p>Region: {region}</p>
-          <p>Size: {size}</p>
-          <p>Year: {year}</p>
-        </div>
+        {redWines
+          ? redWines.map(wine => {
+              return (
+                <div key={wine.id}>
+                  <h2>{wine.name}</h2>
+                  <img src={wine.imageURL} />
+                  <h2>{wine.color}</h2>
+                  <h2>${wine.price}</h2>
+                  <Link to={`/products/${wine.id}`}>view wine</Link>
+                </div>
+              )
+            })
+          : 'No red wines avaliable'}
       </div>
     )
   }
 }
 
-const mapState = state => ({
-  //product: state.singleProduct
-})
+const mapState = state => {
+  return {
+    wines: state.allWines.all
+  }
+}
 
-const mapDispatch = dispatch => ({
-  //singleProduct: productId => dispatch(getSingleProduct(productId))
-})
+const mapDispatch = dispatch => {
+  return {
+    getAllWines: () => dispatch(fetchWinesFromServer())
+  }
+}
 
 export default connect(mapState, mapDispatch)(RedWines)
