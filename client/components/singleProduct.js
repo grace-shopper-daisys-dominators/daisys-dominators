@@ -16,14 +16,7 @@ export class SingleProduct extends Component {
       this.props.addToCart(currProduct.id)
     } else {
       addToLocalStorage(currProduct)
-      // var currProductInCart = localStorage.getItem('cart')
-      // console.log('currProductInCart: ', JSON.parse(currProductInCart))
     }
-
-    // localStorage.setItem('cart', JSON.stringify(currProduct))
-    // console.log('LOCAL STORAGE', localStorage)
-
-    //localStorage.removeItem('cart')
   }
   render() {
     const {
