@@ -76,7 +76,7 @@ const products = [
   {
     name: 'Le Stanze del Poliziano',
     imageURL:
-      'https://www.winedeals.com/media/catalog/product/cache/400a650acef16caf799ce948294c4e36/p/o/poliziano_le_stanze_mv_750.png',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/p/o/poliziano_le_stanze_mv_750.png',
     color: 'RED',
     region: 'Italy, Tuscany',
     price: 56.0,
@@ -295,22 +295,22 @@ const products = [
     rating: 3
   },
   {
-    name: 'Marimar Estate La Masía Chardonnay',
+    name: 'Champalou Vouvray Les Fondraux',
     imageURL:
-      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/m/a/marimar_masia_chard_09_750.png',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/c/h/champalou_vouvray_fondraux_15_750.png',
     color: 'WHITE',
-    region: 'United States, California',
+    region: 'France, Loire',
     price: 38.0,
     size: 750,
     description:
-      'The intense nose is delicate and very focused, with aromas of star jasmine and white peach, nicely framed with the elegant oak that contributes notes of hazelnut. The palate is rich and savory yet crisp and mouthfilling, reminiscent of baked apple and lemon custard. The finish is long and perfectly balanced. I would recommend serving it at 46°–48° F.',
+      'At the end of a long, draining day, you deserve to relax with a glass of this silky nectar, full of lovely notes of pear, melon, and pineapple. Les Fondraux is elegant and forthcoming, just like the Champalou family, who put all their craftsmanship into making it. Slightly off-dry and very aromatic, it will partner up nicely with spicy Thai food. If you want to stay more traditional, try it with dry goat cheese, or even some bleu, as the wine will balance with the saltiness of the cheese.',
     year: 2019,
     rating: 4
   },
   {
     name: 'Réserve des Vignerons Saumur Rosé',
     imageURL:
-      'https://www.winedeals.com/media/catalog/product/cache/400a650acef16caf799ce948294c4e36/r/e/res_vignerons_saumur_rose_15_750.png',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/r/e/res_vignerons_saumur_rose_15_750.png',
     color: 'ROSÉ',
     region: 'France, Loire',
     price: 27.0,
@@ -321,17 +321,17 @@ const products = [
     rating: 4
   },
   {
-    name: 'Kiwi Cuvée Bin 52 Cabernet Franc Rosé Wine',
+    name: 'Whispering Angel',
     imageURL:
-      'https://www.winedeals.com/kiwi-cuvee-bin-52-cabernet-franc-rose-wine-2018-750-ml-90563.html',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/w/h/whispering_angel_15_750.png',
     color: 'ROSÉ',
-    region: 'France, Vin de Pays',
+    region: 'France, Provence',
     price: 29.0,
     size: 750,
     description:
-      'Impressive with its pale pink color and notes of wild flowers, tart raspberry, and strawberry. Pair with a tortellini salad.',
-    year: 2018,
-    rating: 3
+      'As a negociant and vinificateur (winery), Caves d’esclans identifies vineyards, grapes and wines from château d’esclans as well as local growers to make what has reputedly become the world’s greatest rosé. As our objective is to obtain the best quality grapes and wines, we have created relationships with the local grape growers, committed beside Caves d’esclans, whose vineyards are treated with the same high standards of quality as are the vineyards of Château d’esclans.',
+    year: 2019,
+    rating: 5
   },
   {
     name: 'Sheldrake Point Dry Rosé',
@@ -347,41 +347,93 @@ const products = [
     rating: 4
   },
   {
-    name: 'Deer Run Winery Pebble Beach Blush',
+    name: 'Wild Pig Syrah Rosé',
     imageURL:
-      'https://www.winedeals.com/reserve-des-vignerons-saumur-rose-2018-750-ml-90161.html',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/w/i/wild_pig_syrah_rose_16_750.png',
     color: 'ROSÉ',
-    region: 'United States, New York, Finger Lakes',
+    region: 'France, Vin de Pays',
     price: 27.0,
     size: 750,
     description:
-      'Deer Run Pebble Beach Blush, is a light, summery blush that has more peach character than ever. Light, crisp, and refreshing, the palate is characterized by sweet white fruits. Intermingled with a touch of acidity and minerality, the finish is very clean with a bit of bite. This beautiful wine is great as your go-to party wine and pairs wonderfully with fruit desserts and angel-food cake.',
+      'Located in the Languedoc area, the vineyards spread from the banks of the Rhône river in the East to the city of Carcassonne in the West, from the foothills of the Massif Central mountains in the North to the Mediterranean Sea in the South. A pink colour with bright hints, a generous and fruity wine with notes of raspberries and a fresh finish.',
     year: 2018,
     rating: 3
   },
   {
-    name: 'Johnson Estate Chautauqua Blush',
+    name: 'La Vieille Ferme Rosé',
     imageURL:
-      'https://www.winedeals.com/media/catalog/product/cache/400a650acef16caf799ce948294c4e36/j/o/johnson_estate_chaut_blush_nv_750.png',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/l/a/la_vieille_ferme_rose_15_750.png',
     color: 'ROSÉ',
-    region: 'United States, New York',
+    region: 'France, Vin de Table',
     price: 19.0,
     size: 750,
     description:
-      'The delicate color of the wine reflects the light red hue of the grape, and the wine`s full, fragrant and fruitful sweetness is delightfully reminiscent of the Delaware`s fully-ripened flavor.',
+      'Pale brilliant orange. Red berries, citrus fruits and a hint of spiciness on the nose and palate. Light-bodied and racy in style; a white pepper nuance drives the finish',
     year: 2018,
     rating: 4
   },
   {
-    name: 'Liberty Vineyards Lucy’s In The Sky',
+    name: 'Apothic Rosé',
     imageURL:
-      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/l/i/liberty_vyd_lucy_nv_750.png',
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/a/p/apothic_rose_17_750.png',
     color: 'ROSÉ',
-    region: 'United States, New York',
+    region: 'United States, California',
     price: 24.0,
     size: 750,
     description:
-      'Destemming and slight crushing, both the free run juice and pressed juices are vinified in stainless steel.',
+      'Light in color, yet dark in nature, Apothic Rosé Wine is a vibrant and alluring wine with notes of raspberry, watermelon and strawberry with a crisp, refreshing finish.',
+    year: 2019,
+    rating: 4
+  },
+  {
+    name: 'Miraval Côtes de Provence Rosé',
+    imageURL:
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/m/i/miraval_rose_12_750.png',
+    color: 'ROSÉ',
+    region: 'France, Provence',
+    price: 24.0,
+    size: 750,
+    description:
+      'Beautiful, pale, petal-pink colour, elegant with bright nuances. A beautiful aromatic expression with aromas of fresh fruit and spring flowers, refreshing acidity, with great minerality and a saline finish.',
+    year: 2019,
+    rating: 3
+  },
+  {
+    name: 'Fleurs de Prairie Rosé',
+    imageURL:
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/f/l/fleurs_de_prairie_17_750.png',
+    color: 'ROSÉ',
+    region: 'France, Provence',
+    price: 27.0,
+    size: 750,
+    description:
+      '“Fleurs de Prairie” translates as “wildflowers,” celebrating the beautiful fields of wisteria, lavender, poppy, and sunflowers carpeting Provence. The wine is sourced from select Provençal vineyards that dot the coastal wind-swept hillsides of the region. The Mediterranean combination of sun, wind, mild water stress, and ocean influence provide ideal conditions for grapes to ripen to the perfect balance of flavor and freshness. Provence produced beautiful 2016 rosés due to the year’s generally mild spring and sunny, dry summer. The continuing drought impacted yields across the board, but quality remained high.',
+    year: 2016,
+    rating: 4
+  },
+  {
+    name: 'Stella Rosa Stella Pink',
+    imageURL:
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/s/t/stella_rosa_pink_nv_750.png',
+    color: 'ROSÉ',
+    region: 'Italy, Piemonte',
+    price: 19.0,
+    size: 750,
+    description:
+      'Flirty, fun, and young are the words to describe Stella Rosa Pink, the semi-sweet, semi-sparkling wine that is understated. She’s a tease on the eyes but means business on the palate.',
+    year: 2019,
+    rating: 3
+  },
+  {
+    name: 'Prophecy Rosé',
+    imageURL:
+      ' https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/p/r/prophecy_rose_17_750.png',
+    color: 'ROSÉ',
+    region: 'France, Vin de France',
+    price: 19.0,
+    size: 750,
+    description:
+      'This wine is crisp and refreshing with layered flavors of fresh strawberry, raspberries and a hint of white peach. Pairs with poultry, seafood, grilled vegetables, light salads, goat cheese and fruit dessert.',
     year: 2019,
     rating: 3
   }
