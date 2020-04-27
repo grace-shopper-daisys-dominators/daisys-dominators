@@ -12,17 +12,17 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         <span className="intro intro--the">The</span>
         <span className="intro intro--num">first #1</span>
         <span className="intro">vintage typeface</span>
-      </div> */}
+     </div> */}
       <div className="vintage__container">
         <p className="vintage vintage__top">Daisy's Wine Shop</p>
         <p className="vintage vintage__bot">Daisy's Wine Shop</p>
       </div>
-      {/* <div>
+      <div>
         <span className="outro">NO.01</span>
-        <span className="outro outro--big">TYPEFACE RECREATED</span>
-        <span className="outro">CSS</span>
-        <span className="outro outro--smart">smart cookie</span>
-      </div> */}
+        <span className="outro outro--big"> The best wine store ever! </span>
+        <span className="outro">Daisy's wine</span>
+        {/*<span className="outro outro--smart">smart cookie</span> */}
+      </div>
     </div>
     <nav>
       {isLoggedIn ? (
