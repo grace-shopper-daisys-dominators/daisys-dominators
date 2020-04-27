@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
 import {addToCart} from '../store/cart'
 import {addToLocalStorage} from '../store/localStorage'
-// import {logout} from '../store'
-// import {user} from '../store/user'
-// import {persistedState} from '../store'
 
 export class SingleProduct extends Component {
   componentDidMount() {
@@ -18,19 +15,15 @@ export class SingleProduct extends Component {
     if (this.props.user.email) {
       this.props.addToCart(currProduct.id)
     } else {
-      console.log('IM HERE=====>')
-      //addToLocalStorage(currProduct.id)
+      addToLocalStorage(currProduct)
+      // var currProductInCart = localStorage.getItem('cart')
+      // console.log('currProductInCart: ', JSON.parse(currProductInCart))
     }
 
     // localStorage.setItem('cart', JSON.stringify(currProduct))
     // console.log('LOCAL STORAGE', localStorage)
 
     //localStorage.removeItem('cart')
-
-    var currProductInCart = localStorage.getItem('cart')
-    console.log('currProductInCart: ', JSON.parse(currProductInCart))
-
-    // //this.props.addToCart(id)
   }
   render() {
     const {
@@ -64,7 +57,7 @@ export class SingleProduct extends Component {
           <button
             type="submit"
             onClick={() => this.handleClick()}
-            // console.log(localStorage, this.props.product)}
+
             // onClick={() => this.props.addToCart(this.props.productId)}
           >
             Add to cart

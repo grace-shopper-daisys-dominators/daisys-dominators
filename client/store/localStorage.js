@@ -1,15 +1,12 @@
-// export const addToLocalStorage = (currProduct) => {
-
-//   let  currCart = localStorage.getItem('cart');
-//   if (isEmpty(currCart)){
-//       localStorage.setItem('cart', JSON.stringify(currProduct))
-//   }
-
-// }
-
-// {
-// }
-// const cart = [{id: 1}, {id: 1}, {id: 2}]
+export const addToLocalStorage = currProduct => {
+  let currentCart = JSON.parse(localStorage.getItem('cart'))
+  if (!currentCart) {
+    currentCart = []
+  }
+  currentCart.push(currProduct)
+  localStorage.setItem('cart', JSON.stringify(currentCart))
+  console.log(currentCart)
+}
 
 // export const loadState = async () => {
 //   try {
