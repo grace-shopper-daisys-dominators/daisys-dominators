@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
+// import UpdateProductForm from '../components/updateProductForm'
 import {addToCart} from '../store/cart'
 import {addToLocalStorage} from '../store/localStorage'
 
@@ -46,13 +47,10 @@ export class SingleProduct extends Component {
           <p>Size: {size}</p>
           <p>Year: {year}</p>
         </div>
+        {/** TODO: WORK ON UPDATE FORM BELOW */}
+        {/*<UpdateProductForm />*/}
         <div>
-          <button
-            type="submit"
-            onClick={() => this.handleClick()}
-
-            // onClick={() => this.props.addToCart(this.props.productId)}
-          >
+          <button type="submit" onClick={() => this.handleClick()}>
             Add to cart
           </button>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchWinesFromServer} from '../../../store/allWines'
-import AllWines from '../../allWines'
+import {fetchWinesFromServer, deleteWine} from '../../../store/allWines'
+import {Link} from 'react-router-dom'
 import './style.css'
 
 class HomePage extends React.Component {
@@ -9,29 +9,35 @@ class HomePage extends React.Component {
     this.props.getAllWines()
   }
   render() {
+    const {wines} = this.props
+    const {isAdmin} = this.props.user
+
     return (
       <div>
-        <div className="halo" />
-        <div>
-          <span className="intro intro--the">The</span>
-          <span className="intro intro--num">first #1</span>
-          <span className="intro">vintage typeface</span>
-        </div>
-        <div className="vintage__container">
-          <p className="vintage vintage__top">Daisy's Wine Shop</p>
-          <p className="vintage vintage__bot">Daisy's Wine Shop</p>
-        </div>
-        <div>
-          <span className="outro">NO.01</span>
-          <span className="outro outro--big">ALL WINES</span>
-          <span className="outro">CSS</span>
-          <span className="outro outro--smart">smart cookie</span>
-        </div>
-        <div>
-          <div>
-            <AllWines wines={this.props.wines} />
-          </div>
-        </div>
+        <h1>ALL WINES</h1>
+        {wines
+          ? wines.map(wine => {
+              return (
+                <div className="container" key={wine.id}>
+                  <h2> {wine.name} </h2>
+                  <img src={wine.imageURL} />
+                  <h2> {wine.color} </h2>
+                  <h2> ${wine.price}</h2>
+                  <Link to={`products/${wine.id}`}>view wine</Link>
+                  {isAdmin ? (
+                    <button
+                      type="button"
+                      onClick={() => this.props.handleDelete(wine.id)}
+                    >
+                      Delete product
+                    </button>
+                  ) : (
+                    ''
+                  )}
+                </div>
+              )
+            })
+          : ' '}
       </div>
     )
   }
@@ -39,13 +45,15 @@ class HomePage extends React.Component {
 
 const mapState = state => {
   return {
-    wines: state.allWines.all
+    wines: state.allWines.all,
+    user: state.user
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getAllWines: () => dispatch(fetchWinesFromServer())
+    getAllWines: () => dispatch(fetchWinesFromServer()),
+    handleDelete: wineId => dispatch(deleteWine(wineId))
   }
 }
 
