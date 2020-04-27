@@ -417,7 +417,7 @@ const products = [
       'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/s/t/stella_rosa_pink_nv_750.png',
     color: 'ROSÉ',
     region: 'Italy, Piemonte',
-    price: 19.0,
+    price: 24.0,
     size: 750,
     description:
       'Flirty, fun, and young are the words to describe Stella Rosa Pink, the semi-sweet, semi-sparkling wine that is understated. She’s a tease on the eyes but means business on the palate.',
@@ -430,12 +430,12 @@ const products = [
       ' https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/p/r/prophecy_rose_17_750.png',
     color: 'ROSÉ',
     region: 'France, Vin de France',
-    price: 19.0,
+    price: 21.0,
     size: 750,
     description:
       'This wine is crisp and refreshing with layered flavors of fresh strawberry, raspberries and a hint of white peach. Pairs with poultry, seafood, grilled vegetables, light salads, goat cheese and fruit dessert.',
     year: 2019,
-    rating: 3
+    rating: 4
   }
 ]
 
@@ -461,22 +461,7 @@ const seed = async () => {
       })
     )
 
-    // const testOrders = await Order.create({
-    //   status: 'pending',
-    //   userId: 1
-    // })
-
-    // return testOrders
-
     console.log(green('Seeding success!'))
-
-    /*------------------------USERS------------------------- */
-
-    // const exampleUser = await User.create({})
-
-    /*------------------------WINES------------------------- */
-
-    // const exampleWine = await Wine.create({})
   } catch (err) {
     console.log(red(err))
   }

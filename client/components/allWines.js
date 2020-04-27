@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 
 const allWines = props => {
   const {wines} = props
-  //console.log(props)
   return (
     <div>
       <h1>ALL WINES</h1>
