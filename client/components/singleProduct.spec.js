@@ -1,22 +1,22 @@
-/* global describe beforeEach it */
+// /* global describe beforeEach it */
 
-import {expect} from 'chai'
-import React from 'react'
-import enzyme, {shallow} from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import {SingleProduct} from './singleProduct'
+// import {expect} from 'chai'
+// import React from 'react'
+// import enzyme, {shallow} from 'enzyme'
+// import Adapter from 'enzyme-adapter-react-16'
+// import {SingleProduct} from './singleProduct'
 
-const adapter = new Adapter()
-enzyme.configure({adapter})
+// const adapter = new Adapter()
+// enzyme.configure({adapter})
 
-describe('SingleProduct', () => {
-  let product
+// describe('SingleProduct', () => {
+//   let product
 
-  beforeEach(() => {
-    product = shallow(<SingleProduct name="wine" />)
-  })
+//   beforeEach(() => {
+//     product = shallow(<SingleProduct name="wine" />)
+//   })
 
-  it('renders the wine name in an h1', () => {
-    expect(product.find('h1').text()).to.be.equal('wine')
-  })
-})
+//   it('renders the wine name in an h1', () => {
+//     expect(product.find('h1').text()).to.be.equal('wine')
+//   })
+// })
