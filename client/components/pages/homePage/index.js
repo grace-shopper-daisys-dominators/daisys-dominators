@@ -10,9 +10,10 @@ class HomePage extends React.Component {
   }
   render() {
     const {wines} = this.props
+    const {isAdmin} = this.props.user
+
     return (
       <div>
-        {/** transfer code from allWines file component here to be able to add delete button and use the class component to access handle delete */}
         <h1>ALL WINES</h1>
         {wines
           ? wines.map(wine => {
@@ -23,12 +24,16 @@ class HomePage extends React.Component {
                   <h2> {wine.color} </h2>
                   <h2> ${wine.price}</h2>
                   <Link to={`products/${wine.id}`}>view wine</Link>
-                  <button
-                    type="button"
-                    onClick={() => this.props.handleDelete(wine.id)}
-                  >
-                    Delete product
-                  </button>
+                  {isAdmin ? (
+                    <button
+                      type="button"
+                      onClick={() => this.props.handleDelete(wine.id)}
+                    >
+                      Delete product
+                    </button>
+                  ) : (
+                    ''
+                  )}
                 </div>
               )
             })
@@ -40,7 +45,8 @@ class HomePage extends React.Component {
 
 const mapState = state => {
   return {
-    wines: state.allWines.all
+    wines: state.allWines.all,
+    user: state.user
   }
 }
 
