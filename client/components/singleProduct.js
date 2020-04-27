@@ -1,17 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
+// import UpdateProductForm from '../components/updateProductForm'
 import {addToCart} from '../store/cart'
+import {addToLocalStorage} from '../store/localStorage'
 
 export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
   }
 
-  handleClick = id => {
-    this.props.addToCart(id)
-  }
+  handleClick = () => {
+    const currProduct = this.props.product
 
+    if (this.props.user.email) {
+      this.props.addToCart(currProduct.id)
+    } else {
+      addToLocalStorage(currProduct)
+    }
+  }
   render() {
     const {
       name,
@@ -24,7 +31,6 @@ export class SingleProduct extends Component {
       year,
       rating
     } = this.props.product
-
     return (
       <div>
         <div>
@@ -41,11 +47,10 @@ export class SingleProduct extends Component {
           <p>Size: {size}</p>
           <p>Year: {year}</p>
         </div>
+        {/** TODO: WORK ON UPDATE FORM BELOW */}
+        {/*<UpdateProductForm />*/}
         <div>
-          <button
-            type="submit"
-            onClick={() => this.props.addToCart(this.props.productId)}
-          >
+          <button type="submit" onClick={() => this.handleClick()}>
             Add to cart
           </button>
         </div>
@@ -55,7 +60,8 @@ export class SingleProduct extends Component {
 }
 
 const mapState = state => ({
-  product: state.singleProduct
+  product: state.singleProduct,
+  user: state.user
 })
 
 const mapDispatch = dispatch => ({
