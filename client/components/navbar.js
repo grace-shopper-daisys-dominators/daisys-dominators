@@ -27,6 +27,11 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
     <nav>
       {isLoggedIn ? (
         <div>
+          <Link to="/home">
+            <span className="home" style={{display: 'block'}}>
+              HOME
+            </span>
+          </Link>
           <Link to="/">
             <span className="all-wines" style={{display: 'block'}}>
               ALL WINES
