@@ -37,7 +37,8 @@ export class SingleProduct extends Component {
           <p>Size: {size}</p>
           <p>Year: {year}</p>
         </div>
-        <UpdateProductForm />
+        {/** TODO: WORK ON UPDATE FORM BELOW */}
+        {/*<UpdateProductForm />*/}
       </div>
     )
   }
