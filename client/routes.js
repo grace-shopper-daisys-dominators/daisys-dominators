@@ -5,7 +5,10 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import SingleProduct from './components/SingleProduct'
-import HomePage from './components/pages/homePage'
+//import HomePage from './components/pages/HomePage'
+import Cart from './components/pages/Cart'
+
+import HomePage from './components/pages/HomePage/index.js'
 import AllUsers from './components/pages/allUsers/AllUsers'
 import SingleUser from './components/pages/singleUser/SingleUser'
 import RedWines from './components/pages/RedWines'
@@ -25,6 +28,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/carts" component={Cart} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/users" component={AllUsers} />
         <Route exact path="/users/:userId" component={SingleUser} />

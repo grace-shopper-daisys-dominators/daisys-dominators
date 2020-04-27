@@ -6,6 +6,8 @@ import user from './user'
 import allUsers from './allUsers'
 import singleProduct from './singleProduct'
 import allWines from './allWines'
+// import throttle from 'lodash/throttle'
+// import {loadState, saveState} from './localStorage'
 
 const reducer = combineReducers({user, singleProduct, allUsers, allWines})
 
@@ -13,6 +15,18 @@ const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
 const store = createStore(reducer, middleware)
+
+// export const persistedState = loadState()
+
+// const store = createStore(reducer, persistedState)
+
+// store.subscribe(
+//   throttle(() => {
+//     saveState({
+//       addToLocalStorage: store.getState().addToLocalStorage
+//     })
+//   }, 1000)
+// )
 
 export default store
 export * from './user'
