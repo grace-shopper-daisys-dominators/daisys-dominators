@@ -52,8 +52,8 @@ export const fetchCartFromServer = userId => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/orders/me/current', {userId})
-      dispatch(getCart(data))
-      //TO DO: DISCUSS WHAT NEEDS TO BE RETURNED >  NEED THE WHOLE ITEM TO SET FOR ITEMS STATE aka the complete item detail<
+      dispatch(getCart(data[0].products))
+      //CONSOLE LOG TO MAKE SURE ACCESS THE PRODUCTS OBJ
     } catch (err) {
       console.log(err, "COULDN'T FETCH CART")
     }
@@ -100,7 +100,6 @@ export const subtractQuantityFromServer = (orderId, productId, price) => {
       const {data} = await axios.put(`/api/carts/${orderId}`, {
         price,
         operation,
-        orderId,
         productId
       })
       dispatch(subtractQuantity(data.productId, data.total))

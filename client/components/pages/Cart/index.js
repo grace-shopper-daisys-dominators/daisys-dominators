@@ -1,9 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchCartFromServer, addItemToServer} from '../../../store/cart'
+import {
+  fetchCartFromServer,
+  removeItemFromServer,
+  subtractQuantityFromServer,
+  addQuantityToServer
+} from '../../../store/cart'
 import {me} from '../../../store/user'
-import SingleCartItem from './singleCartItem'
+// import SingleCartItem from './singleCartItem'
 
 export class Cart extends React.Component {
   componentDidMount() {
