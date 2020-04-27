@@ -28,19 +28,25 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
+          <Link to="/home">HOME</Link>
+          <Link to="/orders">ORDER HISTORY</Link>
+          <Link to="/carts">CART</Link>
+          <a href="#" onClick={handleClick}>
+            LOGOUT
+          </a>
           {isAdmin ? (
             <div>
-              <Link to="/home">Home</Link>
-              <Link to="/users">Users</Link>
+              <Link to="/home">HOME</Link>
+              <Link to="/users">USERS</Link>
               <a href="#" onClick={handleClick}>
-                Logout
+                LOGOUT
               </a>
             </div>
           ) : (
             <div>
-              <Link to="/home">Home</Link>
+              <Link to="/home">HOME</Link>
               <a href="#" onClick={handleClick}>
-                Logout
+                LOGOUT
               </a>
             </div>
           )}
@@ -48,8 +54,29 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/">
+            <span className="all-wines" style={{display: 'block'}}>
+              ALL WINES
+            </span>
+          </Link>
+          <Link to="/redwines">
+            <span className="red" style={{display: 'block'}}>
+              RED WINE
+            </span>
+          </Link>
+          <Link to="/whitewines">
+            <span className="white" style={{display: 'block'}}>
+              WHITE WINE
+            </span>
+          </Link>
+          <Link to="/rosewines">
+            <span className="rose" style={{display: 'block'}}>
+              ROSÉ
+            </span>
+          </Link>
+          <Link to="/cart">CART</Link>
+          <Link to="/login">LOG IN</Link>
+          <Link to="/signup">SIGN UP</Link>
         </div>
       )}
     </nav>
