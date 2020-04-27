@@ -141,7 +141,7 @@ export class UpdateProductForm extends Component {
 
 const mapState = state => {
   return {
-    wine: state.singleProduct
+    wine: state.allWines
   }
 }
 const mapDispatch = dispatch => {
