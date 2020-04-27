@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
-import UpdateProductForm from '../components/updateProductForm'
+// import UpdateProductForm from '../components/updateProductForm'
 
 export class SingleProduct extends Component {
   componentDidMount() {
