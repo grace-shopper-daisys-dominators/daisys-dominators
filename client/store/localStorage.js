@@ -1,4 +1,12 @@
-// // //const cart = {}
+export const addToLocalStorage = currProduct => {
+  let currentCart = JSON.parse(localStorage.getItem('cart'))
+  if (!currentCart) {
+    currentCart = []
+  }
+  currentCart.push(currProduct)
+  localStorage.setItem('cart', JSON.stringify(currentCart))
+  console.log(currentCart)
+}
 
 // export const loadState = async () => {
 //   try {
