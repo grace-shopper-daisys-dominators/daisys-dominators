@@ -23,7 +23,7 @@ class HomePage extends React.Component {
         </div>
         <div>
           <span className="outro">NO.01</span>
-          <span className="outro outro--big">TYPEFACE RECREATED</span>
+          <span className="outro outro--big">ALL WINES</span>
           <span className="outro">CSS</span>
           <span className="outro outro--smart">smart cookie</span>
         </div>

@@ -3,16 +3,14 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
+import allUsers from './allUsers'
 import singleProduct from './singleProduct'
 import allWines from './allWines'
 // import throttle from 'lodash/throttle'
 // import {loadState, saveState} from './localStorage'
 
-const reducer = combineReducers({
-  user,
-  allWines,
-  singleProduct
-})
+const reducer = combineReducers({user, singleProduct, allUsers, allWines})
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
