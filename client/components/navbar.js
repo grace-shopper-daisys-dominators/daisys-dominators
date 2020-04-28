@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import './navbar.css'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <div>
@@ -26,7 +27,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
     </div>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="links-container">
           <Link to="/home">
             <span className="home" style={{display: 'block'}}>
               HOME
@@ -39,17 +40,17 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
           </Link>
           <Link to="/redwines">
             <span className="red" style={{display: 'block'}}>
-              RED WINE
+              RED WINES
             </span>
           </Link>
           <Link to="/whitewines">
             <span className="white" style={{display: 'block'}}>
-              WHITE WINE
+              WHITE WINES
             </span>
           </Link>
           <Link to="/rosewines">
             <span className="rose" style={{display: 'block'}}>
-              ROSÉ
+              ROSÉS
             </span>
           </Link>
           {isAdmin ? <Link to="/users">USERS</Link> : ''}
@@ -68,12 +69,12 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
           </Link>
           <Link to="/redwines">
             <span className="red" style={{display: 'block'}}>
-              RED WINE
+              RED WINES
             </span>
           </Link>
           <Link to="/whitewines">
             <span className="white" style={{display: 'block'}}>
-              WHITE WINE
+              WHITE WINES
             </span>
           </Link>
           <Link to="/rosewines">
