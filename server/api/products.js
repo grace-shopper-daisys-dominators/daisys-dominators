@@ -106,7 +106,7 @@ router.put('/:id', async (req, res, next) => {
       year,
       rating
     })
-    if (curr) res.status(200).send(updated)
+    res.status(200).send(updated)
 
     // if (currentUser.isAdmin) {
     //   const updatedProduct = await Product.update(productObj, {where: {id: id}})

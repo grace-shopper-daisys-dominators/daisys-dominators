@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {updateWine} from '../store/singleProduct'
+import {updateWine} from '../store/singleProduct.js'
 
 export class UpdateProductForm extends Component {
   constructor() {
