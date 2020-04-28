@@ -42,7 +42,7 @@ router.put('/:id', async (req, res, next) => {
     // I'm not sure how to eloquently test this route with postman since I don't know how to add a "user" attribute to the request there, but I tested it as best I could and I think it works!
 
     if (currentUser.isAdmin) {
-      const updatedProduct = Product.update(req.body, {where: {id: id}})
+      const updatedProduct = await Product.update(req.body, {where: {id: id}})
       if (updatedProduct) {
         res.send('Update successful!')
       } else {

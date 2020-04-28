@@ -5,13 +5,13 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import singleProduct from './singleProduct'
 import allWines from './allWines'
-// import throttle from 'lodash/throttle'
-// import {loadState, saveState} from './localStorage'
+import cart from './cart'
 
 const reducer = combineReducers({
   user,
+  singleProduct,
   allWines,
-  singleProduct
+  cart
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

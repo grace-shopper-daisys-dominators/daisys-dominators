@@ -28,9 +28,7 @@ class HomePage extends React.Component {
           <span className="outro outro--smart">smart cookie</span>
         </div>
         <div>
-          <div>
-            <AllWines wines={this.props.wines} />
-          </div>
+          <AllWines wines={this.props.wines} />
         </div>
       </div>
     )
