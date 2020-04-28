@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {addNewWine} from '../store/allWines'
+import './productForm.css'
 
 export class NewProductForm extends Component {
   constructor() {
@@ -55,81 +56,94 @@ export class NewProductForm extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="product-form-container">
         <form onSubmit={e => this.handleSubmit(e)}>
-          <input
-            type="text"
-            name="name"
-            value={this.state.name}
-            placeholder="wine name"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="imageURL"
-            value={this.state.imageURL}
-            placeholder="Image URL"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="color"
-            value={this.state.color}
-            placeholder="Color"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="region"
-            value={this.state.region}
-            placeholder="Region"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="number"
-            name="price"
-            value={this.state.number}
-            placeholder="Price"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="number"
-            name="size"
-            value={this.state.size}
-            placeholder="size"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="description"
-            value={this.state.description}
-            placeholder="description"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="year"
-            value={this.state.year}
-            placeholder="year"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="number"
-            name="rating"
-            value={this.state.rating}
-            placeholder="rating"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <button type="submit">Add New Item</button>
+          <div>
+            <input
+              type="text"
+              name="name"
+              value={this.state.name}
+              placeholder="Wine name"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="imageURL"
+              value={this.state.imageURL}
+              placeholder="Image URL"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="color"
+              value={this.state.color}
+              placeholder="Color"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="region"
+              value={this.state.region}
+              placeholder="Region"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              name="price"
+              value={this.state.number}
+              placeholder="Price"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              name="size"
+              value={this.state.size}
+              placeholder="Size"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="year"
+              value={this.state.year}
+              placeholder="Year"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              name="rating"
+              value={this.state.rating}
+              placeholder="Rating"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <textarea
+              type="text"
+              name="description"
+              value={this.state.description}
+              placeholder="Description"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <button id="add-product-btn" type="submit">
+              Add New Item
+            </button>
+          </div>
         </form>
       </div>
     )
