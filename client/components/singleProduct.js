@@ -31,6 +31,7 @@ export class SingleProduct extends Component {
       year,
       rating
     } = this.props.product
+    const {isAdmin} = this.props.user
     return (
       <div>
         <div>
@@ -52,9 +53,7 @@ export class SingleProduct extends Component {
             Add to cart
           </button>
         </div>
-        <div>
-          <UpdateProductForm />
-        </div>
+        <div>{isAdmin ? <UpdateProductForm /> : ''}</div>
       </div>
     )
   }

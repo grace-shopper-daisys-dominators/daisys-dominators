@@ -42,7 +42,6 @@ export const updateWine = (wineId, wineInfo) => {
   return async dispatch => {
     try {
       const res = await axios.put(`/api/products/${wineId}`, wineInfo)
-      console.log('info', res.data)
       dispatch(updatedWine(res.data))
     } catch (err) {
       console.log(err, 'UNABLE TO UPDATE PRODUCT')

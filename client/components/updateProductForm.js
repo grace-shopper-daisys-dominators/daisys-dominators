@@ -44,8 +44,6 @@ export class UpdateProductForm extends Component {
   }
   render() {
     const {wine} = this.props
-
-    console.log('updateform component', wine)
     return (
       <div>
         <form onSubmit={e => this.handleEdit(e, wine.id)}>
