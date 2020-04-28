@@ -31,7 +31,9 @@ const AuthForm = props => {
               />
             </div>
             <div>
-              <button type="submit">{displayName}</button>
+              <button id="login-btn" type="submit">
+                {displayName}
+              </button>
             </div>
             <div>
               <a className="google-login-btn" href="/auth/google">
@@ -71,7 +73,9 @@ const AuthForm = props => {
               />
             </div>
             <div>
-              <button type="submit">{displayName}</button>
+              <button id="signup-btn" type="submit">
+                {displayName}
+              </button>
             </div>
           </form>
           <a className="google-login-btn" href="/auth/google">

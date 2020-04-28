@@ -4,7 +4,7 @@
   margin-top: 60px;
 }
 
-input[type='text'],
+.form-container form div input[type='text'],
 input[type='password'],
 input[type='email'] {
   border-radius: 5px;
@@ -13,12 +13,13 @@ input[type='email'] {
   padding: 15px;
 }
 
-input::placeholder {
+.form-container form div input::placeholder {
   font-size: 15px;
   color: #1b2631;
 }
 
-button[type='submit'] {
+#login-btn,
+#signup-btn {
   background-color: #1d8348;
   padding: 10px 20px 10px 20px;
   border: none;
@@ -27,7 +28,8 @@ button[type='submit'] {
   color: white;
   cursor: pointer;
 }
-button[type='submit']:hover {
+#login-btn:hover,
+#signup-btn:hover {
   opacity: 0.6;
 }
 .google-login-btn {
