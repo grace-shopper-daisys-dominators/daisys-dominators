@@ -15,8 +15,6 @@ export class Cart extends React.Component {
   }
 
   render() {
-    console.log(this.props.user, 'IM THE CURR USER')
-
     const {
       items,
       removeItem,
@@ -25,6 +23,7 @@ export class Cart extends React.Component {
       total,
       orderId
     } = this.props
+
     return (
       <div>
         <h2>Cart</h2>

@@ -50,6 +50,7 @@ class Routes extends Component {
                 </div>
               )}
             />
+            <Route exact path="/checkout" component={Checkout} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
