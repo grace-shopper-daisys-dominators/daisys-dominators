@@ -14,6 +14,9 @@ const AuthForm = props => {
     <div>
       {name === 'login' ? (
         <div>
+          <div>
+            {error && error.response && <div> {error.response.data} </div>}
+          </div>
           <form onSubmit={handleSubmit} name={name}>
             <div>
               <input name="email" type="text" placeholder="Email" required />
@@ -29,7 +32,6 @@ const AuthForm = props => {
             <div>
               <button type="submit">{displayName}</button>
             </div>
-            {error && error.response && <div> {error.response.data} </div>}
           </form>
           <a href="/auth/google">{displayName} with Google</a>
         </div>
@@ -66,7 +68,6 @@ const AuthForm = props => {
             <div>
               <button type="submit">{displayName}</button>
             </div>
-            {error && error.response && <div> {error.response.data} </div>}
           </form>
           <a href="/auth/google">{displayName} with Google</a>
         </div>
