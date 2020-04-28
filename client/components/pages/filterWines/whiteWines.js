@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchWinesFromServer} from '../../../store/allWines'
+import './style.css'
 
 class WhiteWines extends Component {
   componentDidMount() {
