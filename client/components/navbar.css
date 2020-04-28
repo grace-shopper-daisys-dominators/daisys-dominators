@@ -1,4 +1,8 @@
-.links-container a span,
-a {
+.nav-links {
   color: white;
+}
+
+.nav-links:hover {
+  text-decoration: underline;
+  opacity: 0.8;
 }
