@@ -46,9 +46,26 @@ Cart.prototype.remove = async function(price) {
   }
 }
 
-Cart.prototype.updateTotal = async function() {
+// Cart.prototype.updateTotal = async function () {
+//   try {
+//     const orderId= this.orderId
+//     let cartsInOrder = await Cart.findAll({where: {orderId : orderId}
+//     });
+//     let newTotal = 0
+//     for (let key in cartsInOrder){
+//       newTotal += cartsInOrder[key].price
+//     }
+//     await Cart.update({total: newTotal}, {where: {orderId : orderId}})
+//     await this.save();
+//     return true;
+//   } catch(err) {
+//     console.error(err)
+//     return false;
+//   }
+// }
+
+Cart.updateTotal = async function(orderId) {
   try {
-    const orderId = this.orderId
     let cartsInOrder = await Cart.findAll({
       where: {orderId: orderId}
     })
@@ -57,7 +74,6 @@ Cart.prototype.updateTotal = async function() {
       newTotal += cartsInOrder[key].price
     }
     await Cart.update({total: newTotal}, {where: {orderId: orderId}})
-    await this.save()
     return true
   } catch (err) {
     console.error(err)

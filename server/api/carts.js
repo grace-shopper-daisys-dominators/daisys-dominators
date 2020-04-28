@@ -72,8 +72,10 @@ router.post('/', async (req, res, next) => {
       })
 
       if (newCart) {
-        await newCart.updateTotal()
+        await Cart.updateTotal(orderId)
+
         let cart = await Cart.findOne({where: {orderId, productId}})
+
         res.status(201).send(cart)
       } else {
         res.status(204).send('Failed to add item.')
@@ -112,10 +114,12 @@ router.put('/:id', async (req, res, next) => {
       }
 
       if (result) {
-        await cart.updateTotal()
+        await Cart.updateTotal(orderId)
+
         cart = await Cart.findOne({
           where: {orderId: orderId, productId: productId}
         })
+
         res.send(cart)
       } else {
         res.status(304).send('Failed to edit cart.')
@@ -134,15 +138,20 @@ router.delete('/:id', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {}
+      currentUser = {id: 1}
     }
-    const {orderId} = req.body
+    const orderId = req.params.id
+
+    const {productId} = req.body
 
     const {userId} = await Order.findByPk(orderId)
 
     if (userId === currentUser.id) {
-      const deleted = await Cart.destroy({where: {id: req.params.id}})
+      const deleted = await Cart.destroy({
+        where: {orderId: orderId, productId: productId}
+      })
       if (deleted > 0) {
+        Cart.updateTotal(orderId)
         res.status(204).send('Item successfully deleted.')
       } else {
         res.status(304).send('Failed to delete item.')
