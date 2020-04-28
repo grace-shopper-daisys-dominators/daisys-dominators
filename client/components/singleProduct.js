@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
 // import UpdateProductForm from '../components/updateProductForm'
 import {
-  addToCart,
+  addItemToServer,
   fetchCartFromServer,
   addQuantityToServer
 } from '../store/cart'
@@ -19,15 +19,16 @@ export class SingleProduct extends Component {
 
   isLoggedIn = userId => {
     const currProduct = this.props.product
-    const {items, orderId, product, addQuantity} = this.props
+    const {items, orderId, addQuantity} = this.props
     let existedItem = items.find(item => item.id === currProduct.id)
     if (existedItem) {
-      addQuantity(currProduct.id, orderId, product.price)
+      addQuantity(currProduct.id, orderId, currProduct.price)
     } else {
       this.props.addToCart(
+        currProduct,
         currProduct.id,
         this.props.orderId,
-        this.props.product.price
+        currProduct.price
       )
     }
   }
@@ -92,12 +93,13 @@ const mapState = state => ({
   orderId: state.user.orderId
 })
 
+//What's being sent to the backend
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
   getAllItems: (userId, orderId) =>
     dispatch(fetchCartFromServer(userId, orderId)),
-  addToCart: (productId, orderId, price) =>
-    dispatch(addToCart(productId, orderId, price)),
+  addToCart: (product, productId, orderId, price) =>
+    dispatch(addItemToServer(product, productId, orderId, price)), //product is being sent back so that thunk so that it can be added to state without getting from backend route
   addQuantity: (productId, orderId, price) =>
     dispatch(addQuantityToServer(productId, orderId, price))
 })

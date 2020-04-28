@@ -11,8 +11,8 @@ import SingleCartItem from '../../singleCartItem'
 
 export class Cart extends React.Component {
   componentDidMount() {
-    if (this.props.user) {
-      this.props.getAllItems(this.props.user, this.props.orderId)
+    if (this.props.user.id) {
+      this.props.getAllItems(this.props.user.id, this.props.orderId)
     } //ELSE if guest get from localstorage
   }
 
@@ -50,7 +50,7 @@ export class Cart extends React.Component {
 
 const mapState = state => {
   return {
-    user: state.user.id,
+    user: state.user,
     orderId: state.user.orderId,
     items: state.cart.items,
     total: state.cart.total
@@ -59,8 +59,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllItems: (user, orderId) =>
-      dispatch(fetchCartFromServer(user, orderId)),
+    getAllItems: (userId, orderId) =>
+      dispatch(fetchCartFromServer(userId, orderId)),
 
     removeItem: (itemId, orderId, price) =>
       dispatch(removeItemFromServer(itemId, orderId, price)),
