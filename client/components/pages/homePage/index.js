@@ -19,11 +19,13 @@ class HomePage extends React.Component {
             ? wines.map(wine => {
                 return (
                   <div className="wine-container" key={wine.id}>
-                    <div id="wine-img-container">
-                      <div>
-                        <img src={wine.imageURL} />
+                    <Link id="view-more-btn" to={`products/${wine.id}`}>
+                      <div id="wine-img-container">
+                        <div>
+                          <img src={wine.imageURL} />
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                     <div className="wine-details">
                       <div id="wine-name">
                         <h2> {wine.name} </h2>

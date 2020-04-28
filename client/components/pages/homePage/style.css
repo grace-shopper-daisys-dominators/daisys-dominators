@@ -125,6 +125,9 @@ body {
   align-items: center;
   justify-content: left;
 }
+.wine-details div {
+  margin: 0;
+}
 .wine-details div h2 {
   font-size: 28px;
   color: white;
