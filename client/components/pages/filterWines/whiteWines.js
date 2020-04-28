@@ -46,14 +46,14 @@ class WhiteWines extends Component {
                             Delete Product
                           </button>
                         ) : (
-                          'No white wines avaliable'
+                          ''
                         )}
                       </div>
                     </div>
                   </div>
                 )
               })
-            : ' '}
+            : 'No white wines avaliable.'}
         </div>
       </div>
     )

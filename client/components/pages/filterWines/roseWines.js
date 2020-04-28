@@ -44,14 +44,14 @@ class RoseWines extends Component {
                             Delete Product
                           </button>
                         ) : (
-                          'No rose wines avaliable'
+                          ''
                         )}
                       </div>
                     </div>
                   </div>
                 )
               })
-            : ' '}
+            : 'No rose wines avaliable.'}
         </div>
       </div>
     )

@@ -970,8 +970,8 @@ var RedWines = /*#__PURE__*/function (_Component) {
           onClick: function onClick() {
             return _this.props.handleDelete(wine.id);
           }
-        }, "Delete Product") : 'No red wines avaliable')));
-      }) : ' '));
+        }, "Delete Product") : '')));
+      }) : 'No red wines avaliable.'));
     }
   }]);
 
@@ -1091,8 +1091,8 @@ var RoseWines = /*#__PURE__*/function (_Component) {
           onClick: function onClick() {
             return _this.props.handleDelete(wine.id);
           }
-        }, "Delete Product") : 'No rose wines avaliable')));
-      }) : ' '));
+        }, "Delete Product") : '')));
+      }) : 'No rose wines avaliable.'));
     }
   }]);
 
@@ -1241,8 +1241,8 @@ var WhiteWines = /*#__PURE__*/function (_Component) {
           onClick: function onClick() {
             return _this.props.handleDelete(wine.id);
           }
-        }, "Delete Product") : 'No white wines avaliable')));
-      }) : ' '));
+        }, "Delete Product") : '')));
+      }) : 'No white wines avaliable.'));
     }
   }]);
 
