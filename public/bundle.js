@@ -970,7 +970,7 @@ var RedWines = /*#__PURE__*/function (_Component) {
           onClick: function onClick() {
             return _this.props.handleDelete(wine.id);
           }
-        }, "Delete Product") : '')));
+        }, "Delete Product") : 'No red wines avaliable')));
       }) : ' '));
     }
   }]);
@@ -1183,19 +1183,39 @@ var WhiteWines = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var wines = this.props.wines;
+      var isAdmin = this.props.user.isAdmin;
       var whiteWines = wines.filter(function (wine) {
         return wine.color.toLowerCase() === 'white';
       });
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, whiteWines ? whiteWines.map(function (wine) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wines-outer-container"
+      }, whiteWines ? whiteWines.map(function (wine) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "wine-container",
           key: wine.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, wine.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "wine-img-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: wine.imageURL
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, wine.color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "$", wine.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-          to: "/products/".concat(wine.id)
-        }, "view wine"));
-      }) : 'No white wines avaliable');
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "wine-details"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "wine-name"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " ", wine.name, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " $", wine.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          id: "view-more-btn",
+          to: "products/".concat(wine.id)
+        }, "View more")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "delete-btn"
+        }, isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: function onClick() {
+            return _this.props.handleDelete(wine.id);
+          }
+        }, "Delete Product") : 'No white wines avaliable')));
+      }) : ' '));
     }
   }]);
 
@@ -1204,7 +1224,8 @@ var WhiteWines = /*#__PURE__*/function (_Component) {
 
 var mapState = function mapState(state) {
   return {
-    wines: state.allWines.all
+    wines: state.allWines.all,
+    user: state.user
   };
 };
 

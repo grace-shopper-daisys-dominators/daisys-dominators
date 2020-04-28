@@ -44,7 +44,7 @@ class RedWines extends Component {
                             Delete Product
                           </button>
                         ) : (
-                          ''
+                          'No red wines avaliable'
                         )}
                       </div>
                     </div>
