@@ -450,7 +450,9 @@ var Navbar = function Navbar(_ref) {
   }, "ORDER HISTORY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     className: "nav-links",
     to: "/cart"
-  }, "CART")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }, "CART")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "links-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "nav-links",
@@ -487,7 +489,7 @@ var Navbar = function Navbar(_ref) {
   }, "SIGN UP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     className: "nav-links",
     to: "/cart"
-  }, "CART"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+  }, "CART"))));
 };
 /**
  * CONTAINER
@@ -1584,6 +1586,35 @@ module.exports = content.locals || {};
 
 /***/ }),
 
+/***/ "./client/components/singleProduct.css":
+/*!*********************************************!*\
+  !*** ./client/components/singleProduct.css ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!./singleProduct.css */ "./node_modules/css-loader/dist/cjs.js!./client/components/singleProduct.css");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
 /***/ "./client/components/singleProduct.js":
 /*!********************************************!*\
   !*** ./client/components/singleProduct.js ***!
@@ -1601,6 +1632,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_updateProductForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/updateProductForm */ "./client/components/updateProductForm.js");
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var _store_localStorage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/localStorage */ "./client/store/localStorage.js");
+/* harmony import */ var _singleProduct_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./singleProduct.css */ "./client/components/singleProduct.css");
+/* harmony import */ var _singleProduct_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_singleProduct_css__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1624,6 +1657,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1683,7 +1717,7 @@ var SingleProduct = /*#__PURE__*/function (_Component) {
       var isAdmin = this.props.user.isAdmin;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: imageURL
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Rating: ", rating), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: ", price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Type: ", color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Region: ", region), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Size: ", size), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Year: ", year)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Rating: ", rating), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: ", price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Type: ", color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Region: ", region), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Size: ", size), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Year: ", year)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         onClick: function onClick() {
           return _this2.handleClick();
@@ -17985,7 +18019,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".nav-links {\n  color: white;\n}\n\n.nav-links:hover {\n  text-decoration: underline;\n  opacity: 0.8;\n}\n", ""]);
+exports.push([module.i, ".links-container {\n  padding: 20px;\n}\n\n.nav-links {\n  color: white;\n}\n\n.nav-links:hover {\n  text-decoration: underline;\n  opacity: 0.8;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -18042,6 +18076,24 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".product-form-container form {\n  display: flex;\n  flex-direction: column;\n  margin-top: 60px;\n}\n\n.product-form-container form div input[type='text'],\ninput[type='password'],\ninput[type='email'],\ninput[type='number'] {\n  border-radius: 5px;\n  background: white;\n  border: none;\n  padding: 15px;\n}\ntextarea {\n  border-radius: 5px;\n  background: white;\n  border: none;\n  padding: 10px;\n}\n\n.product-form-container form div input::placeholder,\ntextarea::placeholder {\n  font-size: 15px;\n  color: #1b2631;\n}\n\n#add-product-btn,\n#edit-product-btn {\n  background-color: #1d8348;\n  padding: 10px 20px 10px 20px;\n  border: none;\n  border-radius: 5px;\n  text-decoration: none;\n  color: white;\n  cursor: pointer;\n}\n\n#add-product-btn:hover,\n#edit-product-btn:hover {\n  opacity: 0.6;\n}\n\n/** for future error msgs*/\n#err-msg {\n  color: red;\n  font-size: 10px;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./client/components/singleProduct.css":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./client/components/singleProduct.css ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "", ""]);
 // Exports
 module.exports = exports;
 

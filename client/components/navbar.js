@@ -71,7 +71,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
           </Link>
         </div>
       ) : (
-        <div>
+        <div className="links-container">
           <Link to="/">
             <span className="nav-links" style={{display: 'block'}}>
               ALL WINES
@@ -104,7 +104,6 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         </div>
       )}
     </nav>
-    <hr />
   </div>
 )
 

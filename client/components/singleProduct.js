@@ -4,6 +4,7 @@ import {getSingleProduct} from '../store/singleProduct.js'
 import UpdateProductForm from '../components/updateProductForm'
 import {addToCart} from '../store/cart'
 import {addToLocalStorage} from '../store/localStorage'
+import './singleProduct.css'
 
 export class SingleProduct extends Component {
   componentDidMount() {
@@ -40,7 +41,6 @@ export class SingleProduct extends Component {
         <div>
           <h1>{name}</h1>
           <p>Rating: {rating}</p>
-          <hr />
           <p>Price: {price}</p>
           <p>Description: {description}</p>
           <p>Type: {color}</p>
