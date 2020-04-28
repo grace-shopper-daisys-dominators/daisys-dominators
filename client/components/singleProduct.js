@@ -53,7 +53,6 @@ export class SingleProduct extends Component {
           </button>
         </div>
         <div>
-          {/** TODO: WORK ON UPDATE FORM BELOW */}
           <UpdateProductForm />
         </div>
       </div>
