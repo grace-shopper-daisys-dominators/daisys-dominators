@@ -16,11 +16,11 @@ const getCart = cart => {
 }
 
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const addToCart = (product, price) => {
+export const addToCart = (product, total) => {
   return {
     type: ADD_TO_CART,
     product,
-    price
+    total
   }
 }
 
@@ -77,7 +77,7 @@ export const addItemToServer = (product, productId, orderId, price) => {
         price
         //whats being sent to the backend
       })
-      dispatch(addToCart(product, data.price))
+      dispatch(addToCart(product, data.total))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T ADD ITEM TO DATABASE")
@@ -149,7 +149,7 @@ const addCartToState = (state, action) => {
   return {
     ...state,
     items: [...state.items, action.product],
-    total: state.total - action.price
+    total: action.total
   }
 }
 
