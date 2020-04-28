@@ -78,19 +78,21 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+// eslint-disable-next-line complexity
 router.put('/:id', async (req, res, next) => {
   try {
     let currentUser
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {}
+      currentUser = {id: 1}
     }
-    const {price, operation, orderId} = req.body
+    let cart = await Cart.findByPk(req.params.id)
+    const {price, operation} = req.body
+    const {orderId} = cart
     const {userId} = await Order.findByPk(orderId)
+
     if (userId === currentUser.id) {
-      let cart = await Cart.findByPk(req.params.id)
-      console.log(cart, 'IM THE NEW CART')
       if (cart) {
         let newPrice
         let newQuantity
@@ -106,10 +108,14 @@ router.put('/:id', async (req, res, next) => {
         } else if (operation === 'remove') {
           newPrice = cart.price * 1 - price * 1
           newQuantity = cart.quantity - 1
-          result = await Cart.update(
-            {quantity: newQuantity, price: newPrice},
-            {where: {id: req.params.id}}
-          )
+          if (newQuantity < 0) {
+            res.send('Quantity cannot go below 0.')
+          } else {
+            result = await Cart.update(
+              {quantity: newQuantity, price: newPrice},
+              {where: {id: req.params.id}}
+            )
+          }
         }
 
         if (result) {
