@@ -57,14 +57,13 @@ router.post('/', async (req, res, next) => {
 })
 
 router.put('/:id', async (req, res, next) => {
-  const id = req.params.id
   try {
-    // let currentUser
-    // if (req.user) {
-    //   currentUser = req.user.dataValues
-    // } else {
-    //   currentUser = {}
-    // }
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
 
     const {
       name,
@@ -77,25 +76,7 @@ router.put('/:id', async (req, res, next) => {
       year,
       rating
     } = req.body
-    // const reqBody = {
-    //   name,
-    //   color,
-    //   description,
-    //   price,
-    //   imageURL,
-    //   region,
-    //   size,
-    //   year,
-    //   rating
-    // }
-    // let productObj = {}
-
-    // for (let key in reqBody) {
-    //   if (reqBody[key]) productObj[key] = reqBody[key]
-    // }
-
-    const productToUpdate = await Product.findByPk(id)
-    const updated = await productToUpdate.update({
+    const reqBody = {
       name,
       color,
       description,
@@ -105,19 +86,35 @@ router.put('/:id', async (req, res, next) => {
       size,
       year,
       rating
-    })
-    res.status(200).send(updated)
+    }
+    const id = req.params.id
+    let productObj = {}
 
-    // if (currentUser.isAdmin) {
-    //   const updatedProduct = await Product.update(productObj, {where: {id: id}})
-    //   if (updatedProduct) {
-    //     res.send('Update successful!')
-    //   } else {
-    //     throw new Error('Update failed.')
-    //   }
-    // } else {
-    //   res.status(401).send('Log in with admin account to edit products.')
-    // }
+    for (let key in reqBody) {
+      if (reqBody[key]) productObj[key] = reqBody[key]
+    }
+
+    if (currentUser.isAdmin) {
+      const productToUpdate = await Product.findByPk(id)
+      const updatedProduct = await productToUpdate.update({
+        name,
+        color,
+        description,
+        price,
+        imageURL,
+        region,
+        size,
+        year,
+        rating
+      })
+      if (updatedProduct) {
+        res.status(200).send(updatedProduct)
+      } else {
+        throw new Error('Update failed.')
+      }
+    } else {
+      res.status(401).send('Log in with admin account to edit products.')
+    }
   } catch (err) {
     next(err)
   }
@@ -136,14 +133,12 @@ router.delete('/:id', async (req, res, next) => {
 
     if (currentUser.isAdmin) {
       const deleted = await Product.destroy({where: {id: id}})
-      // ADDED THIS LINE TO SEND ID TO FRONT END
-      res.send(id)
-      // NOTE: checks below prevent id to be send to the front end...
-      // if (deleted) {
-      //   res.status(204).send('Product deleted.')
-      // } else {
-      //   res.status(304).send('Failed to delete product.')
-      // }
+
+      if (deleted) {
+        res.send(id)
+      } else {
+        res.status(304).send('Failed to delete product.')
+      }
     } else {
       res.status(401).send('Log in with admin account to delete products.')
     }
