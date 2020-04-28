@@ -1,0 +1,78 @@
+/* ALL WINES STYLE BELOW*/
+
+.wines-outer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.wine-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#wine-img-container {
+  background-color: white;
+  margin: 20px;
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  padding: 50px;
+}
+
+#wine-img-container img {
+  max-width: 150px;
+  max-height: 300px;
+}
+
+.wine-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+}
+
+.wine-details div h2 {
+  font-size: 28px;
+  color: white;
+}
+
+#wine-name {
+  max-width: 300px;
+}
+
+.wine-details div p {
+  font-size: 24px;
+  color: white;
+}
+
+#view-more-btn {
+  color: #922b21;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+#view-more-btn:hover {
+  color: white;
+}
+
+#delete-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#delete-btn button {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#delete-btn button:hover {
+  opacity: 0.9;
+}

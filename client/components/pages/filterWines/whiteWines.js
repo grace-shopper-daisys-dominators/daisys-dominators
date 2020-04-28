@@ -1,20 +1,22 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchWinesFromServer} from '../../store/allWines'
+import {fetchWinesFromServer} from '../../../store/allWines'
 
-class RedWines extends Component {
+class WhiteWines extends Component {
   componentDidMount() {
     this.props.getAllWines()
   }
   render() {
     const {wines} = this.props
-    const redWines = wines.filter(wine => wine.color.toLowerCase() === 'red')
+    const whiteWines = wines.filter(
+      wine => wine.color.toLowerCase() === 'white'
+    )
 
     return (
       <div>
-        {redWines
-          ? redWines.map(wine => {
+        {whiteWines
+          ? whiteWines.map(wine => {
               return (
                 <div key={wine.id}>
                   <h2>{wine.name}</h2>
@@ -25,7 +27,7 @@ class RedWines extends Component {
                 </div>
               )
             })
-          : 'No red wines avaliable'}
+          : 'No white wines avaliable'}
       </div>
     )
   }
@@ -43,4 +45,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(RedWines)
+export default connect(mapState, mapDispatch)(WhiteWines)
