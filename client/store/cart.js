@@ -25,11 +25,10 @@ export const addToCart = (product, total) => {
 }
 
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const removeItem = (productId, orderId, total) => {
+export const removeItem = (productId, total) => {
   return {
     type: REMOVE_ITEM,
     productId,
-    orderId,
     total
   }
 }
@@ -54,8 +53,7 @@ export const addQuantity = product => {
 export const fetchCartFromServer = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/orders/me/current`)
-      console.log(data, 'HELLO IM CART DATA')
+      const {data} = await axios.get('/api/orders/me/current')
       dispatch(getCart(data[0].products))
       //whats being received from the backend
     } catch (err) {
@@ -81,15 +79,11 @@ export const addItemToServer = (product, productId, orderId, price) => {
   }
 }
 
-export const removeItemFromServer = (productId, orderId, price) => {
+export const removeItemFromServer = (productId, orderId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.delete(`/api/carts/${orderId}`, {
-        productId,
-        price
-        //whats being sent to the backend
-      })
-      dispatch(removeItem(data.productId, data.total))
+      const {data} = await axios.delete(`/api/carts/${orderId}/${productId}`)
+      dispatch(removeItem(productId, data.total))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T REMOVE ITEM FROM DATABASE")
@@ -102,9 +96,9 @@ export const subtractQuantityFromServer = (productId, orderId, price) => {
     try {
       let operation = 'remove'
       const {data} = await axios.put(`/api/carts/${orderId}`, {
+        price,
         operation,
-        productId,
-        price
+        productId
         //whats being sent to the backend
       })
       dispatch(subtractQuantity(data))
@@ -174,7 +168,6 @@ const addQuantityFromState = (state, action) => {
   let indexOfExistedItem = state.items.findIndex(
     item => item.id === action.product.id
   )
-  console.log(indexOfExistedItem, 'HELLOO IM ITEM')
   if (indexOfExistedItem) {
     const copyItems = [...state.items]
     copyItems[indexOfExistedItem] = action.product

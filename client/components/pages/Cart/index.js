@@ -11,12 +11,12 @@ import SingleCartItem from '../../singleCartItem'
 
 export class Cart extends React.Component {
   componentDidMount() {
-    if (this.props.user.id) {
-      this.props.getAllItems(this.props.user.id, this.props.orderId)
-    } //ELSE if guest get from localstorage
+    this.props.getAllItems()
   }
 
   render() {
+    console.log(this.props.user, 'IM THE CURR USER')
+
     const {
       items,
       removeItem,
@@ -61,8 +61,8 @@ const mapDispatch = dispatch => {
   return {
     getAllItems: () => dispatch(fetchCartFromServer()),
 
-    removeItem: (itemId, orderId, price) =>
-      dispatch(removeItemFromServer(itemId, orderId, price)),
+    removeItem: (itemId, orderId) =>
+      dispatch(removeItemFromServer(itemId, orderId)),
 
     subQuantity: (itemId, orderId, price) =>
       dispatch(subtractQuantityFromServer(itemId, orderId, price)),

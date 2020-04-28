@@ -3,26 +3,6 @@ const {Order, User, Cart, Product} = require('../db/models')
 module.exports = router
 const sequelize = require('sequelize')
 
-// router.get('/', async (req, res, next) => {
-//   try {
-//     let currentUser
-//     if (req.user) {
-//       currentUser = req.user.dataValues
-//     } else {
-//       currentUser = {}
-//     }
-
-//     if (currentUser.isAdmin) {
-//       const carts = await Cart.findAll({include: Product})
-//       res.json(carts)
-//     } else {
-//       res.status(401).send('Log in with admin account to view carts.')
-//     }
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
 router.get('/:id', async (req, res, next) => {
   try {
     let currentUser
@@ -50,7 +30,7 @@ router.post('/', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: 1}
+      currentUser = {}
     }
 
     const {productId, orderId, price} = req.body
@@ -94,7 +74,7 @@ router.put('/:id', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: 1}
+      currentUser = {}
     }
     const {price, operation, productId} = req.body
     const orderId = req.params.id
@@ -132,17 +112,15 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:orderId/:productId', async (req, res, next) => {
   try {
     let currentUser
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: 1}
+      currentUser = {}
     }
-    const orderId = req.params.id
-
-    const {productId} = req.body
+    const {orderId, productId} = req.params
 
     const {userId} = await Order.findByPk(orderId)
 
