@@ -13,7 +13,7 @@ export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
     if (this.props.user.id) {
-      this.props.getAllItems(this.props.user, this.props.orderId)
+      this.props.getAllItems()
     }
   }
 
@@ -39,7 +39,7 @@ export class SingleProduct extends Component {
     const currProduct = this.props.product
     const {user} = this.props
 
-    if (user.id) {
+    if (user) {
       this.isLoggedIn(user.id)
     } else {
       addToLocalStorage(currProduct)
@@ -96,8 +96,7 @@ const mapState = state => ({
 //What's being sent to the backend
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
-  getAllItems: (userId, orderId) =>
-    dispatch(fetchCartFromServer(userId, orderId)),
+  getAllItems: () => dispatch(fetchCartFromServer()),
   addToCart: (product, productId, orderId, price) =>
     dispatch(addItemToServer(product, productId, orderId, price)), //product is being sent back so that thunk so that it can be added to state without getting from backend route
   addQuantity: (productId, orderId, price) =>

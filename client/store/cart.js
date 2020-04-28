@@ -1,12 +1,12 @@
 import axios from 'axios'
-
+//ACTION TYPE
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 const SUB_QUANTITY = 'SUB_QUANTITY'
 const ADD_QUANTITY = 'ADD_QUANTITY'
 
-//ACTION CREATOR-
+//ACTION CREATOR
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
 const getCart = cart => {
   return {
@@ -25,40 +25,36 @@ export const addToCart = (product, total) => {
 }
 
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const removeItem = (productId, orderId, price) => {
+export const removeItem = (productId, orderId, total) => {
   return {
     type: REMOVE_ITEM,
     productId,
     orderId,
-    price
+    total
   }
 }
 
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const subtractQuantity = (productId, orderId, price) => {
+export const subtractQuantity = product => {
   return {
     type: SUB_QUANTITY,
-    productId,
-    orderId,
-    price
+    product
   }
 }
 
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const addQuantity = (productId, price) => {
+export const addQuantity = product => {
   return {
     type: ADD_QUANTITY,
-    productId,
-    price
+    product
   }
 }
 
-export const fetchCartFromServer = (userId, orderId) => {
+//THUNKS//
+export const fetchCartFromServer = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(
-        `/api/orders/me/current/${userId}/${orderId}`
-      )
+      const {data} = await axios.get(`/api/orders/me/current`)
       console.log(data, 'HELLO IM CART DATA')
       dispatch(getCart(data[0].products))
       //whats being received from the backend
@@ -111,7 +107,7 @@ export const subtractQuantityFromServer = (productId, orderId, price) => {
         price
         //whats being sent to the backend
       })
-      dispatch(subtractQuantity(data.productId, data.total))
+      dispatch(subtractQuantity(data))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T SUBTRACT QUANTITY FROM DATABASE")
@@ -130,7 +126,7 @@ export const addQuantityToServer = (productId, orderId, price) => {
         orderId
         //whats being sent to the backend
       })
-      dispatch(addQuantity(data.productId, data.price))
+      dispatch(addQuantity(data))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T ADD QUANTITY FROM DATABASE")
@@ -161,26 +157,34 @@ const removeItemFromState = (state, action) => {
 //orderId, productId, price
 //data.productId, data.total on the action
 const subQuantityFromState = (state, action) => {
-  let existedItem = state.items.find(item => item.id === action.productId)
-  if (existedItem && existedItem.quantity > 1) {
-    existedItem.quantity -= 1
-    return {...state, total: action.total}
+  let indexOfExistedItem = state.items.findIndex(
+    item => item.id === action.product.id
+  )
+
+  if (indexOfExistedItem) {
+    const copyItems = [...state.items]
+    copyItems[indexOfExistedItem] = action.product
+    return {...state, items: copyItems, total: action.product.total}
   } else {
-    return {...state, total: state.total}
+    return {state}
   }
 }
 
 const addQuantityFromState = (state, action) => {
-  let existedItem = state.items.find(item => item.id === action.productId)
-  console.log(existedItem, 'I EXIST')
-  if (existedItem) {
-    existedItem.quantity += 1
-    return {...state, total: action.total}
+  let indexOfExistedItem = state.items.findIndex(
+    item => item.id === action.product.id
+  )
+  console.log(indexOfExistedItem, 'HELLOO IM ITEM')
+  if (indexOfExistedItem) {
+    const copyItems = [...state.items]
+    copyItems[indexOfExistedItem] = action.product
+    return {...state, items: copyItems, total: action.product.total}
   } else {
-    return {...state, total: state.total}
+    return {state}
   }
 }
 
+//To get quantity its on action.
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:

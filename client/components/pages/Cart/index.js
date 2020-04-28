@@ -59,8 +59,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllItems: (userId, orderId) =>
-      dispatch(fetchCartFromServer(userId, orderId)),
+    getAllItems: () => dispatch(fetchCartFromServer()),
 
     removeItem: (itemId, orderId, price) =>
       dispatch(removeItemFromServer(itemId, orderId, price)),
