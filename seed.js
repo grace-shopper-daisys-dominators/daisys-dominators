@@ -460,9 +460,9 @@ const seed = async () => {
       })
     )
 
-    console.log(green('Seeding success!'))
+    console.log('Seeding success!')
   } catch (err) {
-    console.log(red(err))
+    console.log(err)
   }
 }
 

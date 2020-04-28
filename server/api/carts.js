@@ -57,12 +57,23 @@ router.post('/', async (req, res, next) => {
 
     const {userId} = await Order.findByPk(orderId)
 
+    let total = await Cart.findOne({
+      where: {orderId: orderId}
+    })
+
     if (currentUser.id === userId) {
+      if (!total) {
+        total = price * 1
+      } else {
+        total = total.total * 1 + price * 1
+        Cart.update({total: total}, {where: {orderId: orderId}})
+      }
       const newCart = await Cart.create({
         productId: productId,
         quantity: 1,
         price: price,
-        orderId: orderId
+        orderId: orderId,
+        total: total
       })
 
       if (newCart) {
