@@ -5,26 +5,22 @@ export const addToLocalStorage = currProduct => {
   }
   currentCart.push(currProduct)
   localStorage.setItem('cart', JSON.stringify(currentCart))
-  console.log(currentCart)
+  return currentCart
 }
 
-// export const loadState = async () => {
-//   try {
-//     const serializedState = await localStorage.getItem('state')
-//     if (serializedState === null) {
-//       return undefined
-//     }
-//     return JSON.parse(serializedState)
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+export const removeFromLocalStorage = currProduct => {
+  let currentCart = JSON.parse(localStorage.getItem('cart'))
+  if (!currentCart) {
+    currentCart = []
+  }
+  let newCart = currentCart.filter(product => product.id !== currProduct.id)
+  localStorage.setItem('cart', JSON.stringify(newCart))
+  return newCart
+}
 
-// export const saveState = async (state) => {
-//   try {
-//     const serializedState = await JSON.stringify(state)
-//     localStorage.setItem('state', serializedState)
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+export const getTotal = () => {
+  let currentCart = JSON.parse(localStorage.getItem('cart'))
+  let total = 0
+  currentCart.forEach(product => (total += product.price))
+  return total
+}

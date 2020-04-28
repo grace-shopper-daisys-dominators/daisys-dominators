@@ -33,16 +33,19 @@ export class SingleProduct extends Component {
     }
   }
 
+  isNotLoggedIn = () => {
+    const currProduct = this.props.product
+    addToLocalStorage(currProduct)
+  }
+
   //NEED HELPER FUNC FOR GUEST STILL USING LOCAL STORAGE
 
   handleClick = () => {
-    const currProduct = this.props.product
-    const {user} = this.props
-
-    if (user.id) {
+    const {user} = this.props.product
+    if (user) {
       this.isLoggedIn(user.id)
     } else {
-      addToLocalStorage(currProduct)
+      this.isNotLoggedIn()
     }
   }
 

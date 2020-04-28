@@ -2,6 +2,7 @@ import React from 'react'
 
 const singleCartItem = props => {
   const {items, removeItem, subQuantity, addQuantity, orderId} = props
+  console.log('HEREEEEE=>', props)
 
   return (
     <div>

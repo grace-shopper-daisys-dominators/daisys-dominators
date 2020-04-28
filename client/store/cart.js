@@ -1,4 +1,9 @@
 import axios from 'axios'
+import {
+  addToLocalStorage,
+  removeFromLocalStorage,
+  getTotal
+} from './localStorage'
 
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
@@ -53,6 +58,19 @@ export const addQuantity = (productId, price) => {
   }
 }
 
+export const fetchCartFromLocalStorage = () => {
+  return dispatch => {
+    try {
+      const items = JSON.parse(localStorage.cart)
+      console.log(items, 'HELLO IM CART DATA')
+      dispatch(getCart(items))
+      //whats being received from localStorage
+    } catch (err) {
+      console.log(err, "COULDN'T GET FROM STORAGE CART")
+    }
+  }
+}
+
 export const fetchCartFromServer = (userId, orderId) => {
   return async dispatch => {
     try {
@@ -64,6 +82,17 @@ export const fetchCartFromServer = (userId, orderId) => {
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T FETCH CART")
+    }
+  }
+}
+export const addItemToLocalStorage = product => {
+  return dispatch => {
+    try {
+      const cart = addToLocalStorage(product)
+      console.log(cart, 'HELLO IM local DATA')
+      dispatch(addToCart(product, product.price))
+    } catch (err) {
+      console.log(err, "COULDN'T ADD ITEM ")
     }
   }
 }
@@ -81,6 +110,21 @@ export const addItemToServer = (product, productId, orderId, price) => {
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T ADD ITEM TO DATABASE")
+    }
+  }
+}
+export const removeItemFromStorage = productId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`/api/products/${productId}`)
+      console.log('product id=====>', productId)
+      console.log('data=====>', data)
+      const newCart = removeFromLocalStorage(data)
+      const total = getTotal()
+      dispatch(removeItem(data.id, total))
+      //whats being received from the backend
+    } catch (err) {
+      console.log(err, "COULDN'T REMOVE ITEM FROM local")
     }
   }
 }

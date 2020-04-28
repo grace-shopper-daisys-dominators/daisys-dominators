@@ -15,25 +15,11 @@ const reducer = combineReducers({
   allUsers,
   cart
 })
-// import throttle from 'lodash/throttle'
-// import {loadState, saveState} from './localStorage'
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
 const store = createStore(reducer, middleware)
-
-// export const persistedState = loadState()
-
-// const store = createStore(reducer, persistedState)
-
-// store.subscribe(
-//   throttle(() => {
-//     saveState({
-//       addToLocalStorage: store.getState().addToLocalStorage
-//     })
-//   }, 1000)
-// )
 
 export default store
 export * from './user'
