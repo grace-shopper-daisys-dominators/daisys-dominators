@@ -50,34 +50,31 @@ router.post('/', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {}
+      currentUser = {id: 1}
     }
 
     const {productId, orderId, price} = req.body
 
     const {userId} = await Order.findByPk(orderId)
 
-    let total = await Cart.findOne({
-      where: {orderId: orderId}
-    })
+    // let total = await Cart.findOne({
+    //   where: {orderId: orderId}
+    // })
+    // total = total.total
 
     if (currentUser.id === userId) {
-      if (!total) {
-        total = price * 1
-      } else {
-        total = total.total * 1 + price * 1
-        Cart.update({total: total}, {where: {orderId: orderId}})
-      }
       const newCart = await Cart.create({
         productId: productId,
         quantity: 1,
         price: price,
         orderId: orderId,
-        total: total
+        total: 0
       })
 
       if (newCart) {
-        res.status(201).send(newCart)
+        await newCart.updateTotal()
+        let cart = await Cart.findOne({where: {orderId, productId}})
+        res.status(201).send(cart)
       } else {
         res.status(204).send('Failed to add item.')
       }
@@ -89,7 +86,6 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-// eslint-disable-next-line complexity
 router.put('/:id', async (req, res, next) => {
   try {
     let currentUser
@@ -98,45 +94,31 @@ router.put('/:id', async (req, res, next) => {
     } else {
       currentUser = {id: 1}
     }
-    let cart = await Cart.findByPk(req.params.id)
-    const {price, operation} = req.body
-    const {orderId} = cart
+    const {price, operation, productId} = req.body
+    const orderId = req.params.id
+
+    let cart = await Cart.findOne({
+      where: {orderId: orderId, productId: productId}
+    })
+
     const {userId} = await Order.findByPk(orderId)
 
     if (userId === currentUser.id) {
-      if (cart) {
-        let newPrice
-        let newQuantity
-        let result
+      let result
+      if (operation === 'add') {
+        result = await cart.add(price)
+      } else if (operation === 'remove') {
+        result = await cart.remove(price)
+      }
 
-        if (operation === 'add') {
-          newPrice = cart.price * 1 + price * 1
-          newQuantity = cart.quantity + 1
-          result = await Cart.update(
-            {quantity: newQuantity, price: newPrice},
-            {where: {id: req.params.id}}
-          )
-        } else if (operation === 'remove') {
-          newPrice = cart.price * 1 - price * 1
-          newQuantity = cart.quantity - 1
-          if (newQuantity < 0) {
-            res.send('Quantity cannot go below 0.')
-          } else {
-            result = await Cart.update(
-              {quantity: newQuantity, price: newPrice},
-              {where: {id: req.params.id}}
-            )
-          }
-        }
-
-        if (result) {
-          cart = await Cart.findByPk(req.params.id)
-          res.status(202).send(cart)
-        } else {
-          res.status(304).send('Failed to edit cart.')
-        }
+      if (result) {
+        await cart.updateTotal()
+        cart = await Cart.findOne({
+          where: {orderId: orderId, productId: productId}
+        })
+        res.send(cart)
       } else {
-        res.status(204).send('Item does not exist in cart')
+        res.status(304).send('Failed to edit cart.')
       }
     } else {
       res.status(401).send('You may only edit your own cart.')
