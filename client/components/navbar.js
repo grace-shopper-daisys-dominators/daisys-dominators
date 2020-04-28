@@ -50,7 +50,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
           </Link>
           <Link to="/rosewines">
             <span className="nav-links" style={{display: 'block'}}>
-              ROSÉS
+              ROSÉ
             </span>
           </Link>
           {isAdmin ? (
