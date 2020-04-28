@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
+    console.log(req)
     const id = req.params.id
     const product = await Product.findByPk(id)
     res.json(product)
@@ -23,11 +24,32 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newProduct = await Product.create(req.body)
-    if (newProduct) {
-      res.status(201).send(newProduct)
+    const {name, color, description, price} = req.body
+    const productObj = {name, color, description, price}
+    const {imageURL, region, size, year, rating} = req.body
+    const optionals = {imageURL, region, size, year, rating}
+
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
     } else {
-      res.status(500).send('Unable to create product.')
+      currentUser = {}
+    }
+
+    for (let key in optionals) {
+      if (optionals[key]) productObj[key] = optionals[key]
+    }
+
+    if (currentUser.isAdmin) {
+      const newProduct = await Product.create(productObj)
+
+      if (newProduct) {
+        res.status(201).send(newProduct)
+      } else {
+        res.status(500).send('Unable to create product.')
+      }
+    } else {
+      res.status(401).send('Log in with admin account to add products.')
     }
   } catch (err) {
     next(err)
@@ -36,20 +58,81 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const currentUser = req.user.dataValues
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
     const id = req.params.id
 
-    // I'm not sure how to eloquently test this route with postman since I don't know how to add a "user" attribute to the request there, but I tested it as best I could and I think it works!
+    const {
+      name,
+      color,
+      description,
+      price,
+      imageURL,
+      region,
+      size,
+      year,
+      rating
+    } = req.body
+    const reqBody = {
+      name,
+      color,
+      description,
+      price,
+      imageURL,
+      region,
+      size,
+      year,
+      rating
+    }
+    let productObj = {}
+
+    for (let key in reqBody) {
+      if (reqBody[key]) productObj[key] = reqBody[key]
+    }
 
     if (currentUser.isAdmin) {
-      const updatedProduct = await Product.update(req.body, {where: {id: id}})
+      const updatedProduct = await Product.update(productObj, {where: {id: id}})
       if (updatedProduct) {
         res.send('Update successful!')
       } else {
         throw new Error('Update failed.')
       }
     } else {
-      res.status(401).send('You are not authorized to edit products.')
+      res.status(401).send('Log in with admin account to edit products.')
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    let currentUser
+    if (req.user) {
+      currentUser = req.user.dataValues
+    } else {
+      currentUser = {}
+    }
+
+    const id = req.params.id
+
+    if (currentUser.isAdmin) {
+      const deleted = await Product.destroy({where: {id: id}})
+      // ADDED THIS LINE TO SEND ID TO FRONT END
+      res.send(id)
+      // NOTE: checks below prevent id to be send to the front end...
+      // if (deleted) {
+      //   res.status(204).send('Product deleted.')
+      // } else {
+      //   res.status(304).send('Failed to delete product.')
+      // }
+    } else {
+      res.status(401).send('Log in with admin account to delete products.')
     }
   } catch (err) {
     next(err)

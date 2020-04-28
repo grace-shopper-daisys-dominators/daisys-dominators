@@ -1,23 +1,51 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
-import {addToCart} from '../store/cart'
+// import UpdateProductForm from '../components/updateProductForm'
+import {
+  addItemToServer,
+  fetchCartFromServer,
+  addQuantityToServer
+} from '../store/cart'
 import {addToLocalStorage} from '../store/localStorage'
 
 export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
+    if (this.props.user.id) {
+      this.props.getAllItems(this.props.user, this.props.orderId)
+    }
   }
+
+  isLoggedIn = userId => {
+    const currProduct = this.props.product
+    const {items, orderId, addQuantity} = this.props
+    let existedItem = items.find(item => item.id === currProduct.id)
+    if (existedItem) {
+      addQuantity(currProduct.id, orderId, currProduct.price)
+    } else {
+      this.props.addToCart(
+        currProduct,
+        currProduct.id,
+        this.props.orderId,
+        currProduct.price
+      )
+    }
+  }
+
+  //NEED HELPER FUNC FOR GUEST STILL USING LOCAL STORAGE
 
   handleClick = () => {
     const currProduct = this.props.product
+    const {user} = this.props
 
-    if (this.props.user.email) {
-      this.props.addToCart(currProduct.id)
+    if (user.id) {
+      this.isLoggedIn(user.id)
     } else {
       addToLocalStorage(currProduct)
     }
   }
+
   render() {
     const {
       name,
@@ -46,13 +74,10 @@ export class SingleProduct extends Component {
           <p>Size: {size}</p>
           <p>Year: {year}</p>
         </div>
+        {/** TODO: WORK ON UPDATE FORM BELOW */}
+        {/*<UpdateProductForm />*/}
         <div>
-          <button
-            type="submit"
-            onClick={() => this.handleClick()}
-
-            // onClick={() => this.props.addToCart(this.props.productId)}
-          >
+          <button type="submit" onClick={() => this.handleClick()}>
             Add to cart
           </button>
         </div>
@@ -62,13 +87,21 @@ export class SingleProduct extends Component {
 }
 
 const mapState = state => ({
+  items: state.cart.items,
   product: state.singleProduct,
-  user: state.user
+  user: state.user,
+  orderId: state.user.orderId
 })
 
+//What's being sent to the backend
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
-  addToCart: id => dispatch(addToCart(id))
+  getAllItems: (userId, orderId) =>
+    dispatch(fetchCartFromServer(userId, orderId)),
+  addToCart: (product, productId, orderId, price) =>
+    dispatch(addItemToServer(product, productId, orderId, price)), //product is being sent back so that thunk so that it can be added to state without getting from backend route
+  addQuantity: (productId, orderId, price) =>
+    dispatch(addQuantityToServer(productId, orderId, price))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
