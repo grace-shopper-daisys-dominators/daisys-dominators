@@ -13,14 +13,12 @@ const getCart = cart => {
   }
 }
 
-export const addToCart = (product, total, productId, quantity) => {
-  //TO DO: Specify exactly what is getting added from the product
+export const addToCart = (product, total, productId) => {
   return {
     type: ADD_TO_CART,
     product,
     total,
-    productId,
-    quantity
+    productId
   }
 }
 
@@ -70,9 +68,7 @@ export const addItemToServer = (productId, orderId, price) => {
         orderId,
         price
       })
-      dispatch(
-        addToCart(data.product, data.total, data.productId, data.quantity)
-      )
+      dispatch(addToCart(data.product, data.total, data.productId))
       //TO DO: DISCUSS WHAT NEEDS TO BE RETURNED >  NEED THE WHOLE ITEM TO SET FOR ITEMS STATE aka the complete item detail<
       //ALSO ask if possible to sent the whole item/product object back so you can update state
     } catch (err) {
@@ -111,7 +107,7 @@ export const subtractQuantityFromServer = (orderId, productId, price) => {
   }
 }
 
-export const addQuantityToServer = (orderId, productId, price) => {
+export const addQuantityToServer = (productId, orderId, price) => {
   return async dispatch => {
     try {
       let operation = 'add'

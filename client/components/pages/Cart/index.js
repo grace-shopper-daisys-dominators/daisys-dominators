@@ -7,18 +7,13 @@ import {
   subtractQuantityFromServer,
   addQuantityToServer
 } from '../../../store/cart'
-import {me} from '../../../store/user'
 import SingleCartItem from '../../singleCartItem'
 
 export class Cart extends React.Component {
   componentDidMount() {
-    this.props.getUser()
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.user !== this.props.user) {
+    if (this.props.user) {
       this.props.getAllItems(this.props.user, this.props.orderId)
-    }
+    } //ELSE if guest get from localstorage
   }
 
   render() {
@@ -64,8 +59,6 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getUser: () => dispatch(me()),
-
     getAllItems: (user, orderId) =>
       dispatch(fetchCartFromServer(user, orderId)),
 
@@ -81,7 +74,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(Cart)
-
-//For guest: Find the ID on sessions if there isn't a userId aka logged in visitor
-//Check to see where the data is being stored if its a guest render it from local storage IF NOT get from database
-//Make sure guest doesn't have userId. Is it sessions id for guest?

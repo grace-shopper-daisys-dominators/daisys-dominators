@@ -2,27 +2,49 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
 // import UpdateProductForm from '../components/updateProductForm'
-import {addToCart} from '../store/cart'
+import {
+  addToCart,
+  fetchCartFromServer,
+  addQuantityToServer
+} from '../store/cart'
 import {addToLocalStorage} from '../store/localStorage'
 
 export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
+    if (this.props.user.id) {
+      this.props.getAllItems(this.props.user, this.props.orderId)
+    }
   }
 
-  handleClick = () => {
+  isLoggedIn = userId => {
     const currProduct = this.props.product
-
-    if (this.props.user.email) {
+    const {items, orderId, product, addQuantity} = this.props
+    let existedItem = items.find(item => item.id === currProduct.id)
+    if (existedItem) {
+      addQuantity(currProduct.id, orderId, product.price)
+    } else {
       this.props.addToCart(
         currProduct.id,
         this.props.orderId,
         this.props.product.price
       )
+    }
+  }
+
+  //NEED HELPER FUNC FOR GUEST STILL USING LOCAL STORAGE
+
+  handleClick = () => {
+    const currProduct = this.props.product
+    const {user} = this.props
+
+    if (user.id) {
+      this.isLoggedIn(user.id)
     } else {
       addToLocalStorage(currProduct)
     }
   }
+
   render() {
     const {
       name,
@@ -64,6 +86,7 @@ export class SingleProduct extends Component {
 }
 
 const mapState = state => ({
+  items: state.cart.items,
   product: state.singleProduct,
   user: state.user,
   orderId: state.user.orderId
@@ -71,8 +94,12 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
+  getAllItems: (userId, orderId) =>
+    dispatch(fetchCartFromServer(userId, orderId)),
   addToCart: (productId, orderId, price) =>
-    dispatch(addToCart(productId, orderId, price))
+    dispatch(addToCart(productId, orderId, price)),
+  addQuantity: (productId, orderId, price) =>
+    dispatch(addQuantityToServer(productId, orderId, price))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
