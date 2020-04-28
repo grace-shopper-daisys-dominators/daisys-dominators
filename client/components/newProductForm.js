@@ -23,15 +23,7 @@ export class NewProductForm extends Component {
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
-      [e.target.imageURL]: e.target.value,
-      [e.target.color]: e.target.value,
-      [e.target.region]: e.target.value,
-      [e.target.price]: e.target.value,
-      [e.target.size]: e.target.value,
-      [e.target.description]: e.target.value,
-      [e.target.year]: e.target.value,
-      [e.target.rating]: e.target.rating
+      [e.target.name]: e.target.value
     })
   }
 

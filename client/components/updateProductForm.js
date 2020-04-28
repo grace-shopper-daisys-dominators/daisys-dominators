@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {updateWine} from '../store/allWines'
-import {getSingleProduct} from '../store/singleProduct'
 
 export class UpdateProductForm extends Component {
   constructor() {
@@ -22,20 +21,9 @@ export class UpdateProductForm extends Component {
     this.handleUpdate = this.handleEdit.bind(this)
   }
 
-  componentDidMount() {
-    this.props.getProduct()
-  }
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
-      [e.target.imageURL]: e.target.value,
-      [e.target.color]: e.target.value,
-      [e.target.region]: e.target.value,
-      [e.target.price]: e.target.value,
-      [e.target.size]: e.target.value,
-      [e.target.description]: e.target.value,
-      [e.target.year]: e.target.value,
-      [e.target.rating]: e.target.rating
+      [e.target.name]: e.target.value
     })
   }
 
@@ -57,6 +45,7 @@ export class UpdateProductForm extends Component {
   render() {
     const {wine} = this.props
 
+    console.log('updateform component', wine)
     return (
       <div>
         <form onSubmit={e => this.handleEdit(e, wine.id)}>
@@ -146,8 +135,8 @@ const mapState = state => {
 }
 const mapDispatch = dispatch => {
   return {
-    handleUpdate: wineToUpdateInfo => dispatch(updateWine(wineToUpdateInfo)),
-    getProduct: () => dispatch(getSingleProduct())
+    handleUpdate: (wineId, wineToUpdateInfo) =>
+      dispatch(updateWine(wineId, wineToUpdateInfo))
   }
 }
 

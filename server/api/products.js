@@ -57,15 +57,14 @@ router.post('/', async (req, res, next) => {
 })
 
 router.put('/:id', async (req, res, next) => {
+  const id = req.params.id
   try {
-    let currentUser
-    if (req.user) {
-      currentUser = req.user.dataValues
-    } else {
-      currentUser = {}
-    }
-
-    const id = req.params.id
+    // let currentUser
+    // if (req.user) {
+    //   currentUser = req.user.dataValues
+    // } else {
+    //   currentUser = {}
+    // }
 
     const {
       name,
@@ -78,7 +77,25 @@ router.put('/:id', async (req, res, next) => {
       year,
       rating
     } = req.body
-    const reqBody = {
+    // const reqBody = {
+    //   name,
+    //   color,
+    //   description,
+    //   price,
+    //   imageURL,
+    //   region,
+    //   size,
+    //   year,
+    //   rating
+    // }
+    // let productObj = {}
+
+    // for (let key in reqBody) {
+    //   if (reqBody[key]) productObj[key] = reqBody[key]
+    // }
+
+    const productToUpdate = await Product.findByPk(id)
+    const updated = await productToUpdate.update({
       name,
       color,
       description,
@@ -88,23 +105,20 @@ router.put('/:id', async (req, res, next) => {
       size,
       year,
       rating
-    }
-    let productObj = {}
+    })
 
-    for (let key in reqBody) {
-      if (reqBody[key]) productObj[key] = reqBody[key]
-    }
+    res.status(200).send(updated)
 
-    if (currentUser.isAdmin) {
-      const updatedProduct = await Product.update(productObj, {where: {id: id}})
-      if (updatedProduct) {
-        res.send('Update successful!')
-      } else {
-        throw new Error('Update failed.')
-      }
-    } else {
-      res.status(401).send('Log in with admin account to edit products.')
-    }
+    // if (currentUser.isAdmin) {
+    //   const updatedProduct = await Product.update(productObj, {where: {id: id}})
+    //   if (updatedProduct) {
+    //     res.send('Update successful!')
+    //   } else {
+    //     throw new Error('Update failed.')
+    //   }
+    // } else {
+    //   res.status(401).send('Log in with admin account to edit products.')
+    // }
   } catch (err) {
     next(err)
   }
