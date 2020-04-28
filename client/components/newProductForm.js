@@ -141,7 +141,7 @@ export class NewProductForm extends Component {
           </div>
           <div>
             <button id="add-product-btn" type="submit">
-              Add New Item
+              Add product
             </button>
           </div>
         </form>
