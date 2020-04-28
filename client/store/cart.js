@@ -82,7 +82,7 @@ export const addItemToServer = (product, productId, orderId, price) => {
 export const removeItemFromServer = (productId, orderId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.delete(`/api/carts/${orderId}/${productId}`)
+      const {data} = await axios.delete(`/api/cart/${orderId}/${productId}`)
       dispatch(removeItem(productId, data.total))
       //whats being received from the backend
     } catch (err) {
@@ -95,7 +95,7 @@ export const subtractQuantityFromServer = (productId, orderId, price) => {
   return async dispatch => {
     try {
       let operation = 'remove'
-      const {data} = await axios.put(`/api/carts/${orderId}`, {
+      const {data} = await axios.put(`/api/cart/${orderId}`, {
         price,
         operation,
         productId
@@ -113,7 +113,7 @@ export const addQuantityToServer = (productId, orderId, price) => {
   return async dispatch => {
     try {
       let operation = 'add'
-      const {data} = await axios.put(`/api/carts/${orderId}`, {
+      const {data} = await axios.put(`/api/cart/${orderId}`, {
         price,
         operation,
         productId,
