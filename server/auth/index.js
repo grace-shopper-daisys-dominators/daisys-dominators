@@ -47,7 +47,6 @@ router.get('/me', async (req, res) => {
       where: {status: 'pending', userId: req.user.id}
     })
     req.user.dataValues.orderId = order.id
-    console.log(req.user, 'IM USER')
     res.json(req.user)
   } catch (err) {
     console.log(err)

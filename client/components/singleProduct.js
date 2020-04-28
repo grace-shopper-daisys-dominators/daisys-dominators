@@ -14,7 +14,11 @@ export class SingleProduct extends Component {
     const currProduct = this.props.product
 
     if (this.props.user.email) {
-      this.props.addToCart(currProduct.id)
+      this.props.addToCart(
+        currProduct.id,
+        this.props.orderId,
+        this.props.product.price
+      )
     } else {
       addToLocalStorage(currProduct)
     }
@@ -61,12 +65,14 @@ export class SingleProduct extends Component {
 
 const mapState = state => ({
   product: state.singleProduct,
-  user: state.user
+  user: state.user,
+  orderId: state.user.orderId
 })
 
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
-  addToCart: id => dispatch(addToCart(id))
+  addToCart: (productId, orderId, price) =>
+    dispatch(addToCart(productId, orderId, price))
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)

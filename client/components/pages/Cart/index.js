@@ -22,7 +22,14 @@ export class Cart extends React.Component {
   }
 
   render() {
-    const {items, removeItem, subQuantity, addQuantity, total} = this.props
+    const {
+      items,
+      removeItem,
+      subQuantity,
+      addQuantity,
+      total,
+      orderId
+    } = this.props
     return (
       <div>
         <h2>Cart</h2>
@@ -33,6 +40,7 @@ export class Cart extends React.Component {
           removeItem={removeItem}
           subQuantity={subQuantity}
           addQuantity={addQuantity}
+          orderId={orderId}
         />
         {/* ) : (
             //ACCESS THE LOCAL STORAGE
@@ -58,7 +66,8 @@ const mapDispatch = dispatch => {
   return {
     getUser: () => dispatch(me()),
 
-    getAllItems: user => dispatch(fetchCartFromServer(user)),
+    getAllItems: (user, orderId) =>
+      dispatch(fetchCartFromServer(user, orderId)),
 
     removeItem: (itemId, orderId, price) =>
       dispatch(removeItemFromServer(itemId, orderId, price)),

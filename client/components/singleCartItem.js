@@ -1,7 +1,7 @@
 import React from 'react'
 
 const singleCartItem = props => {
-  const {items, removeItem, subQuantity, addQuantity} = props
+  const {items, removeItem, subQuantity, addQuantity, orderId} = props
 
   return (
     <div>
@@ -17,19 +17,19 @@ const singleCartItem = props => {
             </div>
             <button
               type="submit"
-              onClick={() => removeItem(item.id, item.orderId, item.price)}
+              onClick={() => removeItem(item.id, orderId, item.price)}
             >
               DELETE ITEM
             </button>
             <button
               type="submit"
-              onClick={() => subQuantity(item.id, item.orderId, item.price)}
+              onClick={() => subQuantity(item.id, orderId, item.price)}
             >
               Subtract Quantity
             </button>
             <button
               type="submit"
-              onClick={() => addQuantity(item.id, item.orderId, item.price)}
+              onClick={() => addQuantity(item.id, orderId, item.price)}
             >
               Add Quantity
             </button>

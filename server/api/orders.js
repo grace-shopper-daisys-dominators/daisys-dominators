@@ -72,7 +72,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.get('/me/current', async (req, res, next) => {
+router.get('/me/current/:userId/:orderId', async (req, res, next) => {
   try {
     let currentUser
     if (req.user) {
@@ -89,13 +89,14 @@ router.get('/me/current', async (req, res, next) => {
             model: Product,
             through: {
               where: {
-                orderId: 1
+                orderId: req.params.orderId
               }
             }
           }
         ]
       })
-      console.log(cart, 'HELLO IM CART')
+
+      console.log(cart, 'IM CART')
       res.json(cart)
     } else {
       res.send('Log in to view your cart.')

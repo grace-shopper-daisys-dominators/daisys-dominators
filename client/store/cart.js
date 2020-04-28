@@ -51,10 +51,9 @@ export const addQuantity = (productId, total) => {
 export const fetchCartFromServer = (userId, orderId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/orders/me/current', {
-        userId,
-        orderId
-      })
+      const {data} = await axios.get(
+        `/api/orders/me/current/${userId}/${orderId}`
+      )
       console.log(data, 'HELLO IM CART DATA')
       dispatch(getCart(data[0].products))
     } catch (err) {
