@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
 module.exports = router
+const {Order} = require('../db/models')
 
 router.post('/login', async (req, res, next) => {
   const {email, password} = req.body
@@ -40,8 +41,17 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', async (req, res) => {
+  try {
+    const order = await Order.findOne({
+      where: {status: 'pending', userId: req.user.id}
+    })
+    req.user.dataValues.orderId = order.id
+    console.log(req.user, 'IM USER')
+    res.json(req.user)
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 router.use('/google', require('./google'))

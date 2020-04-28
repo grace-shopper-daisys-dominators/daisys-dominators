@@ -8,31 +8,37 @@ import {
   addQuantityToServer
 } from '../../../store/cart'
 import {me} from '../../../store/user'
-// import SingleCartItem from './singleCartItem'
+import SingleCartItem from '../../singleCartItem'
 
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getUser()
   }
 
-  componentDidUpdate() {
-    if (this.props.user) {
-      this.props.getAllItems(this.props.user)
+  componentDidUpdate(prevProps) {
+    if (prevProps.user !== this.props.user) {
+      this.props.getAllItems(this.props.user, this.props.orderId)
     }
   }
 
   render() {
-    const {user, items} = this.props
+    const {items, removeItem, subQuantity, addQuantity, total} = this.props
     return (
       <div>
         <h2>Cart</h2>
         {/* {
-          user ? (
-              <SingleCartItem items={items} />
-          ) : (
+          user ? ( */}
+        <SingleCartItem
+          items={items}
+          removeItem={removeItem}
+          subQuantity={subQuantity}
+          addQuantity={addQuantity}
+        />
+        {/* ) : (
             //ACCESS THE LOCAL STORAGE
           )
         } */}
+        <div>Total = {total}</div>
         <Link to="/checkout">Checkout</Link>
       </div>
     )
@@ -42,15 +48,26 @@ export class Cart extends React.Component {
 const mapState = state => {
   return {
     user: state.user.id,
-    //CHECK WHAT IS GETTING BACK FROM THE THUNK
-    items: state.cart.items
+    orderId: state.user.orderId,
+    items: state.cart.items,
+    total: state.cart.total
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getUser: () => dispatch(me()),
-    getAllItems: user => dispatch(fetchCartFromServer(user))
+
+    getAllItems: user => dispatch(fetchCartFromServer(user)),
+
+    removeItem: (itemId, orderId, price) =>
+      dispatch(removeItemFromServer(itemId, orderId, price)),
+
+    subQuantity: (itemId, orderId, price) =>
+      dispatch(subtractQuantityFromServer(itemId, orderId, price)),
+
+    addQuantity: (itemId, orderId, price) =>
+      dispatch(addQuantityToServer(itemId, orderId, price))
   }
 }
 

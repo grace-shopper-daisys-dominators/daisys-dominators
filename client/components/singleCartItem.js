@@ -1,18 +1,38 @@
 import React from 'react'
 
 const singleCartItem = props => {
-  const {items} = props
+  const {items, removeItem, subQuantity, addQuantity} = props
 
   return (
     <div>
       {items.map(item => {
         return (
           <div key={item.id}>
-            <h2> {item.name} </h2>
-            <img src={item.imageURL} />
-            <p> {item.color} </p>
-            <p> {item.price} </p>
-            <p> {item.size} </p>
+            <div>
+              <img src={item.imageURL} />
+              <p> Name: {item.name} </p>
+              <p> Color: {item.color} </p>
+              <p> Price: {item.price} </p>
+              <p> Size: {item.size} </p>
+            </div>
+            <button
+              type="submit"
+              onClick={() => removeItem(item.id, item.orderId, item.price)}
+            >
+              DELETE ITEM
+            </button>
+            <button
+              type="submit"
+              onClick={() => subQuantity(item.id, item.orderId, item.price)}
+            >
+              Subtract Quantity
+            </button>
+            <button
+              type="submit"
+              onClick={() => addQuantity(item.id, item.orderId, item.price)}
+            >
+              Add Quantity
+            </button>
           </div>
         )
       })}

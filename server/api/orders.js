@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Product} = require('../db/models')
+const {User, Order, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -84,14 +84,24 @@ router.get('/me/current', async (req, res, next) => {
     if (currentUser.id) {
       const cart = await Order.findAll({
         where: {status: 'pending', userId: currentUser.id},
-        include: Product
+        include: [
+          {
+            model: Product,
+            through: {
+              where: {
+                orderId: 1
+              }
+            }
+          }
+        ]
       })
-
+      console.log(cart, 'HELLO IM CART')
       res.json(cart)
     } else {
       res.send('Log in to view your cart.')
     }
   } catch (err) {
+    console.log(err, 'IM THE ERROR')
     next(err)
   }
 })
