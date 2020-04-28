@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {addNewUser} from '../store/allUsers'
+import {addNewUser} from '../store/user.js'
 
 /**
  * COMPONENT
@@ -118,7 +118,6 @@ const mapSignUpDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       dispatch(addNewUser(firstName, lastName, email, password, formName))
-      dispatch(auth(email, password, 'login'))
     }
   }
 }
