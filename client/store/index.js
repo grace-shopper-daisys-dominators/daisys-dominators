@@ -6,10 +6,17 @@ import user from './user'
 import allUsers from './allUsers'
 import singleProduct from './singleProduct'
 import allWines from './allWines'
+import cart from './cart'
+
+const reducer = combineReducers({
+  user,
+  singleProduct,
+  allWines,
+  allUsers,
+  cart
+})
 // import throttle from 'lodash/throttle'
 // import {loadState, saveState} from './localStorage'
-
-const reducer = combineReducers({user, singleProduct, allUsers, allWines})
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

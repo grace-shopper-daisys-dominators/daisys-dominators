@@ -88,10 +88,9 @@ router.put('/:id', async (req, res, next) => {
     }
     const {price, operation, orderId} = req.body
     const {userId} = await Order.findByPk(orderId)
-
     if (userId === currentUser.id) {
       let cart = await Cart.findByPk(req.params.id)
-
+      console.log(cart, 'IM THE NEW CART')
       if (cart) {
         let newPrice
         let newQuantity
