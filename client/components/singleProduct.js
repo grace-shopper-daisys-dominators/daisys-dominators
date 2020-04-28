@@ -53,7 +53,9 @@ export class SingleProduct extends Component {
             Add to cart
           </button>
         </div>
-        <div>{isAdmin ? <UpdateProductForm /> : ''}</div>
+        <div>
+          {isAdmin ? <UpdateProductForm wine={this.props.product} /> : ''}
+        </div>
       </div>
     )
   }

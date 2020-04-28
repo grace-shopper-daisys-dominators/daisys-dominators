@@ -3,18 +3,18 @@ import {connect} from 'react-redux'
 import {updateWine} from '../store/singleProduct.js'
 
 export class UpdateProductForm extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      updatedName: '',
-      updatedImageURL: '',
-      updatedColor: '',
-      updatedRegion: '',
-      updatedPrice: '',
-      updatedSize: '',
-      updatedDescription: '',
-      updatedYear: '',
-      updatedRating: ''
+      updatedName: props.wine.name,
+      updatedImageURL: props.wine.imageURL,
+      updatedColor: props.wine.color,
+      updatedRegion: props.wine.region,
+      updatedPrice: props.wine.price,
+      updatedSize: props.wine.size,
+      updatedDescription: props.wine.description,
+      updatedYear: props.wine.year,
+      updatedRating: props.wine.rating
     }
 
     this.handleChange = this.handleChange.bind(this)
