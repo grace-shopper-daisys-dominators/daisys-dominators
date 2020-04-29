@@ -1956,7 +1956,6 @@ var singleCartItem = function singleCartItem(props) {
       addQuantity = props.addQuantity,
       orderId = props.orderId;
   var items = props.items;
-  console.log(props);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, items ? items.map(function (item) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "cart-container",
@@ -1971,7 +1970,7 @@ var singleCartItem = function singleCartItem(props) {
       id: "minus-quantity-btn",
       type: "submit",
       onClick: function onClick() {
-        if (item.cart.quantity > 1) {
+        if (item.quantity > 1) {
           subQuantity(item.id, orderId, item.price);
         } else {
           removeItem(item.id, orderId);

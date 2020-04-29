@@ -6,7 +6,6 @@ const singleCartItem = props => {
   const {removeItem, subQuantity, addQuantity, orderId} = props
 
   const {items} = props
-  console.log(props)
 
   return (
     <div>
@@ -41,7 +40,7 @@ const singleCartItem = props => {
                           id="minus-quantity-btn"
                           type="submit"
                           onClick={() => {
-                            if (item.cart.quantity > 1) {
+                            if (item.quantity > 1) {
                               subQuantity(item.id, orderId, item.price)
                             } else {
                               removeItem(item.id, orderId)
