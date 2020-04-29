@@ -32,6 +32,10 @@ const singleCartItem = props => {
                     </p>
                     <p>
                       {' '}
+                      <b>Quantity:</b> {item.quantity}
+                    </p>
+                    <p>
+                      {' '}
                       <b>Size:</b> {item.size} ml{' '}
                     </p>
                     <div className="cart-btns">
@@ -63,7 +67,7 @@ const singleCartItem = props => {
                       </div>
                       <div>
                         <button
-                          id="delete-item--btn"
+                          id="delete-item-btn"
                           type="submit"
                           onClick={() => removeItem(item.id, orderId)}
                         >

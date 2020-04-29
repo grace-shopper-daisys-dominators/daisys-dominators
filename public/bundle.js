@@ -1964,7 +1964,7 @@ var singleCartItem = function singleCartItem(props) {
       className: "cart-details"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: item.imageURL
-    }), ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Name:"), " ", item.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Color:"), " ", item.color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", item.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Size:"), " ", item.size, " ml", ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Name:"), " ", item.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Color:"), " ", item.color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", item.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Quantity:"), " ", item.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Size:"), " ", item.size, " ml", ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "cart-btns"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       id: "minus-quantity-btn",
@@ -1983,7 +1983,7 @@ var singleCartItem = function singleCartItem(props) {
         return addQuantity(item.id, orderId, item.price);
       }
     }, "+")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      id: "delete-item--btn",
+      id: "delete-item-btn",
       type: "submit",
       onClick: function onClick() {
         return removeItem(item.id, orderId);
@@ -19042,7 +19042,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".cart-container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n\n.cart-details {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  background-color: white;\n  width: 400px;\n  margin: 20px;\n  padding: 20px;\n  border-radius: 20px;\n}\n.cart-details div {\n  text-align: left;\n}\n.cart-details img {\n  max-width: 100px;\n  padding: 20px;\n}\n.cart-btns {\n  display: flex;\n  flex-direction: row;\n}\n.cart-btns div {\n  margin: 5px;\n}\n\n#delete-btn,\n#minus-quantity-btn,\n#plus-quantity-btn {\n  border: none;\n  border-radius: 5px;\n  padding: 15px;\n  color: white;\n}\n\n#delete-item-btn {\n  background-color: gray;\n  font-size: 14px;\n}\n#minus-quantity-btn {\n  background-color: red;\n  font-size: 20px;\n}\n\n#plus-quantity-btn {\n  background-color: green;\n  font-size: 20px;\n}\n", ""]);
+exports.push([module.i, ".cart-container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n\n.cart-details {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  background-color: white;\n  width: 400px;\n  margin: 20px;\n  padding: 20px;\n  border-radius: 20px;\n}\n.cart-details div {\n  text-align: left;\n}\n.cart-details img {\n  max-width: 100px;\n  padding: 20px;\n}\n.cart-btns {\n  display: flex;\n  flex-direction: row;\n}\n.cart-btns div {\n  margin: 5px;\n}\n\n#delete-item-btn,\n#minus-quantity-btn,\n#plus-quantity-btn {\n  border: none;\n  border-radius: 5px;\n  padding: 15px;\n  color: white;\n}\n\n#delete-item-btn {\n  background-color: gray;\n  font-size: 14px;\n}\n#minus-quantity-btn {\n  background-color: red;\n  font-size: 20px;\n}\n\n#plus-quantity-btn {\n  background-color: green;\n  font-size: 20px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
