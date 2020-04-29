@@ -832,6 +832,7 @@ var Cart = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "cart-title"
       }, "Cart"), this.props.user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        items: items,
         removeItem: removeItem,
         subQuantity: subQuantity,
         addQuantity: addQuantity,
@@ -1951,12 +1952,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var singleCartItem = function singleCartItem(props) {
-  var removeItem = props.removeItem,
+  var items = props.items,
+      removeItem = props.removeItem,
       subQuantity = props.subQuantity,
       addQuantity = props.addQuantity,
       orderId = props.orderId;
-  var items = props.items;
+  var currQuantity;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, items ? items.map(function (item) {
+    item.cart ? currQuantity = item.cart.quantity : currQuantity = null;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "cart-container",
       key: item.id
@@ -1964,23 +1967,20 @@ var singleCartItem = function singleCartItem(props) {
       className: "cart-details"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: item.imageURL
-    }), ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Name:"), " ", item.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Color:"), " ", item.color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", item.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Quantity:"), " ", item.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Size:"), " ", item.size, " ml", ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Name:"), " ", item.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Color:"), " ", item.color), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", item.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Size:"), " ", item.size, " ml", ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "cart-btns"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       id: "minus-quantity-btn",
       type: "submit",
       onClick: function onClick() {
-        if (item.quantity > 1) {
-          subQuantity(item.id, orderId, item.price);
-        } else {
-          removeItem(item.id, orderId);
-        }
+        subQuantity(item.id, orderId, item.price);
       }
     }, "-")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       id: "plus-quantity-btn",
       type: "submit",
       onClick: function onClick() {
-        return addQuantity(item.id, orderId, item.price);
+        addQuantity(item.id, orderId, item.price);
+        currQuantity++;
       }
     }, "+")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       id: "delete-item-btn",
@@ -1993,8 +1993,7 @@ var singleCartItem = function singleCartItem(props) {
 };
 
 var mapState = function mapState(state) {
-  return {
-    items: state.cart.items
+  return {// items: state.cart.items
   };
 };
 

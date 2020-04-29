@@ -46,6 +46,7 @@ export class Cart extends React.Component {
         {this.props.user.id ? (
           <div>
             <SingleCartItem
+              items={items}
               removeItem={removeItem}
               subQuantity={subQuantity}
               addQuantity={addQuantity}

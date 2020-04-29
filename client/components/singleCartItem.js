@@ -3,14 +3,15 @@ import {connect} from 'react-redux'
 import './singleCartItem.css'
 
 const singleCartItem = props => {
-  const {removeItem, subQuantity, addQuantity, orderId} = props
-
-  const {items} = props
-
+  const {items, removeItem, subQuantity, addQuantity, orderId} = props
+  let currQuantity
   return (
     <div>
       {items
         ? items.map(item => {
+            item.cart
+              ? (currQuantity = item.cart.quantity)
+              : (currQuantity = null)
             return (
               <div className="cart-container" key={item.id}>
                 <div className="cart-details">
@@ -32,10 +33,6 @@ const singleCartItem = props => {
                     </p>
                     <p>
                       {' '}
-                      <b>Quantity:</b> {item.quantity}
-                    </p>
-                    <p>
-                      {' '}
                       <b>Size:</b> {item.size} ml{' '}
                     </p>
                     <div className="cart-btns">
@@ -44,11 +41,7 @@ const singleCartItem = props => {
                           id="minus-quantity-btn"
                           type="submit"
                           onClick={() => {
-                            if (item.quantity > 1) {
-                              subQuantity(item.id, orderId, item.price)
-                            } else {
-                              removeItem(item.id, orderId)
-                            }
+                            subQuantity(item.id, orderId, item.price)
                           }}
                         >
                           -
@@ -58,9 +51,10 @@ const singleCartItem = props => {
                         <button
                           id="plus-quantity-btn"
                           type="submit"
-                          onClick={() =>
+                          onClick={() => {
                             addQuantity(item.id, orderId, item.price)
-                          }
+                            currQuantity++
+                          }}
                         >
                           +
                         </button>
@@ -87,7 +81,7 @@ const singleCartItem = props => {
 
 const mapState = state => {
   return {
-    items: state.cart.items
+    // items: state.cart.items
   }
 }
 
