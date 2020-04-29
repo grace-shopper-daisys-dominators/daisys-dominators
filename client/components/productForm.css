@@ -1,0 +1,53 @@
+.product-form-container form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+#form-title {
+  color: #db675e;
+  font-size: 25px;
+}
+
+.product-form-container form div input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'] {
+  border-radius: 5px;
+  background: white;
+  border: none;
+  padding: 15px;
+}
+textarea {
+  border-radius: 5px;
+  background: white;
+  border: none;
+  padding: 10px;
+}
+
+.product-form-container form div input::placeholder,
+textarea::placeholder {
+  font-size: 15px;
+  color: #1b2631;
+}
+
+#add-product-btn,
+#edit-product-btn {
+  background-color: #1d8348;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+#add-product-btn:hover,
+#edit-product-btn:hover {
+  opacity: 0.6;
+}
+
+/** for future error msgs*/
+#err-msg {
+  color: red;
+  font-size: 10px;
+}

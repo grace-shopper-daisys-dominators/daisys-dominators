@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db/db')
-const {User, Product, Order} = require('./server/db/models/index')
+const {User, Product, Order} = require('../server/db/models/index')
 
 const users = [
   {
@@ -19,6 +19,18 @@ const users = [
     password: '3234'
   }
 ]
+
+const orders = [
+  {
+    status: 'pending',
+    userId: 1
+  },
+  {
+    status: 'pending',
+    userId: 2
+  }
+]
+
 const products = [
   {
     name: 'Robert Mondavi Winery The Reserve Cabernet Sauvignon',
@@ -438,35 +450,29 @@ const products = [
   }
 ]
 
-const orders = [
-  {
-    status: 'pending'
-  }
-]
-
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
-async function runSeed() {
-  console.log('seeding...')
-  try {
-    await seed()
-  } catch (err) {
-    console.error(err)
-    process.exitCode = 1
-  } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
-  }
-}
+// async function runSeed() {
+//   console.log('seeding...')
+//   try {
+//     await seed()
+//   } catch (err) {
+//     console.error(err)
+//     process.exitCode = 1
+//   } finally {
+//     console.log('closing db connection')
+//     await db.close()
+//     console.log('db connection closed')
+//   }
+// }
 
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 // `Async` functions always return a promise, so we can use `catch` to handle
 // any errors that might occur inside of `seed`.
-if (module === require.main) {
-  runSeed()
-}
+// if (module === require.main) {
+//   runSeed()
+// }
 
 const seed = async () => {
   try {
@@ -483,6 +489,12 @@ const seed = async () => {
     await Promise.all(
       users.map(user => {
         return User.create(user)
+      })
+    )
+
+    await Promise.all(
+      orders.map(order => {
+        return Order.create(order)
       })
     )
 

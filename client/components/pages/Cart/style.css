@@ -1,0 +1,21 @@
+.main-cart-container {
+  margin: 40px;
+}
+
+#cart-title {
+  color: #db675e;
+  font-size: 30px;
+}
+.total-count {
+  color: white;
+  font-size: 30px;
+}
+
+#link-to-checkout {
+  color: #db675e;
+  font-size: 20px;
+}
+
+.checkout-total {
+  margin-bottom: 40px;
+}
