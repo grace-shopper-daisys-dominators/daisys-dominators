@@ -19,6 +19,18 @@ const users = [
     password: '3234'
   }
 ]
+
+const orders = [
+  {
+    status: 'pending',
+    userId: 1
+  },
+  {
+    status: 'pending',
+    userId: 2
+  }
+]
+
 const products = [
   {
     name: 'Robert Mondavi Winery The Reserve Cabernet Sauvignon',
@@ -438,12 +450,6 @@ const products = [
   }
 ]
 
-const orders = [
-  {
-    status: 'pending'
-  }
-]
-
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
@@ -483,6 +489,12 @@ const seed = async () => {
     await Promise.all(
       users.map(user => {
         return User.create(user)
+      })
+    )
+
+    await Promise.all(
+      orders.map(order => {
+        return Order.create(order)
       })
     )
 
