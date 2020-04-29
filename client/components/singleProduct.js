@@ -7,14 +7,19 @@ import {
   fetchCartFromServer,
   addQuantityToServer,
   addQuantityToStorage,
-  addItemToLocalStorage
+  addItemToLocalStorage,
+  fetchCartFromLocalStorage
 } from '../store/cart'
 import {addToLocalStorage} from '../store/localStorage'
 
 export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
-    this.props.getAllItems()
+    if (this.props.user.id) {
+      this.props.getAllItems(this.props.user, this.props.orderId)
+    } else {
+      this.props.getAllItems()
+    }
   }
 
   isLoggedIn = userId => {
@@ -49,7 +54,7 @@ export class SingleProduct extends Component {
   //NEED HELPER FUNC FOR GUEST STILL USING LOCAL STORAGE
 
   handleClick = () => {
-    const {user} = this.props.product
+    const {user} = this.props
     if (user) {
       this.isLoggedIn(user.id)
     } else {
@@ -107,8 +112,13 @@ const mapState = state => ({
 //What's being sent to the backend
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
-  getAllItems: (userId, orderId) =>
-    dispatch(fetchCartFromServer(userId, orderId)),
+  getAllItems: (userId, orderId) => {
+    if (userId) {
+      return dispatch(fetchCartFromServer(userId, orderId))
+    } else {
+      return dispatch(fetchCartFromLocalStorage())
+    }
+  },
   addToCart: (product, productId, orderId, price) => {
     if (orderId) {
       return dispatch(addItemToServer(product, productId, orderId, price))

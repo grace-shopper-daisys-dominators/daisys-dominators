@@ -19,6 +19,17 @@ const users = [
   }
 ]
 
+const orders = [
+  {
+    status: 'pending',
+    userId: 1
+  },
+  {
+    status: 'pending',
+    userId: 2
+  }
+]
+
 const products = [
   {
     name: 'Robert Mondavi Winery The Reserve Cabernet Sauvignon',
@@ -438,12 +449,6 @@ const products = [
   }
 ]
 
-const orders = [
-  {
-    status: 'pending'
-  }
-]
-
 const seed = async () => {
   try {
     await db.sync({force: true})
@@ -457,6 +462,12 @@ const seed = async () => {
     await Promise.all(
       users.map(user => {
         return User.create(user)
+      })
+    )
+
+    await Promise.all(
+      orders.map(order => {
+        return Order.create(order)
       })
     )
 

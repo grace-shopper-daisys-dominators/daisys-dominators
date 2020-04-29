@@ -59,9 +59,13 @@ export const addQuantity = product => {
 export const fetchCartFromLocalStorage = () => {
   return dispatch => {
     try {
-      const items = JSON.parse(localStorage.cart)
-      console.log(items, 'HELLO IM CART DATA')
-      dispatch(getCart(items))
+      const items = JSON.parse(localStorage.getItem('cart'))
+      if (items) {
+        console.log(items, 'HELLO IM CART DATA')
+        dispatch(getCart(items))
+      } else {
+        dispatch(getCart([]))
+      }
       //whats being received from localStorage
     } catch (err) {
       console.log(err, "COULDN'T GET FROM STORAGE CART")
@@ -69,10 +73,11 @@ export const fetchCartFromLocalStorage = () => {
   }
 }
 
-export const fetchCartFromServer = (userId, orderId) => {
+export const fetchCartFromServer = userId => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/orders/me/current')
+      console.log('DATA!!!!!', data)
       dispatch(getCart(data[0].products))
       //whats being received from the backend
     } catch (err) {
