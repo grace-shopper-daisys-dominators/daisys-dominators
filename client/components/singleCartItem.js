@@ -1,13 +1,17 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 const singleCartItem = props => {
-  const {items, removeItem, subQuantity, addQuantity, orderId} = props
-  console.log('HEREEEEE=>', props)
+  const {removeItem, subQuantity, addQuantity, orderId} = props
+
+  const {items} = props
+  console.log(props)
 
   return (
     <div>
       {items
         ? items.map(item => {
+            console.log('The current item', item)
             return (
               <div key={item.id}>
                 <div>
@@ -25,7 +29,13 @@ const singleCartItem = props => {
                 </button>
                 <button
                   type="submit"
-                  onClick={() => subQuantity(item.id, orderId, item.price)}
+                  onClick={() => {
+                    if (item.cart.quantity > 1) {
+                      subQuantity(item.id, orderId, item.price)
+                    } else {
+                      removeItem(item.id, orderId)
+                    }
+                  }}
                 >
                   - Quantity
                 </button>
@@ -49,4 +59,10 @@ const singleCartItem = props => {
   )
 }
 
-export default singleCartItem
+const mapState = state => {
+  return {
+    items: state.cart.items
+  }
+}
+
+export default connect(mapState)(singleCartItem)

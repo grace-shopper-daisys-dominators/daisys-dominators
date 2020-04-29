@@ -864,6 +864,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../store/cart */ "./client/store/cart.js");
 /* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../store/user */ "./client/store/user.js");
 /* harmony import */ var _singleCartItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../singleCartItem */ "./client/components/singleCartItem.js");
+/* harmony import */ var _store_localStorage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../store/localStorage */ "./client/store/localStorage.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -881,6 +882,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -923,19 +925,21 @@ function (_React$Component) {
           addQuantity = _this$props.addQuantity,
           total = _this$props.total,
           orderId = _this$props.orderId;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Cart"), this.props.user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        items: items,
+      var localTotal = Object(_store_localStorage__WEBPACK_IMPORTED_MODULE_6__["getTotal"])();
+      console.log(total, 'TOTALLL!');
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Cart"), this.props.user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"] // items={items}
+      , {
         removeItem: removeItem,
         subQuantity: subQuantity,
         addQuantity: addQuantity,
         orderId: orderId
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total = $", total)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
         items: items,
         removeItem: removeItem,
         subQuantity: subQuantity,
         addQuantity: addQuantity,
         orderId: null
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total = ", total), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total = $", localTotal)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/checkout"
       }, "Checkout"));
     }
@@ -1719,16 +1723,19 @@ var mapDispatch = function mapDispatch(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
 
 
 var singleCartItem = function singleCartItem(props) {
-  var items = props.items,
-      removeItem = props.removeItem,
+  var removeItem = props.removeItem,
       subQuantity = props.subQuantity,
       addQuantity = props.addQuantity,
       orderId = props.orderId;
-  console.log('HEREEEEE=>', props);
+  var items = props.items;
+  console.log(props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, items ? items.map(function (item) {
+    console.log('The current item', item);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: item.id
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1741,7 +1748,11 @@ var singleCartItem = function singleCartItem(props) {
     }, "Delete item"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "submit",
       onClick: function onClick() {
-        return subQuantity(item.id, orderId, item.price);
+        if (item.cart.quantity > 1) {
+          subQuantity(item.id, orderId, item.price);
+        } else {
+          removeItem(item.id, orderId);
+        }
       }
     }, "- Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "submit",
@@ -1752,7 +1763,13 @@ var singleCartItem = function singleCartItem(props) {
   }) : '');
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (singleCartItem);
+var mapState = function mapState(state) {
+  return {
+    items: state.cart.items
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState)(singleCartItem));
 
 /***/ }),
 
@@ -2676,10 +2693,11 @@ var SUB_QUANTITY = 'SUB_QUANTITY';
 var ADD_QUANTITY = 'ADD_QUANTITY'; //ACTION CREATOR
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
 
-var getCart = function getCart(cart) {
+var getCart = function getCart(cart, total) {
   return {
     type: GET_CART,
-    cart: cart
+    cart: cart,
+    total: total
   };
 }; //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
 
@@ -2719,10 +2737,10 @@ var fetchCartFromLocalStorage = function fetchCartFromLocalStorage() {
       var items = JSON.parse(localStorage.getItem('cart'));
 
       if (items) {
-        console.log(items, 'HELLO IM CART DATA');
-        dispatch(getCart(items));
+        var total = Object(_localStorage__WEBPACK_IMPORTED_MODULE_1__["getTotal"])();
+        dispatch(getCart(items, total));
       } else {
-        dispatch(getCart([]));
+        dispatch(getCart([], 0));
       } //whats being received from localStorage
 
     } catch (err) {
@@ -2751,7 +2769,7 @@ var fetchCartFromServer = function fetchCartFromServer(userId) {
                 _ref2 = _context.sent;
                 data = _ref2.data;
                 console.log(data, 'IM BACKEND DATA');
-                dispatch(getCart(data[0].products)); //whats being received from the backend
+                dispatch(getCart(data[0].products, data[0].products[0].cart.total)); //whats being received from the backend
 
                 _context.next = 12;
                 break;
@@ -3133,7 +3151,8 @@ function cartReducer() {
   switch (action.type) {
     case GET_CART:
       return _objectSpread({}, state, {
-        items: action.cart
+        items: action.cart,
+        total: action.total
       });
 
     case ADD_TO_CART:
@@ -3249,7 +3268,7 @@ var getTotal = function getTotal() {
   var currentCart = JSON.parse(localStorage.getItem('cart'));
   var total = 0;
   currentCart.forEach(function (product) {
-    total += product.price;
+    total += product.price * product.quantity;
   });
   return total;
 };
