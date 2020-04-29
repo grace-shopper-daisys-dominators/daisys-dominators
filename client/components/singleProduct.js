@@ -34,24 +34,47 @@ export class SingleProduct extends Component {
     } = this.props.product
     const {isAdmin} = this.props.user
     return (
-      <div>
-        <div>
-          <img src={imageURL} />
-        </div>
-        <div>
-          <h1>{name}</h1>
-          <p>Rating: {rating}</p>
-          <p>Price: {price}</p>
-          <p>Description: {description}</p>
-          <p>Type: {color}</p>
-          <p>Region: {region}</p>
-          <p>Size: {size}</p>
-          <p>Year: {year}</p>
-        </div>
-        <div>
-          <button type="submit" onClick={() => this.handleClick()}>
-            Add to cart
-          </button>
+      <div className="single-product-container">
+        <div className="product-inner-container">
+          <div id="img-container">
+            <img src={imageURL} />
+          </div>
+          <div id="product-details">
+            <ul>
+              <li id="wine-name">{name}</li>
+              <li>
+                <b>Rating:</b> {rating}
+              </li>
+              <li>
+                <b>Price:</b> {price}
+              </li>
+              <li>
+                <b>Description:</b> {description}
+              </li>
+              <li>
+                <b>Type:</b> {color}
+              </li>
+              <li>
+                <b>Region:</b> {region}
+              </li>
+              <li>
+                <b>Size:</b> {size}
+              </li>
+              <li>
+                <b>Year:</b> {year}
+              </li>
+              <li>
+                <button
+                  id="add-to-cart-btn"
+                  type="submit"
+                  onClick={() => this.handleClick()}
+                >
+                  Add to cart
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div />
         </div>
         <div>
           {isAdmin ? <UpdateProductForm wine={this.props.product} /> : ''}
