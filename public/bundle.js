@@ -1977,6 +1977,35 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 /***/ }),
 
+/***/ "./client/components/user-home.css":
+/*!*****************************************!*\
+  !*** ./client/components/user-home.css ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!./user-home.css */ "./node_modules/css-loader/dist/cjs.js!./client/components/user-home.css");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
 /***/ "./client/components/user-home.js":
 /*!****************************************!*\
   !*** ./client/components/user-home.js ***!
@@ -1993,6 +2022,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _newProductForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./newProductForm */ "./client/components/newProductForm.js");
+/* harmony import */ var _user_home_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user-home.css */ "./client/components/user-home.css");
+/* harmony import */ var _user_home_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_user_home_css__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -2005,7 +2037,9 @@ var UserHome = function UserHome(props) {
   var _props$user = props.user,
       firstName = _props$user.firstName,
       isAdmin = _props$user.isAdmin;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Welcome, ", firstName, " !"), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_newProductForm__WEBPACK_IMPORTED_MODULE_3__["default"], null)) : '');
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    id: "welcome-user-msg"
+  }, "Welcome, ", firstName, "!"), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_newProductForm__WEBPACK_IMPORTED_MODULE_3__["default"], null)) : '');
 };
 /**
  * CONTAINER
@@ -18113,6 +18147,24 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".single-product-container {\n  display: flex;\n  flex-direction: column;\n}\n.product-inner-container {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  flex-wrap: wrap;\n}\n\n#img-container {\n  background-color: white;\n  width: 600px;\n  padding: 40px;\n  border-radius: 5px;\n}\n#img-container img {\n  max-width: 200px;\n}\n\n#product-details {\n  max-width: 450px;\n  text-align: left;\n}\n#product-details ul #wine-name {\n  color: #db675e;\n  font-size: 30px;\n}\n#product-details ul li {\n  list-style-type: none;\n  font-size: 20px;\n  color: white;\n  margin-bottom: 20px;\n}\n\n#add-to-cart-btn {\n  background-color: #1d8348;\n  padding: 10px 20px 10px 20px;\n  border: none;\n  border-radius: 5px;\n  text-decoration: none;\n  color: white;\n  cursor: pointer;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./client/components/user-home.css":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./client/components/user-home.css ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "#welcome-user-msg {\n  color: white;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
