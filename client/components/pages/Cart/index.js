@@ -37,7 +37,6 @@ export class Cart extends React.Component {
       orderId
     } = this.props
 
-    console.log(items, "I'M ITEMS")
     return (
       <div>
         <h2>Cart</h2>

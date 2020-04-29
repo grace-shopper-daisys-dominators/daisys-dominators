@@ -923,7 +923,6 @@ function (_React$Component) {
           addQuantity = _this$props.addQuantity,
           total = _this$props.total,
           orderId = _this$props.orderId;
-      console.log(items, "I'M ITEMS");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Cart"), this.props.user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
         items: items,
         removeItem: removeItem,
