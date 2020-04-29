@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Product} = require('../db/models')
+const {User, Order, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -82,6 +82,7 @@ router.get('/me/current', async (req, res, next) => {
     }
 
     if (currentUser.id) {
+      console.log(currentUser, 'IM THE CURRENT USER')
       const cart = await Order.findAll({
         where: {status: 'pending', userId: currentUser.id},
         include: Product
@@ -95,6 +96,43 @@ router.get('/me/current', async (req, res, next) => {
     next(err)
   }
 })
+
+// router.get('/me/current/:userId/:orderId', async (req, res, next) => {
+//   try {
+//     let currentUser
+//     if (req.user) {
+//       currentUser = req.user.dataValues
+//     } else {
+//       currentUser = {}
+//     }
+
+//     if (currentUser.id) {
+//       const cart = await Order.findAll({
+//         where: {status: 'pending', userId: currentUser.id},
+//         include: [
+//           {
+//             model: Product,
+//             through: {
+//               where: {
+//                 orderId: req.params.orderId
+//               }
+//             }
+//           }
+//         ]
+//       })
+
+//       console.log(cart, 'IM CART')
+//       res.json(cart)
+//     } else {
+//       res.send('Log in to view your cart.')
+//     }
+//   } catch (err) {
+//     console.log(err, 'IM THE ERROR')
+//     next(err)
+//   }
+// })
+
+//^^ Alternate way of getting a cart
 
 router.post('/', async (req, res, next) => {
   try {

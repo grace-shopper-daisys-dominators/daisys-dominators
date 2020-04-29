@@ -1,0 +1,12 @@
+.links-container {
+  padding: 20px;
+}
+
+.nav-links {
+  color: white;
+}
+
+.nav-links:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
