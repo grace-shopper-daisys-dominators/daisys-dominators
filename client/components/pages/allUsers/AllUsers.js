@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getAllUsers} from '../../../store/allUsers'
+import './allUsers.css'
 
 export class AllUsers extends Component {
   componentDidMount() {
@@ -10,28 +11,28 @@ export class AllUsers extends Component {
   render() {
     const {users} = this.props
     return (
-      <div>
+      <div className="users-container">
+        <h1>Users</h1>
         {users
           ? users.map(user => {
               return (
                 <div key={user.id}>
-                  <Link to={`users/${user.id}`}>
-                    <h1>User:</h1>
+                  <Link id="user-link" to={`users/${user.id}`}>
+                    <div className="single-user-container">
+                      <div>
+                        <p>
+                          <b>Fullname:</b> {user.firstName} {user.lastName}
+                        </p>
+                        <p>
+                          <b>Email:</b> {user.email}
+                        </p>
+                      </div>
+                    </div>
                   </Link>
-                  <p>
-                    <b>Firstname:</b> {user.firstName}
-                  </p>
-                  <p>
-                    <b>Lastname:</b> {user.lastName}
-                  </p>
-                  <p>
-                    <b>Email:</b> {user.email}
-                  </p>
                 </div>
               )
             })
           : 'No users yet!'}
-        {/* TODO: ANOTHER A DIFFERENT MSG HERE */}
       </div>
     )
   }
