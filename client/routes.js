@@ -10,9 +10,9 @@ import Checkout from './components/pages/Checkout'
 import HomePage from './components/pages/HomePage'
 import AllUsers from './components/pages/allUsers/AllUsers'
 import SingleUser from './components/pages/singleUser/SingleUser'
-import RedWines from './components/pages/RedWines'
-import WhiteWines from './components/pages/WhiteWines'
-import RoseWines from './components/pages/RoseWines'
+import RedWines from './components/pages/redWines'
+import WhiteWines from './components/pages/whiteWines'
+import RoseWines from './components/pages/roseWines'
 /**
  * COMPONENT
  */
@@ -50,6 +50,7 @@ class Routes extends Component {
                 </div>
               )}
             />
+            <Route exact path="/checkout" component={Checkout} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

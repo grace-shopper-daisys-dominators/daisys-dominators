@@ -16,15 +16,18 @@ const singleCartItem = props => {
               <p> Price: {item.price} </p>
               <p> Size: {item.size} </p>
             </div>
-            <button
-              type="submit"
-              onClick={() => removeItem(item.id, orderId, item.price)}
-            >
-              DELETE ITEM
+            <button type="submit" onClick={() => removeItem(item.id, orderId)}>
+              Delete item
             </button>
             <button
               type="submit"
               onClick={() => subQuantity(item.id, orderId, item.price)}
+            >
+              - Quantity
+            </button>
+            <button
+              type="submit"
+              onClick={() => addQuantity(item.id, orderId, item.price)}
             >
               Subtract Quantity
             </button>

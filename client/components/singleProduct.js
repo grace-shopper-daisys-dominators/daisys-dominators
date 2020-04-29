@@ -14,9 +14,7 @@ import {addToLocalStorage} from '../store/localStorage'
 export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
-    if (this.props.user.id) {
-      this.props.getAllItems(this.props.user, this.props.orderId)
-    }
+    this.props.getAllItems()
   }
 
   isLoggedIn = userId => {

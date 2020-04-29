@@ -12,7 +12,7 @@ const Product = db.define('product', {
   imageURL: {
     type: Sequelize.TEXT,
     defaultValue:
-      'https://assets.epicurious.com/photos/5ad4bae8c5c3140bdf98db71/16:9/w_2560%2Cc_limit/1203-GT-WN01-01.jpg'
+      'https://www.winedeals.com/media/catalog/product/cache/24a5f9c916d5e5388bb3b7aa0cf8f62d/g/e/generic-red.png'
   },
   color: {
     type: Sequelize.STRING,
