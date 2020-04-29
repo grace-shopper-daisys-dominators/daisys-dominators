@@ -64,7 +64,7 @@ const singleCartItem = props => {
                       </div>
                       <div>
                         <button
-                          id="delete-btn"
+                          id="delete-item--btn"
                           type="submit"
                           onClick={() => removeItem(item.id, orderId)}
                         >

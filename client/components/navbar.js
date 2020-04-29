@@ -63,9 +63,6 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
           <a className="nav-links" href="#" onClick={handleClick}>
             LOGOUT
           </a>
-          <Link className="nav-links" to="/orders">
-            ORDER HISTORY
-          </Link>
           <Link className="nav-links" to="/cart">
             CART
           </Link>
