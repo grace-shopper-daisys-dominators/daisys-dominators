@@ -14,7 +14,7 @@ import {
 import {me} from '../../../store/user'
 import SingleCartItem from '../../singleCartItem'
 import {getTotal} from '../../../store/localStorage'
-
+import './style.css'
 export class Cart extends React.Component {
   componentDidMount() {
     console.log('USER ID ------>', this.props.user.id)
@@ -43,8 +43,8 @@ export class Cart extends React.Component {
     console.log(total, 'TOTALLL!')
 
     return (
-      <div>
-        <h2>Cart</h2>
+      <div id="main-cart-container">
+        <h2 id="cart-title">Cart</h2>
         {this.props.user.id ? (
           <div>
             <SingleCartItem
@@ -54,7 +54,7 @@ export class Cart extends React.Component {
               addQuantity={addQuantity}
               orderId={orderId}
             />
-            <div>Total = ${total}</div>
+            <div className="total-count">Total = ${total}</div>
           </div>
         ) : (
           <div>
@@ -65,10 +65,14 @@ export class Cart extends React.Component {
               addQuantity={addQuantity}
               orderId={null}
             />
-            <div>Total = ${localTotal}</div>
+            <div className="checkout-total">
+              <div className="total-count">Total = ${localTotal}</div>
+              <Link id="link-to-checkout" to="/checkout">
+                Checkout
+              </Link>
+            </div>
           </div>
         )}
-        <Link to="/checkout">Checkout</Link>
       </div>
     )
   }
