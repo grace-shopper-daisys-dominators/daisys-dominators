@@ -14,7 +14,30 @@ export class Checkout extends React.Component {
 
     return (
       <div>
-        <h2>Cart</h2>
+        <h2>Checkout Cart</h2>
+        <div>
+          <h2>Shipping Information</h2>
+          <form>
+            <label htmlFor="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" />
+            <label htmlFor="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" />
+            <label htmlFor="address">Full Address:</label>
+            <input type="text" name="address" />
+            <label htmlFor="phone">Phone Number:</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              required
+            />
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" name="email" />
+            <input type="submit" value="Submit Order" />
+            <input type="reset" />
+          </form>
+        </div>
         {/* {
           user ? ( */}
         <SingleCartItem items={items} orderId={orderId} />

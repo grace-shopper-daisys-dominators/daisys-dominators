@@ -65,7 +65,7 @@ export const fetchCartFromServer = () => {
 export const addItemToServer = (product, productId, orderId, price) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post('/api/carts', {
+      const {data} = await axios.post('/api/cart', {
         productId,
         orderId,
         price
