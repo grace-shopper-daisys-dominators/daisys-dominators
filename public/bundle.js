@@ -1759,7 +1759,7 @@ var SingleProduct = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
-      var currProduct = _this.props.product;
+      var currProduct = _this.props;
 
       if (_this.props.user.email) {
         _this.props.addToCart(currProduct.id);

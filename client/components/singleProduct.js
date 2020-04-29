@@ -12,7 +12,7 @@ export class SingleProduct extends Component {
   }
 
   handleClick = () => {
-    const currProduct = this.props.product
+    const currProduct = this.props
 
     if (this.props.user.email) {
       this.props.addToCart(currProduct.id)
