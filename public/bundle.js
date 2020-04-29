@@ -1530,6 +1530,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_allUsers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../store/allUsers */ "./client/store/allUsers.js");
+/* harmony import */ var _singleUser_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./singleUser.css */ "./client/components/pages/singleUser/singleUser.css");
+/* harmony import */ var _singleUser_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_singleUser_css__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1555,6 +1557,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var SingleUser = /*#__PURE__*/function (_Component) {
   _inherits(SingleUser, _Component);
 
@@ -1575,7 +1578,9 @@ var SingleUser = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var user = this.props.user;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, user.firstName, " ", user.lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email:"), " ", user.email));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "user-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, user.firstName, " ", user.lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Email:"), " ", user.email)));
     }
   }]);
 
@@ -1597,6 +1602,35 @@ var mapDispatch = function mapDispatch(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(SingleUser));
+
+/***/ }),
+
+/***/ "./client/components/pages/singleUser/singleUser.css":
+/*!***********************************************************!*\
+  !*** ./client/components/pages/singleUser/singleUser.css ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!./singleUser.css */ "./node_modules/css-loader/dist/cjs.js!./client/components/pages/singleUser/singleUser.css");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
 
 /***/ }),
 
@@ -18166,6 +18200,24 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Sat
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Six+Caps);"]);
 // Module
 exports.push([module.i, "body {\n  background: url(http://api.thumbr.it/whitenoise-361x370.png?background=15424fff&noise=166f9e&density=100&opacity=61);\n  text-align: center;\n}\n\n.halo {\n  background-image: radial-gradient(transparent, rgba(0, 0, 0, 0.6));\n  bottom: 0;\n  left: 0;\n  position: fixed;\n  right: 0;\n  top: 0;\n  pointer-events: none;\n}\n\n.intro {\n  color: rgb(230, 200, 160);\n  display: block;\n  font-family: 'Satisfy', cursive;\n  font-size: 32px;\n  text-shadow: 1px 1px black;\n  transform: rotate(-10deg);\n}\n\n.intro--the {\n  transform: rotate(-10deg) translate(-20px, 15px);\n}\n\n.intro--num {\n  background: rgb(240, 200, 160);\n  border: 1px dotted rgb(20, 60, 80);\n  color: rgb(20, 60, 80);\n  display: inline-block;\n  font-family: sans-serif;\n  font-size: 12px;\n  font-weight: bolder;\n  padding: 4px 6px 2px;\n  position: absolute;\n  text-shadow: none;\n  transform: rotate(-10deg) translate(20px, -25px);\n}\n\n.vintage__container {\n  display: inline-block;\n  margin: 25px auto 40px;\n}\n\n.vintage {\n  font-family: 'Six Caps', sans-serif;\n  font-size: 192px;\n  letter-spacing: 10px;\n  line-height: 1;\n  margin: 0;\n  position: relative;\n}\n\n.vintage__top {\n  background: linear-gradient(rgb(240, 220, 200), rgb(230, 200, 160));\n  -webkit-background-clip: text;\n  background-clip: text;\n  position: absolute;\n  z-index: 1;\n  -webkit-text-fill-color: transparent;\n  text-fill-color: transparent;\n}\n\n.vintage__bot {\n  text-shadow: 2px 1px rgb(85, 10, 0), 4px 2px rgb(90, 15, 5),\n    6px 4px rgb(100, 20, 15), 8px 5px rgb(105, 25, 20),\n    10px 6px rgb(110, 30, 25), 12px 7px rgb(115, 30, 30),\n    14px 8px rgb(120, 30, 35), 16px 9px black, 18px 10px black, 20px 11px black,\n    22px 12px black, 24px 13px black, 28px 14px rgba(0, 0, 0, 0.9),\n    30px 15px rgba(0, 0, 0, 0.7), 32px 16px rgba(0, 0, 0, 0.5),\n    34px 17px rgba(0, 0, 0, 0.3), 36px 18px rgba(0, 0, 0, 0.1),\n    40px 20px rgba(0, 0, 0, 0.1);\n}\n\n.outro {\n  color: white;\n  font-family: 'Satisfy', cursive;\n  font-size: 16px;\n}\n\n.outro--big {\n  font-family: sans-serif;\n  font-size: 24px;\n}\n\n.outro--smart {\n  display: block;\n}\n/* ALL WINES STYLE BELOW*/\n\n.wines-outer-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-around;\n}\n\n.wine-container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n\n#wine-img-container {\n  background-color: white;\n  margin: 20px;\n  border-radius: 50%;\n  width: 300px;\n  height: 300px;\n  padding: 50px;\n}\n\n#wine-img-container img {\n  max-width: 150px;\n  max-height: 300px;\n}\n.wine-details {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: left;\n}\n.wine-details div {\n  margin: 0;\n}\n.wine-details div h2 {\n  font-size: 28px;\n  color: white;\n}\n#wine-name {\n  max-width: 300px;\n}\n.wine-details div p {\n  font-size: 24px;\n  color: white;\n}\n#view-more-btn {\n  color: #922b21;\n  cursor: pointer;\n  font-size: 24px;\n}\n\n#view-more-btn:hover {\n  color: white;\n}\n\n#delete-btn {\n  display: flex;\n  justify-content: flex-end;\n}\n\n#delete-btn button {\n  background-color: white;\n  color: black;\n  border-radius: 5px;\n  padding: 10px;\n  font-size: 18px;\n  border: none;\n  cursor: pointer;\n  margin: 10px;\n}\n\n#delete-btn button:hover {\n  opacity: 0.9;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./client/components/pages/singleUser/singleUser.css":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./client/components/pages/singleUser/singleUser.css ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".user-container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.user-container div {\n  background-color: white;\n  padding: 40px;\n  border-radius: 20px;\n}\n.user-container div h1 {\n  color: #db675e;\n  font-size: 30px;\n}\n\n.user-container div p {\n  font-size: 20px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 

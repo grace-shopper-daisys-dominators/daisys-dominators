@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleUser} from '../../../store/allUsers'
+import './singleUser.css'
 
 export class SingleUser extends Component {
   componentDidMount() {
@@ -9,13 +10,15 @@ export class SingleUser extends Component {
   render() {
     const {user} = this.props
     return (
-      <div>
-        <h1>
-          {user.firstName} {user.lastName}
-        </h1>
-        <p>
-          <b>Email:</b> {user.email}
-        </p>
+      <div className="user-container">
+        <div>
+          <h1>
+            {user.firstName} {user.lastName}
+          </h1>
+          <p>
+            <b>Email:</b> {user.email}
+          </p>
+        </div>
       </div>
     )
   }
