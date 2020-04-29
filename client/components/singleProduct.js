@@ -118,6 +118,7 @@ export class SingleProduct extends Component {
                 <b>Year:</b> {year}
               </li>
               <li>
+                {this.state.addedToCart && <p>Item Was Added To Cart!</p>}
                 <button
                   id="add-to-cart-btn"
                   type="submit"
@@ -132,10 +133,6 @@ export class SingleProduct extends Component {
         </div>
         <div>
           {isAdmin ? <UpdateProductForm wine={this.props.product} /> : ''}
-          {this.state.addedToCart && <p>Item Was Added To Cart!</p>}
-          <button type="submit" onClick={() => this.handleClick()}>
-            Add to cart
-          </button>
         </div>
       </div>
     )

@@ -13,6 +13,7 @@ import {
 } from '../../../store/cart'
 import {me} from '../../../store/user'
 import SingleCartItem from '../../singleCartItem'
+import {getTotal} from '../../../store/localStorage'
 
 export class Cart extends React.Component {
   componentDidMount() {
@@ -37,27 +38,36 @@ export class Cart extends React.Component {
       orderId
     } = this.props
 
+    const localTotal = getTotal()
+
+    console.log(total, 'TOTALLL!')
+
     return (
       <div>
         <h2>Cart</h2>
         {this.props.user.id ? (
-          <SingleCartItem
-            items={items}
-            removeItem={removeItem}
-            subQuantity={subQuantity}
-            addQuantity={addQuantity}
-            orderId={orderId}
-          />
+          <div>
+            <SingleCartItem
+              // items={items}
+              removeItem={removeItem}
+              subQuantity={subQuantity}
+              addQuantity={addQuantity}
+              orderId={orderId}
+            />
+            <div>Total = ${total}</div>
+          </div>
         ) : (
-          <SingleCartItem
-            items={items}
-            removeItem={removeItem}
-            subQuantity={subQuantity}
-            addQuantity={addQuantity}
-            orderId={null}
-          />
+          <div>
+            <SingleCartItem
+              items={items}
+              removeItem={removeItem}
+              subQuantity={subQuantity}
+              addQuantity={addQuantity}
+              orderId={null}
+            />
+            <div>Total = ${localTotal}</div>
+          </div>
         )}
-        <div>Total = {total}</div>
         <Link to="/checkout">Checkout</Link>
       </div>
     )

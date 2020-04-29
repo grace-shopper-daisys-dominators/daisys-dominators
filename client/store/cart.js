@@ -15,10 +15,11 @@ const ADD_QUANTITY = 'ADD_QUANTITY'
 
 //ACTION CREATOR
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-const getCart = cart => {
+const getCart = (cart, total) => {
   return {
     type: GET_CART,
-    cart
+    cart,
+    total
   }
 }
 
@@ -61,10 +62,10 @@ export const fetchCartFromLocalStorage = () => {
     try {
       const items = JSON.parse(localStorage.getItem('cart'))
       if (items) {
-        console.log(items, 'HELLO IM CART DATA')
-        dispatch(getCart(items))
+        const total = getTotal()
+        dispatch(getCart(items, total))
       } else {
-        dispatch(getCart([]))
+        dispatch(getCart([], 0))
       }
       //whats being received from localStorage
     } catch (err) {
@@ -78,7 +79,7 @@ export const fetchCartFromServer = userId => {
     try {
       const {data} = await axios.get('/api/orders/me/current')
       console.log(data, 'IM BACKEND DATA')
-      dispatch(getCart(data[0].products))
+      dispatch(getCart(data[0].products, data[0].products[0].cart.total))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T FETCH CART")
@@ -262,7 +263,7 @@ const addQuantityFromState = (state, action) => {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      return {...state, items: action.cart}
+      return {...state, items: action.cart, total: action.total}
     case ADD_TO_CART:
       return addCartToState(state, action)
     case REMOVE_ITEM:
