@@ -79,7 +79,12 @@ export const fetchCartFromServer = userId => {
     try {
       const {data} = await axios.get('/api/orders/me/current')
       console.log(data, 'IM BACKEND DATA')
-      dispatch(getCart(data[0].products, data[0].products[0].cart.total))
+      let total = 0
+      if (data[0].products.length > 0) {
+        total = data[0].products[0].cart.total
+      }
+
+      dispatch(getCart(data[0].products, total))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T FETCH CART")

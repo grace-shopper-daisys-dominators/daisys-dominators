@@ -40,21 +40,23 @@ export class Cart extends React.Component {
 
     const localTotal = getTotal()
 
-    console.log(total, 'TOTALLL!')
-
     return (
       <div id="main-cart-container">
         <h2 id="cart-title">Cart</h2>
         {this.props.user.id ? (
           <div>
             <SingleCartItem
-              // items={items}
               removeItem={removeItem}
               subQuantity={subQuantity}
               addQuantity={addQuantity}
               orderId={orderId}
             />
-            <div className="total-count">Total = ${total}</div>
+            <div className="checkout-total">
+              <div className="total-count">Total = ${total}</div>
+              <Link id="link-to-checkout" to="/checkout">
+                Checkout
+              </Link>
+            </div>
           </div>
         ) : (
           <div>
@@ -67,9 +69,6 @@ export class Cart extends React.Component {
             />
             <div className="checkout-total">
               <div className="total-count">Total = ${localTotal}</div>
-              <Link id="link-to-checkout" to="/checkout">
-                Checkout
-              </Link>
             </div>
           </div>
         )}

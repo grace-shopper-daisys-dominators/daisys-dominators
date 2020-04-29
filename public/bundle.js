@@ -827,20 +827,23 @@ var Cart = /*#__PURE__*/function (_React$Component) {
           total = _this$props.total,
           orderId = _this$props.orderId;
       var localTotal = Object(_store_localStorage__WEBPACK_IMPORTED_MODULE_6__["getTotal"])();
-      console.log(total, 'TOTALLL!');
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "main-cart-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "cart-title"
-      }, "Cart"), this.props.user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"] // items={items}
-      , {
+      }, "Cart"), this.props.user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
         removeItem: removeItem,
         subQuantity: subQuantity,
         addQuantity: addQuantity,
         orderId: orderId
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "checkout-total"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "total-count"
-      }, "Total = $", total)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, "Total = $", total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        id: "link-to-checkout",
+        to: "/checkout"
+      }, "Checkout"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
         items: items,
         removeItem: removeItem,
         subQuantity: subQuantity,
@@ -850,10 +853,7 @@ var Cart = /*#__PURE__*/function (_React$Component) {
         className: "checkout-total"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "total-count"
-      }, "Total = $", localTotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        id: "link-to-checkout",
-        to: "/checkout"
-      }, "Checkout"))));
+      }, "Total = $", localTotal))));
     }
   }]);
 
@@ -3335,7 +3335,7 @@ var fetchCartFromLocalStorage = function fetchCartFromLocalStorage() {
 var fetchCartFromServer = function fetchCartFromServer(userId) {
   return /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var _yield$axios$get, data;
+      var _yield$axios$get, data, total;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -3349,22 +3349,28 @@ var fetchCartFromServer = function fetchCartFromServer(userId) {
               _yield$axios$get = _context.sent;
               data = _yield$axios$get.data;
               console.log(data, 'IM BACKEND DATA');
-              dispatch(getCart(data[0].products, data[0].products[0].cart.total)); //whats being received from the backend
+              total = 0;
 
-              _context.next = 12;
+              if (data[0].products.length > 0) {
+                total = data[0].products[0].cart.total;
+              }
+
+              dispatch(getCart(data[0].products, total)); //whats being received from the backend
+
+              _context.next = 14;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 11:
+              _context.prev = 11;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0, "COULDN'T FETCH CART");
 
-            case 12:
+            case 14:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 11]]);
     }));
 
     return function (_x) {
