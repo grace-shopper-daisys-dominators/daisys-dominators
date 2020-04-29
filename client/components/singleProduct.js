@@ -13,6 +13,11 @@ import {
 import {addToLocalStorage} from '../store/localStorage'
 
 export class SingleProduct extends Component {
+  constructor() {
+    super()
+    this.state = {addedToCart: false}
+  }
+
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
     if (this.props.user.id) {
@@ -22,7 +27,7 @@ export class SingleProduct extends Component {
     }
   }
 
-  isLoggedIn = userId => {
+  isLoggedIn = () => {
     const currProduct = this.props.product
     const {items, orderId, addQuantity} = this.props
     let existedItem = items.find(item => item.id === currProduct.id)
@@ -56,10 +61,15 @@ export class SingleProduct extends Component {
   handleClick = () => {
     const {user} = this.props
     if (user) {
-      this.isLoggedIn(user.id)
+      this.isLoggedIn()
     } else {
       this.isNotLoggedIn()
     }
+
+    this.setState({addedToCart: true})
+    setTimeout(() => {
+      this.setState({addedToCart: false})
+    }, 2000)
   }
 
   render() {
@@ -93,6 +103,7 @@ export class SingleProduct extends Component {
         {/** TODO: WORK ON UPDATE FORM BELOW */}
         {/*<UpdateProductForm />*/}
         <div>
+          {this.state.addedToCart && <p>Item Was Added To Cart!</p>}
           <button type="submit" onClick={() => this.handleClick()}>
             Add to cart
           </button>

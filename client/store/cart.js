@@ -77,7 +77,7 @@ export const fetchCartFromServer = userId => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/orders/me/current')
-      console.log('DATA!!!!!', data)
+      console.log(data, 'IM BACKEND DATA')
       dispatch(getCart(data[0].products))
       //whats being received from the backend
     } catch (err) {
@@ -100,7 +100,7 @@ export const addItemToLocalStorage = product => {
 export const addItemToServer = (product, productId, orderId, price) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post('/api/carts', {
+      const {data} = await axios.post('/api/cart', {
         productId,
         orderId,
         price
