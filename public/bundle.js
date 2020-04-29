@@ -159,19 +159,13 @@ function (_Component) {
   _inherits(SingleProduct, _Component);
 
   function SingleProduct() {
-    var _getPrototypeOf2;
-
     var _this;
 
     _classCallCheck(this, SingleProduct);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SingleProduct).call(this));
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(SingleProduct)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "isLoggedIn", function (userId) {
+    _defineProperty(_assertThisInitialized(_this), "isLoggedIn", function () {
       var currProduct = _this.props.product;
       var _this$props = _this.props,
           items = _this$props.items,
@@ -212,12 +206,25 @@ function (_Component) {
       var user = _this.props.user;
 
       if (user) {
-        _this.isLoggedIn(user.id);
+        _this.isLoggedIn();
       } else {
         _this.isNotLoggedIn();
       }
+
+      _this.setState({
+        addedToCart: true
+      });
+
+      setTimeout(function () {
+        _this.setState({
+          addedToCart: false
+        });
+      }, 2000);
     });
 
+    _this.state = {
+      addedToCart: false
+    };
     return _this;
   }
 
@@ -249,7 +256,7 @@ function (_Component) {
           rating = _this$props$product.rating;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: imageURL
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Rating: ", rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: ", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Type: ", color), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Region: ", region), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Size: ", size), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Year: ", year)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Rating: ", rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Price: ", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description: ", description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Type: ", color), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Region: ", region), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Size: ", size), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Year: ", year)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.addedToCart && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Item Was Added To Cart!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         onClick: function onClick() {
           return _this2.handleClick();
@@ -855,7 +862,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../store/cart */ "./client/store/cart.js");
-/* harmony import */ var _singleCartItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../singleCartItem */ "./client/components/singleCartItem.js");
+/* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../store/user */ "./client/store/user.js");
+/* harmony import */ var _singleCartItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../singleCartItem */ "./client/components/singleCartItem.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -879,6 +887,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Cart =
 /*#__PURE__*/
 function (_React$Component) {
@@ -893,10 +902,15 @@ function (_React$Component) {
   _createClass(Cart, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (this.props.user.id) {
-        this.props.getAllItems(this.props.user.id, this.props.orderId); //ELSE if guest get from localstorage
-      } else {
-        this.props.getAllItems();
+      console.log('USER ID ------>', this.props.user.id);
+      this.props.getAllItems(this.props.user.id);
+      this.props.getUser();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProp) {
+      if (prevProp.user.id !== this.props.user.id) {
+        this.props.getAllItems(this.props.user.id);
       }
     }
   }, {
@@ -909,13 +923,14 @@ function (_React$Component) {
           addQuantity = _this$props.addQuantity,
           total = _this$props.total,
           orderId = _this$props.orderId;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Cart"), this.props.user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      console.log(items, "I'M ITEMS");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Cart"), this.props.user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
         items: items,
         removeItem: removeItem,
         subQuantity: subQuantity,
         addQuantity: addQuantity,
         orderId: orderId
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
         items: items,
         removeItem: removeItem,
         subQuantity: subQuantity,
@@ -969,8 +984,8 @@ var mapDispatch = function mapDispatch(dispatch) {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["addQuantityToStorage"])(itemId));
       }
     },
-    getItemsFromLocalStorage: function getItemsFromLocalStorage() {
-      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["fetchCartFromLocalStorage"])());
+    getUser: function getUser() {
+      dispatch(Object(_store_user__WEBPACK_IMPORTED_MODULE_4__["me"])());
     }
   };
 };
@@ -1041,7 +1056,43 @@ function (_React$Component) {
           items = _this$props.items,
           orderId = _this$props.orderId,
           total = _this$props.total;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Cart"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Checkout Cart"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Shipping Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "fname"
+      }, "First Name:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "fname",
+        name: "fname"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "lname"
+      }, "Last Name:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "lname",
+        name: "lname"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "address"
+      }, "Full Address:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "address"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "phone"
+      }, "Phone Number:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "tel",
+        id: "phone",
+        name: "phone",
+        pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+        required: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "email"
+      }, "Email:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "email",
+        id: "email",
+        name: "email"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: "Submit Order"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "reset"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_singleCartItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
         items: items,
         orderId: orderId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total = ", total), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
@@ -1696,7 +1747,7 @@ var singleCartItem = function singleCartItem(props) {
     }, "- Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "submit",
       onClick: function onClick() {
-        return addQuantity(item.id, orderId);
+        return addQuantity(item.id, orderId, item.price);
       }
     }, "Add Quantity"));
   }) : '');
@@ -2700,7 +2751,7 @@ var fetchCartFromServer = function fetchCartFromServer(userId) {
               case 3:
                 _ref2 = _context.sent;
                 data = _ref2.data;
-                console.log('DATA!!!!!', data);
+                console.log(data, 'IM BACKEND DATA');
                 dispatch(getCart(data[0].products)); //whats being received from the backend
 
                 _context.next = 12;
@@ -2751,7 +2802,7 @@ var addItemToServer = function addItemToServer(product, productId, orderId, pric
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/carts', {
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/cart', {
                   productId: productId,
                   orderId: orderId,
                   price: price //whats being sent to the backend

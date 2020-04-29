@@ -11,15 +11,19 @@ import {
   addQuantityToStorage,
   subtractQuantityFromStorage
 } from '../../../store/cart'
+import {me} from '../../../store/user'
 import SingleCartItem from '../../singleCartItem'
 
 export class Cart extends React.Component {
   componentDidMount() {
-    if (this.props.user.id) {
-      this.props.getAllItems(this.props.user.id, this.props.orderId)
-      //ELSE if guest get from localstorage
-    } else {
-      this.props.getAllItems()
+    console.log('USER ID ------>', this.props.user.id)
+    this.props.getAllItems(this.props.user.id)
+    this.props.getUser()
+  }
+
+  componentDidUpdate(prevProp) {
+    if (prevProp.user.id !== this.props.user.id) {
+      this.props.getAllItems(this.props.user.id)
     }
   }
 
@@ -33,7 +37,7 @@ export class Cart extends React.Component {
       orderId
     } = this.props
 
-    console.log(total, 'IM TOTAL')
+    console.log(items, "I'M ITEMS")
     return (
       <div>
         <h2>Cart</h2>
@@ -103,7 +107,9 @@ const mapDispatch = dispatch => {
         return dispatch(addQuantityToStorage(itemId))
       }
     },
-    getItemsFromLocalStorage: () => dispatch(fetchCartFromLocalStorage())
+    getUser: () => {
+      dispatch(me())
+    }
   }
 }
 

@@ -20,6 +20,10 @@ const Cart = db.define('cart', {
 
 Cart.prototype.add = async function(price) {
   try {
+    console.log(
+      'PRICE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+      price
+    )
     this.quantity++
     this.price = this.price * 1 + price * 1
     await this.save()

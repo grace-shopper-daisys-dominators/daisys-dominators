@@ -37,7 +37,7 @@ const singleCartItem = props => {
             </button> */}
                 <button
                   type="submit"
-                  onClick={() => addQuantity(item.id, orderId)}
+                  onClick={() => addQuantity(item.id, orderId, item.price)}
                 >
                   Add Quantity
                 </button>

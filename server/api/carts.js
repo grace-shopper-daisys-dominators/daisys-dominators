@@ -76,6 +76,7 @@ router.put('/:id', async (req, res, next) => {
       currentUser = {}
     }
     const {price, operation, productId} = req.body
+    console.log(req.body)
     const orderId = req.params.id
 
     let cart = await Cart.findOne({
