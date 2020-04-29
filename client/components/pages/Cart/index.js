@@ -7,7 +7,9 @@ import {
   subtractQuantityFromServer,
   addQuantityToServer,
   fetchCartFromLocalStorage,
-  removeItemFromStorage
+  removeItemFromStorage,
+  addQuantityToStorage,
+  subtractQuantityFromStorage
 } from '../../../store/cart'
 import SingleCartItem from '../../singleCartItem'
 
@@ -46,8 +48,8 @@ export class Cart extends React.Component {
           <SingleCartItem
             items={items}
             removeItem={removeItem}
-            subQuantity={null}
-            addQuantity={null}
+            subQuantity={subQuantity}
+            addQuantity={addQuantity}
             orderId={null}
           />
         )}
@@ -85,12 +87,21 @@ const mapDispatch = dispatch => {
       }
     },
 
-    subQuantity: (itemId, orderId, price) =>
-      dispatch(subtractQuantityFromServer(itemId, orderId, price)),
+    subQuantity: (itemId, orderId, price) => {
+      if (orderId) {
+        return dispatch(subtractQuantityFromServer(itemId, orderId, price))
+      } else {
+        return dispatch(subtractQuantityFromStorage(itemId))
+      }
+    },
 
-    addQuantity: (itemId, orderId, price) =>
-      dispatch(addQuantityToServer(itemId, orderId, price)),
-
+    addQuantity: (itemId, orderId, price) => {
+      if (orderId) {
+        return dispatch(addQuantityToServer(itemId, orderId, price))
+      } else {
+        return dispatch(addQuantityToStorage(itemId))
+      }
+    },
     getItemsFromLocalStorage: () => dispatch(fetchCartFromLocalStorage())
   }
 }

@@ -2,7 +2,9 @@ import axios from 'axios'
 import {
   addToLocalStorage,
   removeFromLocalStorage,
-  getTotal
+  getTotal,
+  addQuantityToLocalStorage,
+  removeQuantityToLocalStorage
 } from './localStorage'
 
 const GET_CART = 'GET_CART'
@@ -159,6 +161,37 @@ export const subtractQuantityFromServer = (productId, orderId, price) => {
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T SUBTRACT QUANTITY FROM DATABASE")
+    }
+  }
+}
+
+export const subtractQuantityFromStorage = productId => {
+  return dispatch => {
+    try {
+      const bool = removeQuantityToLocalStorage(productId)
+      if (bool) {
+        console.log('Should be true -->', bool)
+        const total = getTotal()
+        dispatch(subtractQuantity(productId, total))
+      } else {
+        console.log('Should be false -->', bool)
+        const total = getTotal()
+        dispatch(removeItem(productId, total))
+      }
+    } catch (err) {
+      console.log(err, "COULDN'T SUBTRACT QUANTITY FROM DATABASE")
+    }
+  }
+}
+
+export const addQuantityToStorage = productId => {
+  return dispatch => {
+    try {
+      addQuantityToLocalStorage(productId)
+      const total = getTotal()
+      dispatch(addQuantity(productId, total))
+    } catch (err) {
+      console.log(err, "COULDN'T ADD QUANTITY FROM LOCALSTORAGE")
     }
   }
 }

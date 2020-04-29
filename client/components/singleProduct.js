@@ -5,7 +5,9 @@ import {getSingleProduct} from '../store/singleProduct.js'
 import {
   addItemToServer,
   fetchCartFromServer,
-  addQuantityToServer
+  addQuantityToServer,
+  addQuantityToStorage,
+  addItemToLocalStorage
 } from '../store/cart'
 import {addToLocalStorage} from '../store/localStorage'
 
@@ -35,7 +37,15 @@ export class SingleProduct extends Component {
 
   isNotLoggedIn = () => {
     const currProduct = this.props.product
-    addToLocalStorage(currProduct)
+    const {items, addQuantity, addToCart} = this.props
+    console.log('items before add', items)
+    let existedItem = items.find(item => item.id === currProduct.id)
+    if (existedItem) {
+      addQuantity(currProduct.id)
+    } else {
+      addToCart(currProduct)
+    }
+    console.log('items after add', items)
   }
 
   //NEED HELPER FUNC FOR GUEST STILL USING LOCAL STORAGE
@@ -101,10 +111,20 @@ const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
   getAllItems: (userId, orderId) =>
     dispatch(fetchCartFromServer(userId, orderId)),
-  addToCart: (product, productId, orderId, price) =>
-    dispatch(addItemToServer(product, productId, orderId, price)), //product is being sent back so that thunk so that it can be added to state without getting from backend route
-  addQuantity: (productId, orderId, price) =>
-    dispatch(addQuantityToServer(productId, orderId, price))
+  addToCart: (product, productId, orderId, price) => {
+    if (orderId) {
+      return dispatch(addItemToServer(product, productId, orderId, price))
+    } else {
+      return dispatch(addItemToLocalStorage(product))
+    }
+  }, //product is being sent back so that thunk so that it can be added to state without getting from backend route
+  addQuantity: (itemId, orderId, price) => {
+    if (orderId) {
+      return dispatch(addQuantityToServer(itemId, orderId, price))
+    } else {
+      return dispatch(addQuantityToStorage(itemId))
+    }
+  }
 })
 
 export default connect(mapState, mapDispatch)(SingleProduct)
