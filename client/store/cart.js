@@ -54,6 +54,7 @@ export const fetchCartFromServer = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/orders/me/current')
+      console.log(data, 'IM BACKEND DATA')
       dispatch(getCart(data[0].products))
       //whats being received from the backend
     } catch (err) {

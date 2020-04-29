@@ -24,6 +24,7 @@ export class Cart extends React.Component {
       orderId
     } = this.props
 
+    console.log(total, 'IM TOTAL')
     return (
       <div>
         <h2>Cart</h2>
