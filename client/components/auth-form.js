@@ -19,6 +19,7 @@ const AuthForm = props => {
               error.response && <div id="err-msg"> {error.response.data} </div>}
           </div>
           <form onSubmit={handleSubmit} name={name}>
+            <h1 id="form-title">LOG IN</h1>
             <div>
               <input name="email" type="text" placeholder="Email" required />
             </div>
@@ -45,6 +46,7 @@ const AuthForm = props => {
       ) : (
         <div className="form-container">
           <form onSubmit={handleSubmit} name={name}>
+            <h1 id="form-title">SIGN UP</h1>
             <div>
               <input
                 name="firstName"
