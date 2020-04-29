@@ -48,6 +48,7 @@ export class UpdateProductForm extends Component {
     return (
       <div className="product-form-container">
         <form onSubmit={e => this.handleEdit(e, wine.id)}>
+          <h1 id="form-title">UPDATE PRODUCT</h1>
           <div>
             <input
               type="text"

@@ -3,6 +3,10 @@
   flex-direction: column;
   margin-top: 60px;
 }
+#form-title {
+  color: #db675e;
+  font-size: 25px;
+}
 
 .product-form-container form div input[type='text'],
 input[type='password'],

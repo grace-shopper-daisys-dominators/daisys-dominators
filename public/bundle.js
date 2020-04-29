@@ -638,7 +638,9 @@ var NewProductForm = /*#__PURE__*/function (_Component) {
         onSubmit: function onSubmit(e) {
           return _this2.handleSubmit(e);
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        id: "form-title"
+      }, "ADD NEW PRODUCT"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "name",
         value: this.state.name,
@@ -1869,7 +1871,9 @@ var UpdateProductForm = /*#__PURE__*/function (_Component) {
         onSubmit: function onSubmit(e) {
           return _this2.handleEdit(e, wine.id);
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        id: "form-title"
+      }, "UPDATE PRODUCT"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "updatedName",
         value: this.state.updatedName,
@@ -18086,7 +18090,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".product-form-container form {\n  display: flex;\n  flex-direction: column;\n  margin-top: 60px;\n}\n\n.product-form-container form div input[type='text'],\ninput[type='password'],\ninput[type='email'],\ninput[type='number'] {\n  border-radius: 5px;\n  background: white;\n  border: none;\n  padding: 15px;\n}\ntextarea {\n  border-radius: 5px;\n  background: white;\n  border: none;\n  padding: 10px;\n}\n\n.product-form-container form div input::placeholder,\ntextarea::placeholder {\n  font-size: 15px;\n  color: #1b2631;\n}\n\n#add-product-btn,\n#edit-product-btn {\n  background-color: #1d8348;\n  padding: 10px 20px 10px 20px;\n  border: none;\n  border-radius: 5px;\n  text-decoration: none;\n  color: white;\n  cursor: pointer;\n}\n\n#add-product-btn:hover,\n#edit-product-btn:hover {\n  opacity: 0.6;\n}\n\n/** for future error msgs*/\n#err-msg {\n  color: red;\n  font-size: 10px;\n}\n", ""]);
+exports.push([module.i, ".product-form-container form {\n  display: flex;\n  flex-direction: column;\n  margin-top: 60px;\n}\n#form-title {\n  color: #db675e;\n  font-size: 25px;\n}\n\n.product-form-container form div input[type='text'],\ninput[type='password'],\ninput[type='email'],\ninput[type='number'] {\n  border-radius: 5px;\n  background: white;\n  border: none;\n  padding: 15px;\n}\ntextarea {\n  border-radius: 5px;\n  background: white;\n  border: none;\n  padding: 10px;\n}\n\n.product-form-container form div input::placeholder,\ntextarea::placeholder {\n  font-size: 15px;\n  color: #1b2631;\n}\n\n#add-product-btn,\n#edit-product-btn {\n  background-color: #1d8348;\n  padding: 10px 20px 10px 20px;\n  border: none;\n  border-radius: 5px;\n  text-decoration: none;\n  color: white;\n  cursor: pointer;\n}\n\n#add-product-btn:hover,\n#edit-product-btn:hover {\n  opacity: 0.6;\n}\n\n/** for future error msgs*/\n#err-msg {\n  color: red;\n  font-size: 10px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 

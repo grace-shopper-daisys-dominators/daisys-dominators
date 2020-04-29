@@ -58,6 +58,7 @@ export class NewProductForm extends Component {
     return (
       <div className="product-form-container">
         <form onSubmit={e => this.handleSubmit(e)}>
+          <h1 id="form-title">ADD NEW PRODUCT</h1>
           <div>
             <input
               type="text"
