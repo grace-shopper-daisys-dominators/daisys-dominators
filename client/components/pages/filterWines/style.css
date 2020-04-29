@@ -55,6 +55,7 @@
 
 #view-more-btn:hover {
   color: white;
+  opacity: 0.9;
 }
 
 #delete-btn {

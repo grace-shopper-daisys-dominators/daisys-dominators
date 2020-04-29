@@ -98,20 +98,22 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-content: flex-start;
 }
 
 .wine-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 20px;
 }
 
 #wine-img-container {
   background-color: white;
   margin: 20px;
   border-radius: 50%;
-  width: 300px;
-  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
   padding: 50px;
 }
 
@@ -147,6 +149,7 @@ body {
 
 #view-more-btn:hover {
   color: white;
+  opacity: 0.9;
 }
 
 #delete-btn {
