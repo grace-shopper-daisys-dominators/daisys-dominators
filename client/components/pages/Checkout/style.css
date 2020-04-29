@@ -1,0 +1,8 @@
+#checkout {
+  display: flex;
+  justify-content: center;
+}
+
+#submitOrder {
+  width: 90%;
+}
