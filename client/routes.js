@@ -5,15 +5,15 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import SingleProduct from './components/singleProduct'
-//import HomePage from './components/pages/HomePage'
+
 import Cart from './components/pages/Cart'
 
 import HomePage from './components/pages/homePage/index.js'
 import AllUsers from './components/pages/allUsers/AllUsers'
 import SingleUser from './components/pages/singleUser/SingleUser'
-import RedWines from './components/pages/redWines'
-import WhiteWines from './components/pages/whiteWines'
-import RoseWines from './components/pages/roseWines'
+import RedWines from './components/pages/filterWines/redWines'
+import WhiteWines from './components/pages/filterWines/whiteWines'
+import RoseWines from './components/pages/filterWines/roseWines'
 /**
  * COMPONENT
  */

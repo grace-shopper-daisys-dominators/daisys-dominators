@@ -1,41 +1,30 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {updateWine} from '../store/allWines'
-import {getSingleProduct} from '../store/singleProduct'
+import {updateWine} from '../store/singleProduct.js'
+import './productForm.css'
 
 export class UpdateProductForm extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      updatedName: '',
-      updatedImageURL: '',
-      updatedColor: '',
-      updatedRegion: '',
-      updatedPrice: '',
-      updatedSize: '',
-      updatedDescription: '',
-      updatedYear: '',
-      updatedRating: ''
+      updatedName: props.wine.name,
+      updatedImageURL: props.wine.imageURL,
+      updatedColor: props.wine.color,
+      updatedRegion: props.wine.region,
+      updatedPrice: props.wine.price,
+      updatedSize: props.wine.size,
+      updatedDescription: props.wine.description,
+      updatedYear: props.wine.year,
+      updatedRating: props.wine.rating
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleUpdate = this.handleEdit.bind(this)
   }
 
-  componentDidMount() {
-    this.props.getProduct()
-  }
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
-      [e.target.imageURL]: e.target.value,
-      [e.target.color]: e.target.value,
-      [e.target.region]: e.target.value,
-      [e.target.price]: e.target.value,
-      [e.target.size]: e.target.value,
-      [e.target.description]: e.target.value,
-      [e.target.year]: e.target.value,
-      [e.target.rating]: e.target.rating
+      [e.target.name]: e.target.value
     })
   }
 
@@ -56,83 +45,96 @@ export class UpdateProductForm extends Component {
   }
   render() {
     const {wine} = this.props
-
     return (
-      <div>
+      <div className="product-form-container">
         <form onSubmit={e => this.handleEdit(e, wine.id)}>
-          <input
-            type="text"
-            name="updatedName"
-            value={this.state.updatedName}
-            placeholder="wine name"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="updatedImageURL"
-            value={this.state.updatedImageURL}
-            placeholder="Image URL"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="updatedColor"
-            value={this.state.updatedColor}
-            placeholder="Color"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="updatedRegion"
-            value={this.state.updatedRegion}
-            placeholder="Region"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="number"
-            name="updatedPrice"
-            value={this.state.updatedPrice}
-            placeholder="Price"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="number"
-            name="updatedSize"
-            value={this.state.updatedSize}
-            placeholder="size"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="updatedDescription"
-            value={this.state.updatedDescription}
-            placeholder="description"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="text"
-            name="updatedYear"
-            value={this.state.updatedYear}
-            placeholder="year"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <input
-            type="number"
-            name="updatedRating"
-            value={this.state.updatedRating}
-            placeholder="rating"
-            onChange={e => this.handleChange(e)}
-          />
-          <br /> <br />
-          <button type="submit">Edit Info</button>
+          <h1 id="form-title">UPDATE PRODUCT</h1>
+          <div>
+            <input
+              type="text"
+              name="updatedName"
+              value={this.state.updatedName}
+              placeholder="wine name"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="updatedImageURL"
+              value={this.state.updatedImageURL}
+              placeholder="Image URL"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="updatedColor"
+              value={this.state.updatedColor}
+              placeholder="Color"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="updatedRegion"
+              value={this.state.updatedRegion}
+              placeholder="Region"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              name="updatedPrice"
+              value={this.state.updatedPrice}
+              placeholder="Price"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              name="updatedSize"
+              value={this.state.updatedSize}
+              placeholder="size"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="updatedYear"
+              value={this.state.updatedYear}
+              placeholder="year"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              name="updatedRating"
+              value={this.state.updatedRating}
+              placeholder="rating"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <textarea
+              type="text"
+              name="updatedDescription"
+              value={this.state.updatedDescription}
+              placeholder="description"
+              onChange={e => this.handleChange(e)}
+            />
+          </div>
+          <div>
+            <button id="edit-product-btn" type="submit">
+              Update product
+            </button>
+          </div>
         </form>
       </div>
     )
@@ -146,8 +148,8 @@ const mapState = state => {
 }
 const mapDispatch = dispatch => {
   return {
-    handleUpdate: wineToUpdateInfo => dispatch(updateWine(wineToUpdateInfo)),
-    getProduct: () => dispatch(getSingleProduct())
+    handleUpdate: (wineId, wineToUpdateInfo) =>
+      dispatch(updateWine(wineId, wineToUpdateInfo))
   }
 }
 

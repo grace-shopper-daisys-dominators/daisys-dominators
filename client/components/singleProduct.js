@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/singleProduct.js'
-// import UpdateProductForm from '../components/updateProductForm'
+import UpdateProductForm from '../components/updateProductForm'
 import {addToCart} from '../store/cart'
 import {addToLocalStorage} from '../store/localStorage'
+import './singleProduct.css'
 
 export class SingleProduct extends Component {
   componentDidMount() {
@@ -11,7 +12,7 @@ export class SingleProduct extends Component {
   }
 
   handleClick = () => {
-    const currProduct = this.props.product
+    const currProduct = this.props
 
     if (this.props.user.email) {
       this.props.addToCart(currProduct.id)
@@ -31,28 +32,52 @@ export class SingleProduct extends Component {
       year,
       rating
     } = this.props.product
+    const {isAdmin} = this.props.user
     return (
-      <div>
-        <div>
-          <img src={imageURL} />
+      <div className="single-product-container">
+        <div className="product-inner-container">
+          <div id="img-container">
+            <img src={imageURL} />
+          </div>
+          <div id="product-details">
+            <ul>
+              <li id="wine-name">{name}</li>
+              <li>
+                <b>Rating:</b> {rating}
+              </li>
+              <li>
+                <b>Price:</b> {price}
+              </li>
+              <li>
+                <b>Description:</b> {description}
+              </li>
+              <li>
+                <b>Type:</b> {color}
+              </li>
+              <li>
+                <b>Region:</b> {region}
+              </li>
+              <li>
+                <b>Size:</b> {size}
+              </li>
+              <li>
+                <b>Year:</b> {year}
+              </li>
+              <li>
+                <button
+                  id="add-to-cart-btn"
+                  type="submit"
+                  onClick={() => this.handleClick()}
+                >
+                  Add to cart
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div />
         </div>
         <div>
-          <h1>{name}</h1>
-          <p>Rating: {rating}</p>
-          <hr />
-          <p>Price: {price}</p>
-          <p>Description: {description}</p>
-          <p>Type: {color}</p>
-          <p>Region: {region}</p>
-          <p>Size: {size}</p>
-          <p>Year: {year}</p>
-        </div>
-        {/** TODO: WORK ON UPDATE FORM BELOW */}
-        {/*<UpdateProductForm />*/}
-        <div>
-          <button type="submit" onClick={() => this.handleClick()}>
-            Add to cart
-          </button>
+          {isAdmin ? <UpdateProductForm wine={this.props.product} /> : ''}
         </div>
       </div>
     )

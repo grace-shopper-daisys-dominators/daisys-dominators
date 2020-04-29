@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import AddNewProduct from './newProductForm'
-
+import './user-home.css'
 /**
  * COMPONENT
  */
@@ -11,7 +11,7 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {firstName} !</h3>
+      <h3 id="welcome-user-msg">Welcome, {firstName}!</h3>
       {isAdmin ? (
         <div>
           <AddNewProduct />

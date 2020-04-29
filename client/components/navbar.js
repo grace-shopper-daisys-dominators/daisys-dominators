@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import './navbar.css'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <div>
@@ -26,68 +27,83 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
     </div>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="links-container">
           <Link to="/home">
-            <span className="home" style={{display: 'block'}}>
+            <span className="nav-links" style={{display: 'block'}}>
               HOME
             </span>
           </Link>
           <Link to="/">
-            <span className="all-wines" style={{display: 'block'}}>
+            <span className="nav-links" style={{display: 'block'}}>
               ALL WINES
             </span>
           </Link>
           <Link to="/redwines">
-            <span className="red" style={{display: 'block'}}>
-              RED WINE
+            <span className="nav-links" style={{display: 'block'}}>
+              RED WINES
             </span>
           </Link>
           <Link to="/whitewines">
-            <span className="white" style={{display: 'block'}}>
-              WHITE WINE
+            <span className="nav-links" style={{display: 'block'}}>
+              WHITE WINES
             </span>
           </Link>
           <Link to="/rosewines">
-            <span className="rose" style={{display: 'block'}}>
+            <span className="nav-links" style={{display: 'block'}}>
               ROSÉ
             </span>
           </Link>
-          {isAdmin ? <Link to="/users">USERS</Link> : ''}
-          <a href="#" onClick={handleClick}>
+          {isAdmin ? (
+            <Link className="nav-links" to="/users">
+              USERS
+            </Link>
+          ) : (
+            ''
+          )}
+          <a className="nav-links" href="#" onClick={handleClick}>
             LOGOUT
           </a>
-          <Link to="/orders">ORDER HISTORY</Link>
-          <Link to="/cart">CART</Link>
+          <Link className="nav-links" to="/orders">
+            ORDER HISTORY
+          </Link>
+          <Link className="nav-links" to="/cart">
+            CART
+          </Link>
         </div>
       ) : (
-        <div>
+        <div className="links-container">
           <Link to="/">
-            <span className="all-wines" style={{display: 'block'}}>
+            <span className="nav-links" style={{display: 'block'}}>
               ALL WINES
             </span>
           </Link>
           <Link to="/redwines">
-            <span className="red" style={{display: 'block'}}>
-              RED WINE
+            <span className="nav-links" style={{display: 'block'}}>
+              RED WINES
             </span>
           </Link>
           <Link to="/whitewines">
-            <span className="white" style={{display: 'block'}}>
-              WHITE WINE
+            <span className="nav-links" style={{display: 'block'}}>
+              WHITE WINES
             </span>
           </Link>
           <Link to="/rosewines">
-            <span className="rose" style={{display: 'block'}}>
+            <span className="nav-links" style={{display: 'block'}}>
               ROSÉ
             </span>
           </Link>
-          <Link to="/login">LOG IN</Link>
-          <Link to="/signup">SIGN UP</Link>
-          <Link to="/cart">CART</Link>
+          <Link className="nav-links" to="/login">
+            LOG IN
+          </Link>
+          <Link className="nav-links" to="/signup">
+            SIGN UP
+          </Link>
+          <Link className="nav-links" to="/cart">
+            CART
+          </Link>
         </div>
       )}
     </nav>
-    <hr />
   </div>
 )
 

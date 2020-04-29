@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {addNewUser} from '../store/allUsers'
-
+import {addNewUser} from '../store/user.js'
+import './auth-form.css'
 /**
  * COMPONENT
  */
@@ -11,62 +11,78 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <div className="form-container">
       {name === 'login' ? (
         <div>
+          <div>
+            {error &&
+              error.response && <div id="err-msg"> {error.response.data} </div>}
+          </div>
           <form onSubmit={handleSubmit} name={name}>
+            <h1 id="form-title">LOG IN</h1>
             <div>
-              <label htmlFor="email">
-                <small>Email</small>
-              </label>
-              <input name="email" type="text" />
+              <input name="email" type="text" placeholder="Email" required />
             </div>
             <div>
-              <label htmlFor="password">
-                <small>Password</small>
-              </label>
-              <input name="password" type="password" />
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                required
+              />
             </div>
             <div>
-              <button type="submit">{displayName}</button>
+              <button id="login-btn" type="submit">
+                {displayName}
+              </button>
             </div>
-            {error && error.response && <div> {error.response.data} </div>}
+            <div>
+              <a className="google-login-btn" href="/auth/google">
+                {displayName} with Google
+              </a>
+            </div>
           </form>
-          <a href="/auth/google">{displayName} with Google</a>
         </div>
       ) : (
-        <div>
+        <div className="form-container">
           <form onSubmit={handleSubmit} name={name}>
+            <h1 id="form-title">SIGN UP</h1>
             <div>
-              <label htmlFor="firstName">
-                <small>First name</small>
-              </label>
-              <input name="firstName" type="text" />
+              <input
+                name="firstName"
+                type="text"
+                placeholder="First name"
+                required
+              />
             </div>
             <div>
-              <label htmlFor="lastName">
-                <small>Last name</small>
-              </label>
-              <input name="lastName" type="text" />
+              <input
+                name="lastName"
+                type="text"
+                placeholder="Last name"
+                required
+              />
             </div>
             <div>
-              <label htmlFor="email">
-                <small>Email</small>
-              </label>
-              <input name="email" type="text" />
+              <input name="email" type="text" placeholder="Email" required />
             </div>
             <div>
-              <label htmlFor="password">
-                <small>Password</small>
-              </label>
-              <input name="password" type="password" />
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                required
+              />
             </div>
             <div>
-              <button type="submit">{displayName}</button>
+              <button id="signup-btn" type="submit">
+                {displayName}
+              </button>
             </div>
-            {error && error.response && <div> {error.response.data} </div>}
           </form>
-          <a href="/auth/google">{displayName} with Google</a>
+          <a className="google-login-btn" href="/auth/google">
+            {displayName} with Google
+          </a>
         </div>
       )}
     </div>
@@ -118,7 +134,6 @@ const mapSignUpDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       dispatch(addNewUser(firstName, lastName, email, password, formName))
-      dispatch(auth(email, password, 'login'))
     }
   }
 }
