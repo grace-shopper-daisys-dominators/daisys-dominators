@@ -78,7 +78,6 @@ export const fetchCartFromServer = userId => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/orders/me/current')
-      console.log(data, 'IM BACKEND DATA')
       let total = 0
       if (data[0].products.length > 0) {
         total = data[0].products[0].cart.total
@@ -95,7 +94,6 @@ export const addItemToLocalStorage = product => {
   return dispatch => {
     try {
       const cart = addToLocalStorage(product)
-      console.log(cart, 'HELLO IM local DATA')
       dispatch(addToCart(product, product.price))
     } catch (err) {
       console.log(err, "COULDN'T ADD ITEM ")
@@ -125,8 +123,6 @@ export const removeItemFromStorage = productId => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/products/${productId}`)
-      console.log('product id=====>', productId)
-      console.log('data=====>', data)
       const newCart = removeFromLocalStorage(data)
       const total = getTotal()
       dispatch(removeItem(data.id, total))
@@ -142,8 +138,12 @@ export const removeItemFromServer = (productId, price) => {
     try {
       let order = await axios.get('/api/orders/me/current')
       let orderId = order.data[0].id
-      const {data} = await axios.delete(`/api/cart/${orderId}/${productId}`)
-      dispatch(removeItem(productId, data.total))
+      let item = order.data[0].products.find(product => {
+        return product.id === productId
+      })
+      let newPrice = item.cart.price
+      await axios.delete(`/api/cart/${orderId}/${productId}`)
+      dispatch(removeItem(productId, item.cart.total - newPrice))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T REMOVE ITEM FROM DATABASE")
@@ -176,11 +176,9 @@ export const subtractQuantityFromStorage = productId => {
     try {
       const bool = removeQuantityToLocalStorage(productId)
       if (bool) {
-        console.log('Should be true -->', bool)
         const total = getTotal()
         dispatch(subtractQuantity(productId, total))
       } else {
-        console.log('Should be false -->', bool)
         const total = getTotal()
         dispatch(removeItem(productId, total))
       }
@@ -207,7 +205,6 @@ export const addQuantityToServer = (productId, price) => {
     try {
       let order = await axios.get('/api/orders/me/current')
       let orderId = order.data[0].id
-      console.log(order, 'order')
       let operation = 'add'
       const {data} = await axios.put(`/api/cart/${orderId}`, {
         price,

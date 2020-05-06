@@ -125,7 +125,12 @@ router.delete('/:orderId/:productId', async (req, res, next) => {
       })
       if (deleted > 0) {
         Cart.updateTotal(orderId)
-        res.status(204).send('Item successfully deleted.')
+        let newData = await Cart.findOne({where: {orderId: orderId}})
+        let total = 0
+        if (newData) {
+          total = newData.total
+        }
+        res.send(200)
       } else {
         res.status(304).send('Failed to delete item.')
       }

@@ -21,11 +21,6 @@ export class SingleProduct extends Component {
 
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
-    if (this.props.user.id) {
-      this.props.getAllItems(this.props.user.id)
-    } else {
-      this.props.getAllItems()
-    }
   }
 
   componentDidUpdate(prevProp) {
@@ -43,7 +38,6 @@ export class SingleProduct extends Component {
     const {items, addQuantity} = this.props
     let existedItem = items.find(item => item.id === currProduct.id)
     if (existedItem) {
-      console.log(this.props, 'props in loggedin')
       addQuantity(currProduct.id, currProduct.price)
     } else {
       this.props.addToCart(currProduct, currProduct.id, currProduct.price)
@@ -51,24 +45,20 @@ export class SingleProduct extends Component {
   }
 
   isNotLoggedIn = () => {
-    console.log('Bye!')
     const currProduct = this.props.product
     const {items, addQuantity, addToCart} = this.props
-    console.log('items before add', items)
     let existedItem = items.find(item => item.id === currProduct.id)
     if (existedItem) {
       addQuantity(currProduct.id)
     } else {
       addToCart(currProduct)
     }
-    console.log('items after add', items)
   }
 
   //NEED HELPER FUNC FOR GUEST STILL USING LOCAL STORAGE
 
   handleClick = () => {
     const {user} = this.props
-    console.log('User in handleClick: ', !!user)
     if (user.id) {
       this.isLoggedIn()
     } else {
@@ -146,7 +136,6 @@ export class SingleProduct extends Component {
 }
 
 const mapState = state => {
-  console.log('state mapped:', state)
   return {
     items: state.cart.items,
     product: state.singleProduct,
@@ -158,7 +147,6 @@ const mapState = state => {
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
   getAllItems: userId => {
-    console.log('user id:', userId)
     if (userId) {
       return dispatch(fetchCartFromServer(userId))
     } else {

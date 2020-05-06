@@ -44,7 +44,6 @@ export const removeQuantityToLocalStorage = productId => {
   let currentCart = JSON.parse(localStorage.getItem('cart'))
   let bool
   currentCart.forEach(product => {
-    console.log('Product passed in ', product)
     if (product.id === productId) {
       if (product.quantity - 1 > 0) {
         product.quantity--
@@ -52,11 +51,9 @@ export const removeQuantityToLocalStorage = productId => {
         localStorage.setItem('cart', JSON.stringify(currentCart))
       } else {
         removeFromLocalStorage({id: productId})
-        // console.log("THIS!", JSON.parse(localStorage.getItem('cart')));
         bool = false
       }
     }
   })
   return bool
-  // console.log("New cart -------->", currentCart)
 }

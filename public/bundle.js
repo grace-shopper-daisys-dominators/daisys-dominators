@@ -801,19 +801,13 @@ function (_React$Component) {
   _createClass(Cart, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (this.props.user) {
-        this.props.getUser(this.props.user.id);
-        this.props.getAllItems(this.props.user.id);
-      } else {
-        this.props.getUser();
-        this.props.getAllItems();
-      }
+      this.props.getUser(this.props.user.id);
+      this.props.getAllItems(this.props.user.id);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProp) {
       if (prevProp.user.id !== this.props.user.id) {
-        console.log("New Id:", this.props.user.id);
         this.props.getAllItems(this.props.user.id);
       }
     }
@@ -2086,7 +2080,6 @@ function (_Component) {
       });
 
       if (existedItem) {
-        console.log(_this.props, "props in loggedin");
         addQuantity(currProduct.id, currProduct.price);
       } else {
         _this.props.addToCart(currProduct, currProduct.id, currProduct.price);
@@ -2094,13 +2087,11 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "isNotLoggedIn", function () {
-      console.log('Bye!');
       var currProduct = _this.props.product;
       var _this$props2 = _this.props,
           items = _this$props2.items,
           addQuantity = _this$props2.addQuantity,
           addToCart = _this$props2.addToCart;
-      console.log('items before add', items);
       var existedItem = items.find(function (item) {
         return item.id === currProduct.id;
       });
@@ -2110,13 +2101,10 @@ function (_Component) {
       } else {
         addToCart(currProduct);
       }
-
-      console.log('items after add', items);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
       var user = _this.props.user;
-      console.log("User in handleClick: ", !!user);
 
       if (user.id) {
         _this.isLoggedIn();
@@ -2145,12 +2133,6 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.singleProduct(this.props.match.params.productId);
-
-      if (this.props.user.id) {
-        this.props.getAllItems(this.props.user.id);
-      } else {
-        this.props.getAllItems();
-      }
     }
   }, {
     key: "componentDidUpdate",
@@ -2207,7 +2189,6 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapState = function mapState(state) {
-  console.log("state mapped:", state);
   return {
     items: state.cart.items,
     product: state.singleProduct,
@@ -2222,8 +2203,6 @@ var mapDispatch = function mapDispatch(dispatch) {
       return dispatch(Object(_store_singleProduct_js__WEBPACK_IMPORTED_MODULE_2__["getSingleProduct"])(productId));
     },
     getAllItems: function getAllItems(userId) {
-      console.log("user id:", userId);
-
       if (userId) {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["fetchCartFromServer"])(userId));
       } else {
@@ -3007,13 +2986,7 @@ var getWines = function getWines(wines) {
     type: GET_WINES,
     wines: wines
   };
-}; // const getWines = wines => {
-//   return {
-//     type: GET_RED_WINES,
-//     wines
-//   }
-// }
-
+};
 
 var setNewWine = function setNewWine(newWine) {
   return {
@@ -3095,22 +3068,21 @@ var fetchRedWinesFromServer = function fetchRedWinesFromServer() {
               case 3:
                 _ref4 = _context2.sent;
                 data = _ref4.data;
-                console.log(data, 'FROM ALL WINE');
                 dispatch(getWines(data));
-                _context2.next = 12;
+                _context2.next = 11;
                 break;
 
-              case 9:
-                _context2.prev = 9;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
                 console.log(_context2.t0);
 
-              case 12:
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 9]]);
+        }, _callee2, null, [[0, 8]]);
       }));
 
       return function (_x2) {
@@ -3207,13 +3179,11 @@ function allWinesReducer() {
 
   switch (action.type) {
     case GET_WINES:
-      console.log(state, 'FROM ALL WINE');
       return _objectSpread({}, state, {
         all: action.wines
       });
 
     case GET_RED_WINES:
-      console.log(state, 'FROM ALL WINE');
       return _objectSpread({}, state, {
         all: action.wines
       });
@@ -3366,7 +3336,6 @@ var fetchCartFromServer = function fetchCartFromServer(userId) {
               case 3:
                 _ref2 = _context.sent;
                 data = _ref2.data;
-                console.log(data, 'IM BACKEND DATA');
                 total = 0;
 
                 if (data[0].products.length > 0) {
@@ -3375,20 +3344,20 @@ var fetchCartFromServer = function fetchCartFromServer(userId) {
 
                 dispatch(getCart(data[0].products, total)); //whats being received from the backend
 
-                _context.next = 14;
+                _context.next = 13;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 10:
+                _context.prev = 10;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0, "COULDN'T FETCH CART");
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 11]]);
+        }, _callee, null, [[0, 10]]);
       }));
 
       return function (_x) {
@@ -3401,7 +3370,6 @@ var addItemToLocalStorage = function addItemToLocalStorage(product) {
   return function (dispatch) {
     try {
       var cart = Object(_localStorage__WEBPACK_IMPORTED_MODULE_1__["addToLocalStorage"])(product);
-      console.log(cart, 'HELLO IM local DATA');
       dispatch(addToCart(product, product.price));
     } catch (err) {
       console.log(err, "COULDN'T ADD ITEM ");
@@ -3483,26 +3451,24 @@ var removeItemFromStorage = function removeItemFromStorage(productId) {
               case 3:
                 _ref6 = _context3.sent;
                 data = _ref6.data;
-                console.log('product id=====>', productId);
-                console.log('data=====>', data);
                 newCart = Object(_localStorage__WEBPACK_IMPORTED_MODULE_1__["removeFromLocalStorage"])(data);
                 total = Object(_localStorage__WEBPACK_IMPORTED_MODULE_1__["getTotal"])();
                 dispatch(removeItem(data.id, total)); //whats being received from the backend
 
-                _context3.next = 15;
+                _context3.next = 13;
                 break;
 
-              case 12:
-                _context3.prev = 12;
+              case 10:
+                _context3.prev = 10;
                 _context3.t0 = _context3["catch"](0);
                 console.log(_context3.t0, "COULDN'T REMOVE ITEM FROM local");
 
-              case 15:
+              case 13:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 12]]);
+        }, _callee3, null, [[0, 10]]);
       }));
 
       return function (_x3) {
@@ -3518,8 +3484,7 @@ var removeItemFromServer = function removeItemFromServer(productId, price) {
       var _ref7 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee4(dispatch) {
-        var order, orderId, _ref8, data;
-
+        var order, orderId, item, newPrice;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -3531,13 +3496,15 @@ var removeItemFromServer = function removeItemFromServer(productId, price) {
               case 3:
                 order = _context4.sent;
                 orderId = order.data[0].id;
-                _context4.next = 7;
+                item = order.data[0].products.find(function (product) {
+                  return product.id === productId;
+                });
+                newPrice = item.cart.price;
+                _context4.next = 9;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/cart/".concat(orderId, "/").concat(productId));
 
-              case 7:
-                _ref8 = _context4.sent;
-                data = _ref8.data;
-                dispatch(removeItem(productId, data.total)); //whats being received from the backend
+              case 9:
+                dispatch(removeItem(productId, item.cart.total - newPrice)); //whats being received from the backend
 
                 _context4.next = 15;
                 break;
@@ -3565,10 +3532,10 @@ var subtractQuantityFromServer = function subtractQuantityFromServer(productId, 
   return (
     /*#__PURE__*/
     function () {
-      var _ref9 = _asyncToGenerator(
+      var _ref8 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee5(dispatch) {
-        var order, orderId, operation, _ref10, data;
+        var order, orderId, operation, _ref9, data;
 
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
@@ -3591,8 +3558,8 @@ var subtractQuantityFromServer = function subtractQuantityFromServer(productId, 
                 });
 
               case 8:
-                _ref10 = _context5.sent;
-                data = _ref10.data;
+                _ref9 = _context5.sent;
+                data = _ref9.data;
                 dispatch(subtractQuantity(data)); //whats being received from the backend
 
                 _context5.next = 16;
@@ -3612,7 +3579,7 @@ var subtractQuantityFromServer = function subtractQuantityFromServer(productId, 
       }));
 
       return function (_x5) {
-        return _ref9.apply(this, arguments);
+        return _ref8.apply(this, arguments);
       };
     }()
   );
@@ -3623,12 +3590,9 @@ var subtractQuantityFromStorage = function subtractQuantityFromStorage(productId
       var bool = Object(_localStorage__WEBPACK_IMPORTED_MODULE_1__["removeQuantityToLocalStorage"])(productId);
 
       if (bool) {
-        console.log('Should be true -->', bool);
         var total = Object(_localStorage__WEBPACK_IMPORTED_MODULE_1__["getTotal"])();
         dispatch(subtractQuantity(productId, total));
       } else {
-        console.log('Should be false -->', bool);
-
         var _total = Object(_localStorage__WEBPACK_IMPORTED_MODULE_1__["getTotal"])();
 
         dispatch(removeItem(productId, _total));
@@ -3653,10 +3617,10 @@ var addQuantityToServer = function addQuantityToServer(productId, price) {
   return (
     /*#__PURE__*/
     function () {
-      var _ref11 = _asyncToGenerator(
+      var _ref10 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee6(dispatch) {
-        var order, orderId, operation, _ref12, data;
+        var order, orderId, operation, _ref11, data;
 
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
@@ -3669,9 +3633,8 @@ var addQuantityToServer = function addQuantityToServer(productId, price) {
               case 3:
                 order = _context6.sent;
                 orderId = order.data[0].id;
-                console.log(order, "order");
                 operation = 'add';
-                _context6.next = 9;
+                _context6.next = 8;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/cart/".concat(orderId), {
                   price: price,
                   operation: operation,
@@ -3680,29 +3643,29 @@ var addQuantityToServer = function addQuantityToServer(productId, price) {
 
                 });
 
-              case 9:
-                _ref12 = _context6.sent;
-                data = _ref12.data;
+              case 8:
+                _ref11 = _context6.sent;
+                data = _ref11.data;
                 dispatch(addQuantity(data)); //whats being received from the backend
 
-                _context6.next = 17;
+                _context6.next = 16;
                 break;
 
-              case 14:
-                _context6.prev = 14;
+              case 13:
+                _context6.prev = 13;
                 _context6.t0 = _context6["catch"](0);
                 console.log(_context6.t0, "COULDN'T ADD QUANTITY FROM DATABASE");
 
-              case 17:
+              case 16:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 14]]);
+        }, _callee6, null, [[0, 13]]);
       }));
 
       return function (_x6) {
-        return _ref11.apply(this, arguments);
+        return _ref10.apply(this, arguments);
       };
     }()
   );
@@ -3917,8 +3880,6 @@ var removeQuantityToLocalStorage = function removeQuantityToLocalStorage(product
   var currentCart = JSON.parse(localStorage.getItem('cart'));
   var bool;
   currentCart.forEach(function (product) {
-    console.log('Product passed in ', product);
-
     if (product.id === productId) {
       if (product.quantity - 1 > 0) {
         product.quantity--;
@@ -3927,13 +3888,12 @@ var removeQuantityToLocalStorage = function removeQuantityToLocalStorage(product
       } else {
         removeFromLocalStorage({
           id: productId
-        }); // console.log("THIS!", JSON.parse(localStorage.getItem('cart')));
-
+        });
         bool = false;
       }
     }
   });
-  return bool; // console.log("New cart -------->", currentCart)
+  return bool;
 };
 
 /***/ }),
@@ -4179,21 +4139,20 @@ var me = function me() {
               case 3:
                 res = _context.sent;
                 dispatch(getUser(res.data || defaultUser));
-                console.log(res, 'HELLO IM THE USER DATA');
-                _context.next = 11;
+                _context.next = 10;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 11:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 7]]);
       }));
 
       return function (_x) {
@@ -4278,22 +4237,22 @@ var addNewUser = function addNewUser(firstName, lastName, email, password) {
 
               case 3:
                 res = _context3.sent;
-                dispatch(setNewUser(res.data));
+                // dispatch(setNewUser(res.data))
                 _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/home');
-                _context3.next = 11;
+                _context3.next = 10;
                 break;
 
-              case 8:
-                _context3.prev = 8;
+              case 7:
+                _context3.prev = 7;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0, 'UNABLE TO CREATE USER');
 
-              case 11:
+              case 10:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 8]]);
+        }, _callee3, null, [[0, 7]]);
       }));
 
       return function (_x3) {

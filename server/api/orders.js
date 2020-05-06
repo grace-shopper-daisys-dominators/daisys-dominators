@@ -34,7 +34,7 @@ router.get('/me', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: 0}
+      currentUser = {}
     }
 
     if (currentUser.id) {
@@ -57,7 +57,7 @@ router.get('/:id', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: -1}
+      currentUser = {}
     }
 
     const order = await Order.findByPk(req.params.id, {include: Product})
@@ -82,7 +82,6 @@ router.get('/me/current', async (req, res, next) => {
     }
 
     if (currentUser.id) {
-      console.log(currentUser, 'IM THE CURRENT USER')
       const cart = await Order.findAll({
         where: {status: 'pending', userId: currentUser.id},
         include: Product

@@ -27,7 +27,6 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
-    console.log(res, 'HELLO IM THE USER DATA')
   } catch (err) {
     console.error(err)
   }
@@ -61,7 +60,7 @@ export const addNewUser = (firstName, lastName, email, password) => {
         email,
         password
       })
-      dispatch(setNewUser(res.data))
+      // dispatch(setNewUser(res.data))
       history.push('/home')
     } catch (err) {
       console.error(err, 'UNABLE TO CREATE USER')

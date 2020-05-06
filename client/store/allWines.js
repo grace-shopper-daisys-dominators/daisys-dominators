@@ -11,12 +11,6 @@ const getWines = wines => {
     wines
   }
 }
-// const getWines = wines => {
-//   return {
-//     type: GET_RED_WINES,
-//     wines
-//   }
-// }
 
 const setNewWine = newWine => {
   return {
@@ -49,7 +43,6 @@ export const fetchRedWinesFromServer = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/products')
-      console.log(data, 'FROM ALL WINE')
       dispatch(getWines(data))
     } catch (err) {
       console.log(err)
@@ -82,10 +75,8 @@ export const deleteWine = id => {
 export default function allWinesReducer(state = initialState, action) {
   switch (action.type) {
     case GET_WINES:
-      console.log(state, 'FROM ALL WINE')
       return {...state, all: action.wines}
     case GET_RED_WINES:
-      console.log(state, 'FROM ALL WINE')
       return {...state, all: action.wines}
     case ADD_NEW_WINE:
       return {...state, all: [...state.all, action.newWine]}

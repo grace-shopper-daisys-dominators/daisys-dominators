@@ -17,18 +17,12 @@ import {getTotal} from '../../../store/localStorage'
 import './style.css'
 export class Cart extends React.Component {
   componentDidMount() {
-    if (this.props.user) {
-      this.props.getUser(this.props.user.id)
-      this.props.getAllItems(this.props.user.id)
-    } else {
-      this.props.getUser()
-      this.props.getAllItems()
-    }
+    this.props.getUser(this.props.user.id)
+    this.props.getAllItems(this.props.user.id)
   }
 
   componentDidUpdate(prevProp) {
     if (prevProp.user.id !== this.props.user.id) {
-      console.log('New Id:', this.props.user.id)
       this.props.getAllItems(this.props.user.id)
     }
   }
