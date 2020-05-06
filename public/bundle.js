@@ -1884,14 +1884,102 @@ module.exports = exported;
 
 /***/ }),
 
+/***/ "./client/components/singleCartItem.css":
+/*!**********************************************!*\
+  !*** ./client/components/singleCartItem.css ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!./singleCartItem.css */ "./node_modules/css-loader/dist/cjs.js!./client/components/singleCartItem.css");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
 /***/ "./client/components/singleCartItem.js":
 /*!*********************************************!*\
   !*** ./client/components/singleCartItem.js ***!
   \*********************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/sajking/JS/GH_2003/Projects/daisys-dominators/client/components/singleCartItem.js: Unexpected token (3:0)\n\n\u001b[0m \u001b[90m 1 | \u001b[39m\u001b[36mimport\u001b[39m \u001b[33mReact\u001b[39m from \u001b[32m'react'\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 2 | \u001b[39m\u001b[36mimport\u001b[39m {connect} from \u001b[32m'react-redux'\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 3 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m   | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 4 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 5 | \u001b[39m\u001b[36mconst\u001b[39m singleCartItem \u001b[33m=\u001b[39m props \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 6 | \u001b[39m  \u001b[36mconst\u001b[39m {removeItem\u001b[33m,\u001b[39m subQuantity\u001b[33m,\u001b[39m addQuantity\u001b[33m,\u001b[39m orderId} \u001b[33m=\u001b[39m props\u001b[0m\n    at Object.raise (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:6325:17)\n    at Object.unexpected (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:7642:16)\n    at Object.parseExprAtom (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:8841:20)\n    at Object.parseExprAtom (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:3601:20)\n    at Object.parseExprSubscripts (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:8412:23)\n    at Object.parseMaybeUnary (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:8392:21)\n    at Object.parseExprOps (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:8267:23)\n    at Object.parseMaybeConditional (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:8240:23)\n    at Object.parseMaybeAssign (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:8187:21)\n    at Object.parseExpression (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:8135:23)\n    at Object.parseStatementContent (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:9958:23)\n    at Object.parseStatement (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:9829:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:10405:25)\n    at Object.parseBlockBody (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:10392:10)\n    at Object.parseTopLevel (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:9758:10)\n    at Object.parse (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:11270:17)\n    at parse (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/parser/lib/index.js:11306:38)\n    at parser (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\n    at runSync (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at /Users/sajking/JS/GH_2003/Projects/daisys-dominators/node_modules/@babel/core/lib/transform.js:34:34\n    at processTicksAndRejections (internal/process/task_queues.js:79:11)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _singleCartItem_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./singleCartItem.css */ "./client/components/singleCartItem.css");
+/* harmony import */ var _singleCartItem_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_singleCartItem_css__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var singleCartItem = function singleCartItem(props) {
+  var items = props.items,
+      removeItem = props.removeItem,
+      subQuantity = props.subQuantity,
+      addQuantity = props.addQuantity,
+      orderId = props.orderId;
+  var currQuantity;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, items ? items.map(function (item) {
+    item.cart ? currQuantity = item.cart.quantity : currQuantity = null;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cart-container",
+      key: item.id
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cart-details"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: item.imageURL
+    }), ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Name:"), " ", item.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Color:"), " ", item.color), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Price:"), " $", item.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Size:"), " ", item.size, " ml", ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cart-btns"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      id: "minus-quantity-btn",
+      type: "submit",
+      onClick: function onClick() {
+        subQuantity(item.id, orderId, item.price);
+      }
+    }, "-")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      id: "plus-quantity-btn",
+      type: "submit",
+      onClick: function onClick() {
+        addQuantity(item.id, orderId, item.price);
+        currQuantity++;
+      }
+    }, "+")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      id: "delete-item-btn",
+      type: "submit",
+      onClick: function onClick() {
+        return removeItem(item.id, orderId);
+      }
+    }, "Delete item"))))));
+  }) : '');
+};
+
+var mapState = function mapState(state) {
+  return {// items: state.cart.items
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState)(singleCartItem));
 
 /***/ }),
 
@@ -18225,6 +18313,24 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".product-form-container form {\n  display: flex;\n  flex-direction: column;\n  margin-top: 60px;\n}\n#form-title {\n  color: #db675e;\n  font-size: 25px;\n}\n\n.product-form-container form div input[type='text'],\ninput[type='password'],\ninput[type='email'],\ninput[type='number'] {\n  border-radius: 5px;\n  background: white;\n  border: none;\n  padding: 15px;\n}\ntextarea {\n  border-radius: 5px;\n  background: white;\n  border: none;\n  padding: 10px;\n}\n\n.product-form-container form div input::placeholder,\ntextarea::placeholder {\n  font-size: 15px;\n  color: #1b2631;\n}\n\n#add-product-btn,\n#edit-product-btn {\n  background-color: #1d8348;\n  padding: 10px 20px 10px 20px;\n  border: none;\n  border-radius: 5px;\n  text-decoration: none;\n  color: white;\n  cursor: pointer;\n}\n\n#add-product-btn:hover,\n#edit-product-btn:hover {\n  opacity: 0.6;\n}\n\n/** for future error msgs*/\n#err-msg {\n  color: red;\n  font-size: 10px;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./client/components/singleCartItem.css":
+/*!************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./client/components/singleCartItem.css ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".cart-container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n\n.cart-details {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  background-color: white;\n  width: 400px;\n  margin: 20px;\n  padding: 20px;\n  border-radius: 20px;\n}\n.cart-details div {\n  text-align: left;\n}\n.cart-details img {\n  max-width: 100px;\n  padding: 20px;\n}\n.cart-btns {\n  display: flex;\n  flex-direction: row;\n}\n.cart-btns div {\n  margin: 5px;\n}\n\n#delete-item-btn,\n#minus-quantity-btn,\n#plus-quantity-btn {\n  border: none;\n  border-radius: 5px;\n  padding: 15px;\n  color: white;\n}\n\n#delete-item-btn {\n  background-color: gray;\n  font-size: 14px;\n}\n#minus-quantity-btn {\n  background-color: red;\n  font-size: 20px;\n}\n\n#plus-quantity-btn {\n  background-color: green;\n  font-size: 20px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -48031,7 +48137,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

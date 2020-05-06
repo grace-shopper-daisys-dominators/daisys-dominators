@@ -36,11 +36,6 @@ router.post('/', async (req, res, next) => {
 
     const {userId} = await Order.findByPk(orderId)
 
-    // let total = await Cart.findOne({
-    //   where: {orderId: orderId}
-    // })
-    // total = total.total
-
     if (currentUser.id === userId) {
       const newCart = await Cart.create({
         productId: productId,
@@ -76,7 +71,7 @@ router.put('/:id', async (req, res, next) => {
       currentUser = {}
     }
     const {price, operation, productId} = req.body
-    console.log(req.body)
+
     const orderId = req.params.id
 
     let cart = await Cart.findOne({

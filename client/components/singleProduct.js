@@ -30,6 +30,7 @@ export class SingleProduct extends Component {
   }
 
   isLoggedIn = () => {
+    console.log('Hi!')
     const currProduct = this.props.product
     const {items, orderId, addQuantity} = this.props
     let existedItem = items.find(item => item.id === currProduct.id)
@@ -46,6 +47,7 @@ export class SingleProduct extends Component {
   }
 
   isNotLoggedIn = () => {
+    console.log('Bye!')
     const currProduct = this.props.product
     const {items, addQuantity, addToCart} = this.props
     console.log('items before add', items)
