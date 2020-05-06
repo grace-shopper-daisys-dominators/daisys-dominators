@@ -103,9 +103,11 @@ export const addItemToLocalStorage = product => {
   }
 }
 
-export const addItemToServer = (product, productId, orderId, price) => {
+export const addItemToServer = (product, productId, price) => {
   return async dispatch => {
     try {
+      let order = await axios.get('/api/orders/me/current')
+      let orderId = order.data[0].id
       const {data} = await axios.post('/api/cart', {
         productId,
         orderId,
@@ -135,9 +137,11 @@ export const removeItemFromStorage = productId => {
   }
 }
 
-export const removeItemFromServer = (productId, orderId) => {
+export const removeItemFromServer = (productId, price) => {
   return async dispatch => {
     try {
+      let order = await axios.get('/api/orders/me/current')
+      let orderId = order.data[0].id
       const {data} = await axios.delete(`/api/cart/${orderId}/${productId}`)
       dispatch(removeItem(productId, data.total))
       //whats being received from the backend
@@ -147,9 +151,11 @@ export const removeItemFromServer = (productId, orderId) => {
   }
 }
 
-export const subtractQuantityFromServer = (productId, orderId, price) => {
+export const subtractQuantityFromServer = (productId, price) => {
   return async dispatch => {
     try {
+      let order = await axios.get('/api/orders/me/current')
+      let orderId = order.data[0].id
       let operation = 'remove'
       const {data} = await axios.put(`/api/cart/${orderId}`, {
         price,
@@ -196,9 +202,12 @@ export const addQuantityToStorage = productId => {
   }
 }
 
-export const addQuantityToServer = (productId, orderId, price) => {
+export const addQuantityToServer = (productId, price) => {
   return async dispatch => {
     try {
+      let order = await axios.get('/api/orders/me/current')
+      let orderId = order.data[0].id
+      console.log(order, 'order')
       let operation = 'add'
       const {data} = await axios.put(`/api/cart/${orderId}`, {
         price,

@@ -17,13 +17,18 @@ import {getTotal} from '../../../store/localStorage'
 import './style.css'
 export class Cart extends React.Component {
   componentDidMount() {
-    console.log('USER ID ------>', this.props.user.id)
-    this.props.getAllItems(this.props.user.id)
-    this.props.getUser()
+    if (this.props.user) {
+      this.props.getUser(this.props.user.id)
+      this.props.getAllItems(this.props.user.id)
+    } else {
+      this.props.getUser()
+      this.props.getAllItems()
+    }
   }
 
   componentDidUpdate(prevProp) {
     if (prevProp.user.id !== this.props.user.id) {
+      console.log('New Id:', this.props.user.id)
       this.props.getAllItems(this.props.user.id)
     }
   }
@@ -35,7 +40,7 @@ export class Cart extends React.Component {
       subQuantity,
       addQuantity,
       total,
-      orderId
+      user
     } = this.props
 
     const localTotal = getTotal()
@@ -50,7 +55,7 @@ export class Cart extends React.Component {
               removeItem={removeItem}
               subQuantity={subQuantity}
               addQuantity={addQuantity}
-              orderId={orderId}
+              user={user}
             />
             <div className="checkout-total">
               <div className="total-count">Total = ${total}</div>
@@ -66,7 +71,7 @@ export class Cart extends React.Component {
               removeItem={removeItem}
               subQuantity={subQuantity}
               addQuantity={addQuantity}
-              orderId={null}
+              user={user}
             />
             <div className="checkout-total">
               <div className="total-count">Total = ${localTotal}</div>
@@ -81,7 +86,6 @@ export class Cart extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    orderId: state.user.orderId,
     items: state.cart.items,
     total: state.cart.total
   }
@@ -89,33 +93,33 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllItems: (userId, orderId) => {
+    getAllItems: userId => {
       if (userId) {
-        return dispatch(fetchCartFromServer(userId, orderId))
+        return dispatch(fetchCartFromServer(userId))
       } else {
         return dispatch(fetchCartFromLocalStorage())
       }
     },
 
-    removeItem: (itemId, orderId, price) => {
-      if (orderId) {
-        return dispatch(removeItemFromServer(itemId, orderId, price))
+    removeItem: (itemId, price) => {
+      if (price) {
+        return dispatch(removeItemFromServer(itemId, price))
       } else {
         return dispatch(removeItemFromStorage(itemId))
       }
     },
 
-    subQuantity: (itemId, orderId, price) => {
-      if (orderId) {
-        return dispatch(subtractQuantityFromServer(itemId, orderId, price))
+    subQuantity: (itemId, price) => {
+      if (price) {
+        return dispatch(subtractQuantityFromServer(itemId, price))
       } else {
         return dispatch(subtractQuantityFromStorage(itemId))
       }
     },
 
-    addQuantity: (itemId, orderId, price) => {
-      if (orderId) {
-        return dispatch(addQuantityToServer(itemId, orderId, price))
+    addQuantity: (itemId, price) => {
+      if (price) {
+        return dispatch(addQuantityToServer(itemId, price))
       } else {
         return dispatch(addQuantityToStorage(itemId))
       }

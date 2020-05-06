@@ -801,14 +801,19 @@ function (_React$Component) {
   _createClass(Cart, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log('USER ID ------>', this.props.user.id);
-      this.props.getAllItems(this.props.user.id);
-      this.props.getUser();
+      if (this.props.user) {
+        this.props.getUser(this.props.user.id);
+        this.props.getAllItems(this.props.user.id);
+      } else {
+        this.props.getUser();
+        this.props.getAllItems();
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProp) {
       if (prevProp.user.id !== this.props.user.id) {
+        console.log("New Id:", this.props.user.id);
         this.props.getAllItems(this.props.user.id);
       }
     }
@@ -821,7 +826,7 @@ function (_React$Component) {
           subQuantity = _this$props.subQuantity,
           addQuantity = _this$props.addQuantity,
           total = _this$props.total,
-          orderId = _this$props.orderId;
+          user = _this$props.user;
       var localTotal = Object(_store_localStorage__WEBPACK_IMPORTED_MODULE_6__["getTotal"])();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "main-cart-container"
@@ -832,7 +837,7 @@ function (_React$Component) {
         removeItem: removeItem,
         subQuantity: subQuantity,
         addQuantity: addQuantity,
-        orderId: orderId
+        user: user
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "checkout-total"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -845,7 +850,7 @@ function (_React$Component) {
         removeItem: removeItem,
         subQuantity: subQuantity,
         addQuantity: addQuantity,
-        orderId: null
+        user: user
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "checkout-total"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -860,7 +865,6 @@ function (_React$Component) {
 var mapState = function mapState(state) {
   return {
     user: state.user,
-    orderId: state.user.orderId,
     items: state.cart.items,
     total: state.cart.total
   };
@@ -868,30 +872,30 @@ var mapState = function mapState(state) {
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    getAllItems: function getAllItems(userId, orderId) {
+    getAllItems: function getAllItems(userId) {
       if (userId) {
-        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["fetchCartFromServer"])(userId, orderId));
+        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["fetchCartFromServer"])(userId));
       } else {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["fetchCartFromLocalStorage"])());
       }
     },
-    removeItem: function removeItem(itemId, orderId, price) {
-      if (orderId) {
-        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["removeItemFromServer"])(itemId, orderId, price));
+    removeItem: function removeItem(itemId, price) {
+      if (price) {
+        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["removeItemFromServer"])(itemId, price));
       } else {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["removeItemFromStorage"])(itemId));
       }
     },
-    subQuantity: function subQuantity(itemId, orderId, price) {
-      if (orderId) {
-        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["subtractQuantityFromServer"])(itemId, orderId, price));
+    subQuantity: function subQuantity(itemId, price) {
+      if (price) {
+        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["subtractQuantityFromServer"])(itemId, price));
       } else {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["subtractQuantityFromStorage"])(itemId));
       }
     },
-    addQuantity: function addQuantity(itemId, orderId, price) {
-      if (orderId) {
-        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["addQuantityToServer"])(itemId, orderId, price));
+    addQuantity: function addQuantity(itemId, price) {
+      if (price) {
+        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["addQuantityToServer"])(itemId, price));
       } else {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_3__["addQuantityToStorage"])(itemId));
       }
@@ -1938,7 +1942,7 @@ var singleCartItem = function singleCartItem(props) {
       removeItem = props.removeItem,
       subQuantity = props.subQuantity,
       addQuantity = props.addQuantity,
-      orderId = props.orderId;
+      user = props.user;
   var currQuantity;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, items ? items.map(function (item) {
     item.cart ? currQuantity = item.cart.quantity : currQuantity = null;
@@ -1955,27 +1959,28 @@ var singleCartItem = function singleCartItem(props) {
       id: "minus-quantity-btn",
       type: "submit",
       onClick: function onClick() {
-        subQuantity(item.id, orderId, item.price);
+        user.id ? subQuantity(item.id, item.price) : subQuantity(item.id);
       }
     }, "-")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       id: "plus-quantity-btn",
       type: "submit",
       onClick: function onClick() {
-        addQuantity(item.id, orderId, item.price);
+        user.id ? addQuantity(item.id, item.price) : addQuantity(item.id);
         currQuantity++;
       }
     }, "+")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       id: "delete-item-btn",
       type: "submit",
       onClick: function onClick() {
-        return removeItem(item.id, orderId);
+        return user.id ? removeItem(item.id, item.price) : removeItem(item.id);
       }
     }, "Delete item"))))));
   }) : '');
 };
 
 var mapState = function mapState(state) {
-  return {// items: state.cart.items
+  return {
+    items: state.cart.items
   };
 };
 
@@ -2030,9 +2035,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_singleProduct_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleProduct.js */ "./client/store/singleProduct.js");
 /* harmony import */ var _components_updateProductForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/updateProductForm */ "./client/components/updateProductForm.js");
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
-/* harmony import */ var _store_localStorage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/localStorage */ "./client/store/localStorage.js");
-/* harmony import */ var _singleProduct_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./singleProduct.css */ "./client/components/singleProduct.css");
-/* harmony import */ var _singleProduct_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_singleProduct_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _singleProduct_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./singleProduct.css */ "./client/components/singleProduct.css");
+/* harmony import */ var _singleProduct_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_singleProduct_css__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2060,7 +2064,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var SingleProduct =
 /*#__PURE__*/
 function (_Component) {
@@ -2077,20 +2080,21 @@ function (_Component) {
       var currProduct = _this.props.product;
       var _this$props = _this.props,
           items = _this$props.items,
-          orderId = _this$props.orderId,
           addQuantity = _this$props.addQuantity;
       var existedItem = items.find(function (item) {
         return item.id === currProduct.id;
       });
 
       if (existedItem) {
-        addQuantity(currProduct.id, orderId, currProduct.price);
+        console.log(_this.props, "props in loggedin");
+        addQuantity(currProduct.id, currProduct.price);
       } else {
-        _this.props.addToCart(currProduct, currProduct.id, _this.props.orderId, currProduct.price);
+        _this.props.addToCart(currProduct, currProduct.id, currProduct.price);
       }
     });
 
     _defineProperty(_assertThisInitialized(_this), "isNotLoggedIn", function () {
+      console.log('Bye!');
       var currProduct = _this.props.product;
       var _this$props2 = _this.props,
           items = _this$props2.items,
@@ -2112,8 +2116,9 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
       var user = _this.props.user;
+      console.log("User in handleClick: ", !!user);
 
-      if (user) {
+      if (user.id) {
         _this.isLoggedIn();
       } else {
         _this.isNotLoggedIn();
@@ -2142,9 +2147,20 @@ function (_Component) {
       this.props.singleProduct(this.props.match.params.productId);
 
       if (this.props.user.id) {
-        this.props.getAllItems(this.props.user, this.props.orderId);
+        this.props.getAllItems(this.props.user.id);
       } else {
         this.props.getAllItems();
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProp) {
+      if (prevProp.user !== this.props.user) {
+        if (this.props.user.id) {
+          this.props.getAllItems(this.props.user.id);
+        } else {
+          this.props.getAllItems();
+        }
       }
     }
   }, {
@@ -2191,11 +2207,11 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapState = function mapState(state) {
+  console.log("state mapped:", state);
   return {
     items: state.cart.items,
     product: state.singleProduct,
-    user: state.user,
-    orderId: state.user.orderId
+    user: state.user
   };
 }; //What's being sent to the backend
 
@@ -2205,24 +2221,26 @@ var mapDispatch = function mapDispatch(dispatch) {
     singleProduct: function singleProduct(productId) {
       return dispatch(Object(_store_singleProduct_js__WEBPACK_IMPORTED_MODULE_2__["getSingleProduct"])(productId));
     },
-    getAllItems: function getAllItems(userId, orderId) {
+    getAllItems: function getAllItems(userId) {
+      console.log("user id:", userId);
+
       if (userId) {
-        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["fetchCartFromServer"])(userId, orderId));
+        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["fetchCartFromServer"])(userId));
       } else {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["fetchCartFromLocalStorage"])());
       }
     },
-    addToCart: function addToCart(product, productId, orderId, price) {
-      if (orderId) {
-        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["addItemToServer"])(product, productId, orderId, price));
+    addToCart: function addToCart(product, productId, price) {
+      if (price) {
+        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["addItemToServer"])(product, productId, price));
       } else {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["addItemToLocalStorage"])(product));
       }
     },
     //product is being sent back so that thunk so that it can be added to state without getting from backend route
-    addQuantity: function addQuantity(itemId, orderId, price) {
-      if (orderId) {
-        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["addQuantityToServer"])(itemId, orderId, price));
+    addQuantity: function addQuantity(itemId, price) {
+      if (price) {
+        return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["addQuantityToServer"])(itemId, price));
       } else {
         return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_4__["addQuantityToStorage"])(itemId));
       }
@@ -3390,14 +3408,14 @@ var addItemToLocalStorage = function addItemToLocalStorage(product) {
     }
   };
 };
-var addItemToServer = function addItemToServer(product, productId, orderId, price) {
+var addItemToServer = function addItemToServer(product, productId, price) {
   return (
     /*#__PURE__*/
     function () {
       var _ref3 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var _ref4, data;
+        var order, orderId, _ref4, data;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -3405,6 +3423,12 @@ var addItemToServer = function addItemToServer(product, productId, orderId, pric
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/orders/me/current');
+
+              case 3:
+                order = _context2.sent;
+                orderId = order.data[0].id;
+                _context2.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/cart', {
                   productId: productId,
                   orderId: orderId,
@@ -3412,25 +3436,25 @@ var addItemToServer = function addItemToServer(product, productId, orderId, pric
 
                 });
 
-              case 3:
+              case 7:
                 _ref4 = _context2.sent;
                 data = _ref4.data;
                 dispatch(addToCart(product, data.total)); //whats being received from the backend
 
-                _context2.next = 11;
+                _context2.next = 15;
                 break;
 
-              case 8:
-                _context2.prev = 8;
+              case 12:
+                _context2.prev = 12;
                 _context2.t0 = _context2["catch"](0);
                 console.log(_context2.t0, "COULDN'T ADD ITEM TO DATABASE");
 
-              case 11:
+              case 15:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 8]]);
+        }, _callee2, null, [[0, 12]]);
       }));
 
       return function (_x2) {
@@ -3487,14 +3511,14 @@ var removeItemFromStorage = function removeItemFromStorage(productId) {
     }()
   );
 };
-var removeItemFromServer = function removeItemFromServer(productId, orderId) {
+var removeItemFromServer = function removeItemFromServer(productId, price) {
   return (
     /*#__PURE__*/
     function () {
       var _ref7 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee4(dispatch) {
-        var _ref8, data;
+        var order, orderId, _ref8, data;
 
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -3502,27 +3526,33 @@ var removeItemFromServer = function removeItemFromServer(productId, orderId) {
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/cart/".concat(orderId, "/").concat(productId));
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/orders/me/current');
 
               case 3:
+                order = _context4.sent;
+                orderId = order.data[0].id;
+                _context4.next = 7;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/cart/".concat(orderId, "/").concat(productId));
+
+              case 7:
                 _ref8 = _context4.sent;
                 data = _ref8.data;
                 dispatch(removeItem(productId, data.total)); //whats being received from the backend
 
-                _context4.next = 11;
+                _context4.next = 15;
                 break;
 
-              case 8:
-                _context4.prev = 8;
+              case 12:
+                _context4.prev = 12;
                 _context4.t0 = _context4["catch"](0);
                 console.log(_context4.t0, "COULDN'T REMOVE ITEM FROM DATABASE");
 
-              case 11:
+              case 15:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 8]]);
+        }, _callee4, null, [[0, 12]]);
       }));
 
       return function (_x4) {
@@ -3531,22 +3561,28 @@ var removeItemFromServer = function removeItemFromServer(productId, orderId) {
     }()
   );
 };
-var subtractQuantityFromServer = function subtractQuantityFromServer(productId, orderId, price) {
+var subtractQuantityFromServer = function subtractQuantityFromServer(productId, price) {
   return (
     /*#__PURE__*/
     function () {
       var _ref9 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee5(dispatch) {
-        var operation, _ref10, data;
+        var order, orderId, operation, _ref10, data;
 
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.prev = 0;
+                _context5.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/orders/me/current');
+
+              case 3:
+                order = _context5.sent;
+                orderId = order.data[0].id;
                 operation = 'remove';
-                _context5.next = 4;
+                _context5.next = 8;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/cart/".concat(orderId), {
                   price: price,
                   operation: operation,
@@ -3554,25 +3590,25 @@ var subtractQuantityFromServer = function subtractQuantityFromServer(productId, 
 
                 });
 
-              case 4:
+              case 8:
                 _ref10 = _context5.sent;
                 data = _ref10.data;
                 dispatch(subtractQuantity(data)); //whats being received from the backend
 
-                _context5.next = 12;
+                _context5.next = 16;
                 break;
 
-              case 9:
-                _context5.prev = 9;
+              case 13:
+                _context5.prev = 13;
                 _context5.t0 = _context5["catch"](0);
                 console.log(_context5.t0, "COULDN'T SUBTRACT QUANTITY FROM DATABASE");
 
-              case 12:
+              case 16:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[0, 9]]);
+        }, _callee5, null, [[0, 13]]);
       }));
 
       return function (_x5) {
@@ -3613,22 +3649,29 @@ var addQuantityToStorage = function addQuantityToStorage(productId) {
     }
   };
 };
-var addQuantityToServer = function addQuantityToServer(productId, orderId, price) {
+var addQuantityToServer = function addQuantityToServer(productId, price) {
   return (
     /*#__PURE__*/
     function () {
       var _ref11 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee6(dispatch) {
-        var operation, _ref12, data;
+        var order, orderId, operation, _ref12, data;
 
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
                 _context6.prev = 0;
+                _context6.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/orders/me/current');
+
+              case 3:
+                order = _context6.sent;
+                orderId = order.data[0].id;
+                console.log(order, "order");
                 operation = 'add';
-                _context6.next = 4;
+                _context6.next = 9;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/cart/".concat(orderId), {
                   price: price,
                   operation: operation,
@@ -3637,25 +3680,25 @@ var addQuantityToServer = function addQuantityToServer(productId, orderId, price
 
                 });
 
-              case 4:
+              case 9:
                 _ref12 = _context6.sent;
                 data = _ref12.data;
                 dispatch(addQuantity(data)); //whats being received from the backend
 
-                _context6.next = 12;
+                _context6.next = 17;
                 break;
 
-              case 9:
-                _context6.prev = 9;
+              case 14:
+                _context6.prev = 14;
                 _context6.t0 = _context6["catch"](0);
                 console.log(_context6.t0, "COULDN'T ADD QUANTITY FROM DATABASE");
 
-              case 12:
+              case 17:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 9]]);
+        }, _callee6, null, [[0, 14]]);
       }));
 
       return function (_x6) {
@@ -4135,8 +4178,8 @@ var me = function me() {
 
               case 3:
                 res = _context.sent;
-                console.log(res, 'HELLO IM THE USER DATA');
                 dispatch(getUser(res.data || defaultUser));
+                console.log(res, 'HELLO IM THE USER DATA');
                 _context.next = 11;
                 break;
 
@@ -48137,7 +48180,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

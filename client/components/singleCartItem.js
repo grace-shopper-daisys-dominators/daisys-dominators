@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import './singleCartItem.css'
 
 const singleCartItem = props => {
-  const {items, removeItem, subQuantity, addQuantity, orderId} = props
+  const {items, removeItem, subQuantity, addQuantity, user} = props
   let currQuantity
   return (
     <div>
@@ -41,7 +41,9 @@ const singleCartItem = props => {
                           id="minus-quantity-btn"
                           type="submit"
                           onClick={() => {
-                            subQuantity(item.id, orderId, item.price)
+                            user.id
+                              ? subQuantity(item.id, item.price)
+                              : subQuantity(item.id)
                           }}
                         >
                           -
@@ -52,7 +54,9 @@ const singleCartItem = props => {
                           id="plus-quantity-btn"
                           type="submit"
                           onClick={() => {
-                            addQuantity(item.id, orderId, item.price)
+                            user.id
+                              ? addQuantity(item.id, item.price)
+                              : addQuantity(item.id)
                             currQuantity++
                           }}
                         >
@@ -63,7 +67,11 @@ const singleCartItem = props => {
                         <button
                           id="delete-item-btn"
                           type="submit"
-                          onClick={() => removeItem(item.id, orderId)}
+                          onClick={() =>
+                            user.id
+                              ? removeItem(item.id, item.price)
+                              : removeItem(item.id)
+                          }
                         >
                           Delete item
                         </button>
@@ -81,7 +89,7 @@ const singleCartItem = props => {
 
 const mapState = state => {
   return {
-    // items: state.cart.items
+    items: state.cart.items
   }
 }
 

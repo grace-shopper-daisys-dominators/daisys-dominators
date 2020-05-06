@@ -11,7 +11,6 @@ import {
   addItemToLocalStorage,
   fetchCartFromLocalStorage
 } from '../store/cart'
-import {addToLocalStorage} from '../store/localStorage'
 import './singleProduct.css'
 
 export class SingleProduct extends Component {
@@ -23,26 +22,31 @@ export class SingleProduct extends Component {
   componentDidMount() {
     this.props.singleProduct(this.props.match.params.productId)
     if (this.props.user.id) {
-      this.props.getAllItems(this.props.user, this.props.orderId)
+      this.props.getAllItems(this.props.user.id)
     } else {
       this.props.getAllItems()
     }
   }
 
+  componentDidUpdate(prevProp) {
+    if (prevProp.user !== this.props.user) {
+      if (this.props.user.id) {
+        this.props.getAllItems(this.props.user.id)
+      } else {
+        this.props.getAllItems()
+      }
+    }
+  }
+
   isLoggedIn = () => {
-    console.log('Hi!')
     const currProduct = this.props.product
-    const {items, orderId, addQuantity} = this.props
+    const {items, addQuantity} = this.props
     let existedItem = items.find(item => item.id === currProduct.id)
     if (existedItem) {
-      addQuantity(currProduct.id, orderId, currProduct.price)
+      console.log(this.props, 'props in loggedin')
+      addQuantity(currProduct.id, currProduct.price)
     } else {
-      this.props.addToCart(
-        currProduct,
-        currProduct.id,
-        this.props.orderId,
-        currProduct.price
-      )
+      this.props.addToCart(currProduct, currProduct.id, currProduct.price)
     }
   }
 
@@ -64,12 +68,12 @@ export class SingleProduct extends Component {
 
   handleClick = () => {
     const {user} = this.props
-    if (user) {
+    console.log('User in handleClick: ', !!user)
+    if (user.id) {
       this.isLoggedIn()
     } else {
       this.isNotLoggedIn()
     }
-
     this.setState({addedToCart: true})
     setTimeout(() => {
       this.setState({addedToCart: false})
@@ -141,33 +145,36 @@ export class SingleProduct extends Component {
   }
 }
 
-const mapState = state => ({
-  items: state.cart.items,
-  product: state.singleProduct,
-  user: state.user,
-  orderId: state.user.orderId
-})
+const mapState = state => {
+  console.log('state mapped:', state)
+  return {
+    items: state.cart.items,
+    product: state.singleProduct,
+    user: state.user
+  }
+}
 
 //What's being sent to the backend
 const mapDispatch = dispatch => ({
   singleProduct: productId => dispatch(getSingleProduct(productId)),
-  getAllItems: (userId, orderId) => {
+  getAllItems: userId => {
+    console.log('user id:', userId)
     if (userId) {
-      return dispatch(fetchCartFromServer(userId, orderId))
+      return dispatch(fetchCartFromServer(userId))
     } else {
       return dispatch(fetchCartFromLocalStorage())
     }
   },
-  addToCart: (product, productId, orderId, price) => {
-    if (orderId) {
-      return dispatch(addItemToServer(product, productId, orderId, price))
+  addToCart: (product, productId, price) => {
+    if (price) {
+      return dispatch(addItemToServer(product, productId, price))
     } else {
       return dispatch(addItemToLocalStorage(product))
     }
   }, //product is being sent back so that thunk so that it can be added to state without getting from backend route
-  addQuantity: (itemId, orderId, price) => {
-    if (orderId) {
-      return dispatch(addQuantityToServer(itemId, orderId, price))
+  addQuantity: (itemId, price) => {
+    if (price) {
+      return dispatch(addQuantityToServer(itemId, price))
     } else {
       return dispatch(addQuantityToStorage(itemId))
     }

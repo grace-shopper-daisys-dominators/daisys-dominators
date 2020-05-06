@@ -26,8 +26,8 @@ const setNewUser = newUser => ({type: ADD_NEW_USER, newUser})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    console.log(res, 'HELLO IM THE USER DATA')
     dispatch(getUser(res.data || defaultUser))
+    console.log(res, 'HELLO IM THE USER DATA')
   } catch (err) {
     console.error(err)
   }
