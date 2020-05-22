@@ -23,9 +23,11 @@ export const removeFromLocalStorage = currProduct => {
 export const getTotal = () => {
   let currentCart = JSON.parse(localStorage.getItem('cart'))
   let total = 0
-  currentCart.forEach(product => {
-    total += product.price * product.quantity
-  })
+  if (currentCart) {
+    currentCart.forEach(product => {
+      total += product.price * product.quantity
+    })
+  }
   return total
 }
 

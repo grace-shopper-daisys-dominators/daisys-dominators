@@ -24,7 +24,10 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   const googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
+    callbackURL:
+      process.env.NODE_ENV === 'development'
+        ? process.env.GOOGLE_CALLBACK
+        : 'https://daisys-wine-shop.herokuapp.com//auth/google/callback'
   }
 
   const strategy = new GoogleStrategy(
@@ -46,7 +49,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
           let curr = await User.findOne({where: {googleId: googleId}})
           await Order.findOrCreate({
             where: {
-              status: pending,
+              status: 'pending',
               userId: curr.id
             }
           })
