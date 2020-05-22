@@ -8,7 +8,7 @@ import SingleProduct from './components/singleProduct'
 
 import Cart from './components/pages/Cart'
 import Checkout from './components/pages/Checkout'
-import HomePage from './components/pages/HomePage'
+import HomePage from './components/pages/homePage'
 import AllUsers from './components/pages/allUsers/AllUsers'
 import SingleUser from './components/pages/singleUser/SingleUser'
 import RedWines from './components/pages/filterWines/redWines'

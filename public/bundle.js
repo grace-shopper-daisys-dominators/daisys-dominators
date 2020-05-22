@@ -1066,157 +1066,6 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 /***/ }),
 
-/***/ "./client/components/pages/HomePage/index.js":
-/*!***************************************************!*\
-  !*** ./client/components/pages/HomePage/index.js ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_allWines__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../store/allWines */ "./client/store/allWines.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.css */ "./client/components/pages/HomePage/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-var HomePage =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(HomePage, _React$Component);
-
-  function HomePage() {
-    _classCallCheck(this, HomePage);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(HomePage).apply(this, arguments));
-  }
-
-  _createClass(HomePage, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.getAllWines();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      var wines = this.props.wines;
-      var isAdmin = this.props.user.isAdmin;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "wines-outer-container"
-      }, wines ? wines.map(function (wine) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "wine-container",
-          key: wine.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-          id: "view-more-btn",
-          to: "products/".concat(wine.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "wine-img-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: wine.imageURL
-        })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "wine-details"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "wine-name"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " ", wine.name, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " $", wine.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-          id: "view-more-btn",
-          to: "products/".concat(wine.id)
-        }, "View more")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "delete-btn"
-        }, isAdmin ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          onClick: function onClick() {
-            return _this.props.handleDelete(wine.id);
-          }
-        }, "Delete Product") : '')));
-      }) : ' '));
-    }
-  }]);
-
-  return HomePage;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-var mapState = function mapState(state) {
-  return {
-    wines: state.allWines.all,
-    user: state.user
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    getAllWines: function getAllWines() {
-      return dispatch(Object(_store_allWines__WEBPACK_IMPORTED_MODULE_2__["fetchWinesFromServer"])());
-    },
-    handleDelete: function handleDelete(wineId) {
-      return dispatch(Object(_store_allWines__WEBPACK_IMPORTED_MODULE_2__["deleteWine"])(wineId));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(HomePage));
-
-/***/ }),
-
-/***/ "./client/components/pages/HomePage/style.css":
-/*!****************************************************!*\
-  !*** ./client/components/pages/HomePage/style.css ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./client/components/pages/HomePage/style.css");
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-var exported = content.locals ? content.locals : {};
-
-
-
-module.exports = exported;
-
-/***/ }),
-
 /***/ "./client/components/pages/allUsers/AllUsers.js":
 /*!******************************************************!*\
   !*** ./client/components/pages/allUsers/AllUsers.js ***!
@@ -1732,6 +1581,157 @@ var mapDispatch = function mapDispatch(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(WhiteWines));
+
+/***/ }),
+
+/***/ "./client/components/pages/homePage/index.js":
+/*!***************************************************!*\
+  !*** ./client/components/pages/homePage/index.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_allWines__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../store/allWines */ "./client/store/allWines.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.css */ "./client/components/pages/homePage/style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_4__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var HomePage =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(HomePage, _React$Component);
+
+  function HomePage() {
+    _classCallCheck(this, HomePage);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(HomePage).apply(this, arguments));
+  }
+
+  _createClass(HomePage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getAllWines();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var wines = this.props.wines;
+      var isAdmin = this.props.user.isAdmin;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "wines-outer-container"
+      }, wines ? wines.map(function (wine) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "wine-container",
+          key: wine.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          id: "view-more-btn",
+          to: "products/".concat(wine.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "wine-img-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: wine.imageURL
+        })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "wine-details"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "wine-name"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " ", wine.name, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " $", wine.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          id: "view-more-btn",
+          to: "products/".concat(wine.id)
+        }, "View more")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "delete-btn"
+        }, isAdmin ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          onClick: function onClick() {
+            return _this.props.handleDelete(wine.id);
+          }
+        }, "Delete Product") : '')));
+      }) : ' '));
+    }
+  }]);
+
+  return HomePage;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapState = function mapState(state) {
+  return {
+    wines: state.allWines.all,
+    user: state.user
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    getAllWines: function getAllWines() {
+      return dispatch(Object(_store_allWines__WEBPACK_IMPORTED_MODULE_2__["fetchWinesFromServer"])());
+    },
+    handleDelete: function handleDelete(wineId) {
+      return dispatch(Object(_store_allWines__WEBPACK_IMPORTED_MODULE_2__["deleteWine"])(wineId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(HomePage));
+
+/***/ }),
+
+/***/ "./client/components/pages/homePage/style.css":
+/*!****************************************************!*\
+  !*** ./client/components/pages/homePage/style.css ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./client/components/pages/homePage/style.css");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
 
 /***/ }),
 
@@ -2593,7 +2593,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_singleProduct__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/singleProduct */ "./client/components/singleProduct.js");
 /* harmony import */ var _components_pages_Cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/pages/Cart */ "./client/components/pages/Cart/index.js");
 /* harmony import */ var _components_pages_Checkout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/pages/Checkout */ "./client/components/pages/Checkout/index.js");
-/* harmony import */ var _components_pages_HomePage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/pages/HomePage */ "./client/components/pages/HomePage/index.js");
+/* harmony import */ var _components_pages_homePage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/pages/homePage */ "./client/components/pages/homePage/index.js");
 /* harmony import */ var _components_pages_allUsers_AllUsers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/pages/allUsers/AllUsers */ "./client/components/pages/allUsers/AllUsers.js");
 /* harmony import */ var _components_pages_singleUser_SingleUser__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/pages/singleUser/SingleUser */ "./client/components/pages/singleUser/SingleUser.js");
 /* harmony import */ var _components_pages_filterWines_redWines__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/pages/filterWines/redWines */ "./client/components/pages/filterWines/redWines.js");
@@ -2683,11 +2683,11 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/products",
-        component: _components_pages_HomePage__WEBPACK_IMPORTED_MODULE_9__["default"]
+        component: _components_pages_homePage__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/",
-        component: _components_pages_HomePage__WEBPACK_IMPORTED_MODULE_9__["default"]
+        component: _components_pages_homePage__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/redwines",
@@ -2703,7 +2703,7 @@ function (_Component) {
       }), isLoggedIn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         render: function render() {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_4__["UserHome"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_pages_HomePage__WEBPACK_IMPORTED_MODULE_9__["default"], null));
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_4__["UserHome"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_pages_homePage__WEBPACK_IMPORTED_MODULE_9__["default"], null));
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
@@ -18229,26 +18229,6 @@ module.exports = exports;
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./client/components/pages/HomePage/style.css":
-/*!******************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./client/components/pages/HomePage/style.css ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-exports = ___CSS_LOADER_API_IMPORT___(false);
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Satisfy);"]);
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Six+Caps);"]);
-// Module
-exports.push([module.i, "body {\n  background: url(http://api.thumbr.it/whitenoise-361x370.png?background=15424fff&noise=166f9e&density=100&opacity=61);\n  text-align: center;\n}\n\n.halo {\n  background-image: radial-gradient(transparent, rgba(0, 0, 0, 0.6));\n  bottom: 0;\n  left: 0;\n  position: fixed;\n  right: 0;\n  top: 0;\n  pointer-events: none;\n}\n\n.intro {\n  color: rgb(230, 200, 160);\n  display: block;\n  font-family: 'Satisfy', cursive;\n  font-size: 32px;\n  text-shadow: 1px 1px black;\n  transform: rotate(-10deg);\n}\n\n.intro--the {\n  transform: rotate(-10deg) translate(-20px, 15px);\n}\n\n.intro--num {\n  background: rgb(240, 200, 160);\n  border: 1px dotted rgb(20, 60, 80);\n  color: rgb(20, 60, 80);\n  display: inline-block;\n  font-family: sans-serif;\n  font-size: 12px;\n  font-weight: bolder;\n  padding: 4px 6px 2px;\n  position: absolute;\n  text-shadow: none;\n  transform: rotate(-10deg) translate(20px, -25px);\n}\n\n.vintage__container {\n  display: inline-block;\n  margin: 25px auto 40px;\n}\n\n.vintage {\n  font-family: 'Six Caps', sans-serif;\n  font-size: 192px;\n  letter-spacing: 10px;\n  line-height: 1;\n  margin: 0;\n  position: relative;\n}\n\n.vintage__top {\n  background: linear-gradient(rgb(240, 220, 200), rgb(230, 200, 160));\n  -webkit-background-clip: text;\n  background-clip: text;\n  position: absolute;\n  z-index: 1;\n  -webkit-text-fill-color: transparent;\n  text-fill-color: transparent;\n}\n\n.vintage__bot {\n  text-shadow: 2px 1px rgb(85, 10, 0), 4px 2px rgb(90, 15, 5),\n    6px 4px rgb(100, 20, 15), 8px 5px rgb(105, 25, 20),\n    10px 6px rgb(110, 30, 25), 12px 7px rgb(115, 30, 30),\n    14px 8px rgb(120, 30, 35), 16px 9px black, 18px 10px black, 20px 11px black,\n    22px 12px black, 24px 13px black, 28px 14px rgba(0, 0, 0, 0.9),\n    30px 15px rgba(0, 0, 0, 0.7), 32px 16px rgba(0, 0, 0, 0.5),\n    34px 17px rgba(0, 0, 0, 0.3), 36px 18px rgba(0, 0, 0, 0.1),\n    40px 20px rgba(0, 0, 0, 0.1);\n}\n\n.outro {\n  color: white;\n  font-family: 'Satisfy', cursive;\n  font-size: 16px;\n}\n\n.outro--big {\n  font-family: sans-serif;\n  font-size: 24px;\n}\n\n.outro--smart {\n  display: block;\n}\n/* ALL WINES STYLE BELOW*/\n\n.wines-outer-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-content: flex-start;\n}\n\n.wine-container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  margin: 20px;\n}\n\n#wine-img-container {\n  background-color: white;\n  margin: 20px;\n  border-radius: 50%;\n  max-width: 300px;\n  max-height: 300px;\n  padding: 50px;\n}\n\n#wine-img-container img {\n  max-width: 150px;\n  max-height: 300px;\n}\n.wine-details {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: left;\n}\n.wine-details div {\n  margin: 0;\n}\n.wine-details div h2 {\n  font-size: 28px;\n  color: white;\n}\n#wine-name {\n  max-width: 300px;\n}\n.wine-details div p {\n  font-size: 24px;\n  color: white;\n}\n#view-more-btn {\n  color: #922b21;\n  cursor: pointer;\n  font-size: 24px;\n}\n\n#view-more-btn:hover {\n  color: white;\n  opacity: 0.9;\n}\n\n#delete-btn {\n  display: flex;\n  justify-content: flex-end;\n}\n\n#delete-btn button {\n  background-color: white;\n  color: black;\n  border-radius: 5px;\n  padding: 10px;\n  font-size: 18px;\n  border: none;\n  cursor: pointer;\n  margin: 10px;\n}\n\n#delete-btn button:hover {\n  opacity: 0.9;\n}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js!./client/components/pages/allUsers/allUsers.css":
 /*!*********************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./client/components/pages/allUsers/allUsers.css ***!
@@ -18279,6 +18259,26 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modul
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "/* ALL WINES STYLE BELOW*/\n\n.wines-outer-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-around;\n}\n\n.wine-container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n\n#wine-img-container {\n  background-color: white;\n  margin: 20px;\n  border-radius: 50%;\n  width: 300px;\n  height: 300px;\n  padding: 50px;\n}\n\n#wine-img-container img {\n  max-width: 150px;\n  max-height: 300px;\n}\n\n.wine-details {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: left;\n}\n\n.wine-details div h2 {\n  font-size: 28px;\n  color: white;\n}\n\n#wine-name {\n  max-width: 300px;\n}\n\n.wine-details div p {\n  font-size: 24px;\n  color: white;\n}\n\n#view-more-btn {\n  color: #922b21;\n  cursor: pointer;\n  font-size: 24px;\n}\n\n#view-more-btn:hover {\n  color: white;\n  opacity: 0.9;\n}\n\n#delete-btn {\n  display: flex;\n  justify-content: flex-end;\n}\n\n#delete-btn button {\n  background-color: white;\n  color: black;\n  border-radius: 5px;\n  padding: 10px;\n  font-size: 18px;\n  border: none;\n  cursor: pointer;\n  margin: 10px;\n}\n\n#delete-btn button:hover {\n  opacity: 0.9;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./client/components/pages/homePage/style.css":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./client/components/pages/homePage/style.css ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Satisfy);"]);
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Six+Caps);"]);
+// Module
+exports.push([module.i, "body {\n  background: url(http://api.thumbr.it/whitenoise-361x370.png?background=15424fff&noise=166f9e&density=100&opacity=61);\n  text-align: center;\n}\n\n.halo {\n  background-image: radial-gradient(transparent, rgba(0, 0, 0, 0.6));\n  bottom: 0;\n  left: 0;\n  position: fixed;\n  right: 0;\n  top: 0;\n  pointer-events: none;\n}\n\n.intro {\n  color: rgb(230, 200, 160);\n  display: block;\n  font-family: 'Satisfy', cursive;\n  font-size: 32px;\n  text-shadow: 1px 1px black;\n  transform: rotate(-10deg);\n}\n\n.intro--the {\n  transform: rotate(-10deg) translate(-20px, 15px);\n}\n\n.intro--num {\n  background: rgb(240, 200, 160);\n  border: 1px dotted rgb(20, 60, 80);\n  color: rgb(20, 60, 80);\n  display: inline-block;\n  font-family: sans-serif;\n  font-size: 12px;\n  font-weight: bolder;\n  padding: 4px 6px 2px;\n  position: absolute;\n  text-shadow: none;\n  transform: rotate(-10deg) translate(20px, -25px);\n}\n\n.vintage__container {\n  display: inline-block;\n  margin: 25px auto 40px;\n}\n\n.vintage {\n  font-family: 'Six Caps', sans-serif;\n  font-size: 192px;\n  letter-spacing: 10px;\n  line-height: 1;\n  margin: 0;\n  position: relative;\n}\n\n.vintage__top {\n  background: linear-gradient(rgb(240, 220, 200), rgb(230, 200, 160));\n  -webkit-background-clip: text;\n  background-clip: text;\n  position: absolute;\n  z-index: 1;\n  -webkit-text-fill-color: transparent;\n  text-fill-color: transparent;\n}\n\n.vintage__bot {\n  text-shadow: 2px 1px rgb(85, 10, 0), 4px 2px rgb(90, 15, 5),\n    6px 4px rgb(100, 20, 15), 8px 5px rgb(105, 25, 20),\n    10px 6px rgb(110, 30, 25), 12px 7px rgb(115, 30, 30),\n    14px 8px rgb(120, 30, 35), 16px 9px black, 18px 10px black, 20px 11px black,\n    22px 12px black, 24px 13px black, 28px 14px rgba(0, 0, 0, 0.9),\n    30px 15px rgba(0, 0, 0, 0.7), 32px 16px rgba(0, 0, 0, 0.5),\n    34px 17px rgba(0, 0, 0, 0.3), 36px 18px rgba(0, 0, 0, 0.1),\n    40px 20px rgba(0, 0, 0, 0.1);\n}\n\n.outro {\n  color: white;\n  font-family: 'Satisfy', cursive;\n  font-size: 16px;\n}\n\n.outro--big {\n  font-family: sans-serif;\n  font-size: 24px;\n}\n\n.outro--smart {\n  display: block;\n}\n/* ALL WINES STYLE BELOW*/\n\n.wines-outer-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-content: flex-start;\n}\n\n.wine-container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  margin: 20px;\n}\n\n#wine-img-container {\n  background-color: white;\n  margin: 20px;\n  border-radius: 50%;\n  max-width: 300px;\n  max-height: 300px;\n  padding: 50px;\n}\n\n#wine-img-container img {\n  max-width: 150px;\n  max-height: 300px;\n}\n.wine-details {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: left;\n}\n.wine-details div {\n  margin: 0;\n}\n.wine-details div h2 {\n  font-size: 28px;\n  color: white;\n}\n#wine-name {\n  max-width: 300px;\n}\n.wine-details div p {\n  font-size: 24px;\n  color: white;\n}\n#view-more-btn {\n  color: #922b21;\n  cursor: pointer;\n  font-size: 24px;\n}\n\n#view-more-btn:hover {\n  color: white;\n  opacity: 0.9;\n}\n\n#delete-btn {\n  display: flex;\n  justify-content: flex-end;\n}\n\n#delete-btn button {\n  background-color: white;\n  color: black;\n  border-radius: 5px;\n  padding: 10px;\n  font-size: 18px;\n  border: none;\n  cursor: pointer;\n  margin: 10px;\n}\n\n#delete-btn button:hover {\n  opacity: 0.9;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
