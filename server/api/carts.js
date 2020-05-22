@@ -1,27 +1,6 @@
 const router = require('express').Router()
 const {Order, User, Cart, Product} = require('../db/models')
 module.exports = router
-const sequelize = require('sequelize')
-
-// router.get('/', async (req, res, next) => {
-//   try {
-//     let currentUser
-//     if (req.user) {
-//       currentUser = req.user.dataValues
-//     } else {
-//       currentUser = {}
-//     }
-
-//     if (currentUser.isAdmin) {
-//       const carts = await Cart.findAll({include: Product})
-//       res.json(carts)
-//     } else {
-//       res.status(401).send('Log in with admin account to view carts.')
-//     }
-//   } catch (err) {
-//     next(err)
-//   }
-// })
 
 router.get('/:id', async (req, res, next) => {
   try {
@@ -62,11 +41,16 @@ router.post('/', async (req, res, next) => {
         productId: productId,
         quantity: 1,
         price: price,
-        orderId: orderId
+        orderId: orderId,
+        total: 0
       })
 
       if (newCart) {
-        res.status(201).send(newCart)
+        await Cart.updateTotal(orderId)
+
+        let cart = await Cart.findOne({where: {orderId, productId}})
+
+        res.status(201).send(cart)
       } else {
         res.status(204).send('Failed to add item.')
       }
@@ -86,41 +70,34 @@ router.put('/:id', async (req, res, next) => {
     } else {
       currentUser = {}
     }
-    const {price, operation, orderId} = req.body
+    const {price, operation, productId} = req.body
+
+    const orderId = req.params.id
+
+    let cart = await Cart.findOne({
+      where: {orderId: orderId, productId: productId}
+    })
+
     const {userId} = await Order.findByPk(orderId)
 
     if (userId === currentUser.id) {
-      let cart = await Cart.findByPk(req.params.id)
+      let result
+      if (operation === 'add') {
+        result = await cart.add(price)
+      } else if (operation === 'remove') {
+        result = await cart.remove(price)
+      }
 
-      if (cart) {
-        let newPrice
-        let newQuantity
-        let result
+      if (result) {
+        await Cart.updateTotal(orderId)
 
-        if (operation === 'add') {
-          newPrice = cart.price * 1 + price * 1
-          newQuantity = cart.quantity + 1
-          result = await Cart.update(
-            {quantity: newQuantity, price: newPrice},
-            {where: {id: req.params.id}}
-          )
-        } else if (operation === 'remove') {
-          newPrice = cart.price * 1 - price * 1
-          newQuantity = cart.quantity - 1
-          result = await Cart.update(
-            {quantity: newQuantity, price: newPrice},
-            {where: {id: req.params.id}}
-          )
-        }
+        cart = await Cart.findOne({
+          where: {orderId: orderId, productId: productId}
+        })
 
-        if (result) {
-          cart = await Cart.findByPk(req.params.id)
-          res.status(202).send(cart)
-        } else {
-          res.status(304).send('Failed to edit cart.')
-        }
+        res.send(cart)
       } else {
-        res.status(204).send('Item does not exist in cart')
+        res.status(304).send('Failed to edit cart.')
       }
     } else {
       res.status(401).send('You may only edit your own cart.')
@@ -130,7 +107,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:orderId/:productId', async (req, res, next) => {
   try {
     let currentUser
     if (req.user) {
@@ -138,14 +115,22 @@ router.delete('/:id', async (req, res, next) => {
     } else {
       currentUser = {}
     }
-    const {orderId} = req.body
+    const {orderId, productId} = req.params
 
     const {userId} = await Order.findByPk(orderId)
 
     if (userId === currentUser.id) {
-      const deleted = await Cart.destroy({where: {id: req.params.id}})
+      const deleted = await Cart.destroy({
+        where: {orderId: orderId, productId: productId}
+      })
       if (deleted > 0) {
-        res.status(204).send('Item successfully deleted.')
+        Cart.updateTotal(orderId)
+        let newData = await Cart.findOne({where: {orderId: orderId}})
+        let total = 0
+        if (newData) {
+          total = newData.total
+        }
+        res.send(200)
       } else {
         res.status(304).send('Failed to delete item.')
       }

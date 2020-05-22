@@ -34,7 +34,7 @@ router.get('/me', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: 0}
+      currentUser = {}
     }
 
     if (currentUser.id) {
@@ -57,7 +57,7 @@ router.get('/:id', async (req, res, next) => {
     if (req.user) {
       currentUser = req.user.dataValues
     } else {
-      currentUser = {id: -1}
+      currentUser = {}
     }
 
     const order = await Order.findByPk(req.params.id, {include: Product})
@@ -95,6 +95,43 @@ router.get('/me/current', async (req, res, next) => {
     next(err)
   }
 })
+
+// router.get('/me/current/:userId/:orderId', async (req, res, next) => {
+//   try {
+//     let currentUser
+//     if (req.user) {
+//       currentUser = req.user.dataValues
+//     } else {
+//       currentUser = {}
+//     }
+
+//     if (currentUser.id) {
+//       const cart = await Order.findAll({
+//         where: {status: 'pending', userId: currentUser.id},
+//         include: [
+//           {
+//             model: Product,
+//             through: {
+//               where: {
+//                 orderId: req.params.orderId
+//               }
+//             }
+//           }
+//         ]
+//       })
+
+//       console.log(cart, 'IM CART')
+//       res.json(cart)
+//     } else {
+//       res.send('Log in to view your cart.')
+//     }
+//   } catch (err) {
+//     console.log(err, 'IM THE ERROR')
+//     next(err)
+//   }
+// })
+
+//^^ Alternate way of getting a cart
 
 router.post('/', async (req, res, next) => {
   try {

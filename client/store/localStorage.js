@@ -3,28 +3,57 @@ export const addToLocalStorage = currProduct => {
   if (!currentCart) {
     currentCart = []
   }
+  currProduct.quantity = 1
+
   currentCart.push(currProduct)
   localStorage.setItem('cart', JSON.stringify(currentCart))
-  console.log(currentCart)
+  return currentCart
 }
 
-// export const loadState = async () => {
-//   try {
-//     const serializedState = await localStorage.getItem('state')
-//     if (serializedState === null) {
-//       return undefined
-//     }
-//     return JSON.parse(serializedState)
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+export const removeFromLocalStorage = currProduct => {
+  let currentCart = JSON.parse(localStorage.getItem('cart'))
+  if (!currentCart) {
+    currentCart = []
+  }
+  let newCart = currentCart.filter(product => product.id !== currProduct.id)
+  localStorage.setItem('cart', JSON.stringify(newCart))
+  return newCart
+}
 
-// export const saveState = async (state) => {
-//   try {
-//     const serializedState = await JSON.stringify(state)
-//     localStorage.setItem('state', serializedState)
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+export const getTotal = () => {
+  let currentCart = JSON.parse(localStorage.getItem('cart'))
+  let total = 0
+  currentCart.forEach(product => {
+    total += product.price * product.quantity
+  })
+  return total
+}
+
+export const addQuantityToLocalStorage = productId => {
+  let currentCart = JSON.parse(localStorage.getItem('cart'))
+  currentCart.forEach(product => {
+    if (product.id === productId) {
+      product.quantity++
+    }
+  })
+  localStorage.setItem('cart', JSON.stringify(currentCart))
+  return currentCart
+}
+
+export const removeQuantityToLocalStorage = productId => {
+  let currentCart = JSON.parse(localStorage.getItem('cart'))
+  let bool
+  currentCart.forEach(product => {
+    if (product.id === productId) {
+      if (product.quantity - 1 > 0) {
+        product.quantity--
+        bool = true
+        localStorage.setItem('cart', JSON.stringify(currentCart))
+      } else {
+        removeFromLocalStorage({id: productId})
+        bool = false
+      }
+    }
+  })
+  return bool
+}
