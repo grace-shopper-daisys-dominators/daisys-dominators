@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {fetchCartFromServer} from '../../../store/cart'
 import SingleCartItem from '../../singleCartItem'
 import {Link} from 'react-router-dom'
-
+import './style.css'
 export class Checkout extends React.Component {
   componentDidMount() {
     this.props.getAllItems()
@@ -15,8 +15,8 @@ export class Checkout extends React.Component {
     return (
       <div>
         <h2>Checkout Cart</h2>
-        <div>
-          <h2>Shipping Information</h2>
+        <div className="checkout-form-container">
+          <h2 id="form-title">Shipping Information</h2>
           <form>
             <div>
               <input
@@ -51,10 +51,14 @@ export class Checkout extends React.Component {
               <input type="email" id="email" name="email" placeholder="email" />
             </div>
             <div>
-              <input type="submit" value="Submit Order" />
+              <input
+                id="checkout-submit-btn"
+                type="submit"
+                value="Submit Order"
+              />
             </div>
             <div>
-              <input type="reset" value="Reset" />
+              <input id="checkout-reset-btn" type="reset" value="Reset" />
             </div>
           </form>
         </div>
