@@ -1,7 +1,18 @@
+.checkout-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+#page-title {
+  color: #db675e;
+  font-size: 40px;
+}
 .checkout-form-container form {
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
+  margin: 0 40px;
 }
 
 #form-title {
@@ -44,5 +55,21 @@ input[type='reset'] {
 }
 #checkout-submit-btn:hover,
 #checkout-reset-btn:hover {
+  opacity: 0.6;
+}
+
+#total {
+  font-size: 30px;
+  color: white;
+}
+
+#back-to-cart {
+  font-size: 30px;
+  color: white;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#back-to-cart:hover {
   opacity: 0.6;
 }
