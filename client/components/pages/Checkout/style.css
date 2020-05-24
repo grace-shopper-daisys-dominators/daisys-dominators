@@ -1,0 +1,75 @@
+.checkout-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+#page-title {
+  color: #db675e;
+  font-size: 40px;
+}
+.checkout-form-container form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 40px;
+}
+
+#form-title {
+  color: #db675e;
+  font-size: 25px;
+}
+
+.checkout-form-container form div input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='tel'] {
+  border-radius: 5px;
+  background: white;
+  border: none;
+  padding: 15px;
+}
+
+.checkout-form-container form div input::placeholder {
+  font-size: 15px;
+  color: #1b2631;
+}
+
+.checkout-form-container form div input[type='submit'],
+input[type='reset'] {
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#checkout-submit-btn {
+  background-color: #1d8348;
+  color: white;
+}
+#checkout-reset-btn {
+  background-color: white;
+  color: black;
+}
+#checkout-submit-btn:hover,
+#checkout-reset-btn:hover {
+  opacity: 0.6;
+}
+
+#total {
+  font-size: 30px;
+  color: white;
+}
+
+#back-to-cart {
+  font-size: 30px;
+  color: white;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#back-to-cart:hover {
+  opacity: 0.6;
+}
