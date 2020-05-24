@@ -1,0 +1,46 @@
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.form-container form div input[type='text'],
+input[type='password'],
+input[type='email'] {
+  border-radius: 5px;
+  background: white;
+  border: none;
+  padding: 15px;
+}
+
+.form-container form div input::placeholder {
+  font-size: 15px;
+  color: #1b2631;
+}
+
+#login-btn,
+#signup-btn {
+  background-color: #1d8348;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+#login-btn:hover,
+#signup-btn:hover {
+  opacity: 0.6;
+}
+.google-login-btn {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+.google-login-btn:hover {
+  opacity: 0.6;
+}
+#err-msg {
+  color: red;
+  font-size: 10px;
+}

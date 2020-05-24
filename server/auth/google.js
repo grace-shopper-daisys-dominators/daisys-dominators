@@ -1,7 +1,7 @@
 const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const {User} = require('../db/models')
+const {User, Order} = require('../db/models')
 module.exports = router
 
 /**
@@ -24,7 +24,10 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   const googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
+    callbackURL:
+      process.env.NODE_ENV === 'development'
+        ? process.env.GOOGLE_CALLBACK
+        : 'https://daisys-wine-shop.herokuapp.com/auth/google/callback'
   }
 
   const strategy = new GoogleStrategy(
@@ -42,6 +45,16 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
         defaults: {email, imgUrl, firstName, lastName, fullName}
       })
         .then(([user]) => done(null, user))
+        .then(async () => {
+          let curr = await User.findOne({where: {googleId: googleId}})
+          await Order.findOrCreate({
+            where: {
+              status: 'pending',
+              userId: curr.id
+            }
+          })
+        })
+
         .catch(done)
     }
   )

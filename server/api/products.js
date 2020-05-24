@@ -13,7 +13,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log(req)
     const id = req.params.id
     const product = await Product.findByPk(id)
     res.json(product)
@@ -65,8 +64,6 @@ router.put('/:id', async (req, res, next) => {
       currentUser = {}
     }
 
-    const id = req.params.id
-
     const {
       name,
       color,
@@ -89,6 +86,7 @@ router.put('/:id', async (req, res, next) => {
       year,
       rating
     }
+    const id = req.params.id
     let productObj = {}
 
     for (let key in reqBody) {
@@ -96,9 +94,20 @@ router.put('/:id', async (req, res, next) => {
     }
 
     if (currentUser.isAdmin) {
-      const updatedProduct = await Product.update(productObj, {where: {id: id}})
+      const productToUpdate = await Product.findByPk(id)
+      const updatedProduct = await productToUpdate.update({
+        name,
+        color,
+        description,
+        price,
+        imageURL,
+        region,
+        size,
+        year,
+        rating
+      })
       if (updatedProduct) {
-        res.send('Update successful!')
+        res.status(200).send(updatedProduct)
       } else {
         throw new Error('Update failed.')
       }
@@ -123,14 +132,12 @@ router.delete('/:id', async (req, res, next) => {
 
     if (currentUser.isAdmin) {
       const deleted = await Product.destroy({where: {id: id}})
-      // ADDED THIS LINE TO SEND ID TO FRONT END
-      res.send(id)
-      // NOTE: checks below prevent id to be send to the front end...
-      // if (deleted) {
-      //   res.status(204).send('Product deleted.')
-      // } else {
-      //   res.status(304).send('Failed to delete product.')
-      // }
+
+      if (deleted) {
+        res.send(id)
+      } else {
+        res.status(304).send('Failed to delete product.')
+      }
     } else {
       res.status(401).send('Log in with admin account to delete products.')
     }

@@ -1,22 +1,25 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchWinesFromServer, deleteWine} from '../../../store/allWines'
 import {Link} from 'react-router-dom'
+import {fetchWinesFromServer} from '../../../store/allWines'
 import './style.css'
 
-class HomePage extends React.Component {
+class WhiteWines extends Component {
   componentDidMount() {
     this.props.getAllWines()
   }
   render() {
     const {wines} = this.props
     const {isAdmin} = this.props.user
+    const whiteWines = wines.filter(
+      wine => wine.color.toLowerCase() === 'white'
+    )
 
     return (
       <div>
         <div className="wines-outer-container">
-          {wines
-            ? wines.map(wine => {
+          {whiteWines
+            ? whiteWines.map(wine => {
                 return (
                   <div className="wine-container" key={wine.id}>
                     <Link id="view-more-btn" to={`products/${wine.id}`}>
@@ -52,7 +55,7 @@ class HomePage extends React.Component {
                   </div>
                 )
               })
-            : ' '}
+            : 'No white wines avaliable.'}
         </div>
       </div>
     )
@@ -68,9 +71,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllWines: () => dispatch(fetchWinesFromServer()),
-    handleDelete: wineId => dispatch(deleteWine(wineId))
+    getAllWines: () => dispatch(fetchWinesFromServer())
   }
 }
 
-export default connect(mapState, mapDispatch)(HomePage)
+export default connect(mapState, mapDispatch)(WhiteWines)

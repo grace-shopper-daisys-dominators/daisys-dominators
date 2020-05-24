@@ -1,0 +1,45 @@
+.single-product-container {
+  display: flex;
+  flex-direction: column;
+}
+.product-inner-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#img-container {
+  background-color: white;
+  width: 600px;
+  padding: 40px;
+  border-radius: 5px;
+}
+#img-container img {
+  max-width: 200px;
+}
+
+#product-details {
+  max-width: 450px;
+  text-align: left;
+}
+#product-details ul #wine-name {
+  color: #db675e;
+  font-size: 30px;
+}
+#product-details ul li {
+  list-style-type: none;
+  font-size: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+#add-to-cart-btn {
+  background-color: #1d8348;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
