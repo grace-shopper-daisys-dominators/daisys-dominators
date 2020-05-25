@@ -89,7 +89,8 @@ const singleCartItem = props => {
 
 const mapState = state => {
   return {
-    items: state.cart.items
+    items: state.cart.items,
+    user: state.user
   }
 }
 
