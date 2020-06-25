@@ -1,16 +1,32 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchCartFromServer} from '../../../store/cart'
 import SingleCartItem from '../../singleCartItem'
 import {Link} from 'react-router-dom'
 import './style.css'
+import {
+  fetchCartFromServer,
+  removeItemFromServer,
+  subtractQuantityFromServer,
+  addQuantityToServer,
+  removeItemFromStorage,
+  addQuantityToStorage,
+  subtractQuantityFromStorage
+} from '../../../store/cart'
 export class Checkout extends React.Component {
   componentDidMount() {
     this.props.getAllItems()
   }
 
   render() {
-    const {items, orderId, total} = this.props
+    const {
+      items,
+      removeItem,
+      subQuantity,
+      addQuantity,
+      total,
+      user,
+      orderId
+    } = this.props
 
     return (
       <div>
@@ -71,7 +87,14 @@ export class Checkout extends React.Component {
           {/* {
           user ? ( */}
           <div>
-            <SingleCartItem items={items} orderId={orderId} />
+            <SingleCartItem
+              orderId={orderId}
+              items={items}
+              removeItem={removeItem}
+              subQuantity={subQuantity}
+              addQuantity={addQuantity}
+              user={user}
+            />
             <p id="total">Total = ${total}</p>
             <Link id="back-to-cart" to="/cart">
               Back to cart
@@ -101,7 +124,30 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllItems: () => dispatch(fetchCartFromServer())
+    getAllItems: () => dispatch(fetchCartFromServer()),
+    removeItem: (itemId, price) => {
+      if (price) {
+        return dispatch(removeItemFromServer(itemId, price))
+      } else {
+        return dispatch(removeItemFromStorage(itemId))
+      }
+    },
+
+    subQuantity: (itemId, price) => {
+      if (price) {
+        return dispatch(subtractQuantityFromServer(itemId, price))
+      } else {
+        return dispatch(subtractQuantityFromStorage(itemId))
+      }
+    },
+
+    addQuantity: (itemId, price) => {
+      if (price) {
+        return dispatch(addQuantityToServer(itemId, price))
+      } else {
+        return dispatch(addQuantityToStorage(itemId))
+      }
+    }
   }
 }
 
