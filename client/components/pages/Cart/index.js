@@ -22,7 +22,10 @@ export class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProp) {
-    if (prevProp.user.id !== this.props.user.id) {
+    if (
+      prevProp.user.id !== this.props.user.id ||
+      prevProp.items.quantity !== this.props.items.quantity
+    ) {
       this.props.getAllItems(this.props.user.id)
     }
   }

@@ -33,6 +33,10 @@ const singleCartItem = props => {
                     </p>
                     <p>
                       {' '}
+                      <b>Quantity:</b> {currQuantity}
+                    </p>
+                    <p>
+                      {' '}
                       <b>Size:</b> {item.size} ml{' '}
                     </p>
                     <div className="cart-btns">
