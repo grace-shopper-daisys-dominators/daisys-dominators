@@ -22,20 +22,19 @@ export class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProp) {
-    if (
-      prevProp.user.id !== this.props.user.id ||
-      prevProp.items.quantity !== this.props.items.quantity
-    ) {
+    if (prevProp.user.id !== this.props.user.id) {
       this.props.getAllItems(this.props.user.id)
     }
   }
 
   render() {
+    // console.log(this.props.items, "IM ITEMS")
     const {
       items,
       removeItem,
       subQuantity,
       addQuantity,
+      getAllItems,
       total,
       user
     } = this.props
@@ -52,6 +51,7 @@ export class Cart extends React.Component {
               removeItem={removeItem}
               subQuantity={subQuantity}
               addQuantity={addQuantity}
+              getAllItems={getAllItems}
               user={user}
             />
             <div className="checkout-total">

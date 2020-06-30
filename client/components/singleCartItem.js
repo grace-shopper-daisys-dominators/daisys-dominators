@@ -1,14 +1,44 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {sortBy} from 'lodash'
 import './singleCartItem.css'
 
 const singleCartItem = props => {
-  const {items, removeItem, subQuantity, addQuantity, user} = props
+  const {items, removeItem, subQuantity, addQuantity, getAllItems, user} = props
   let currQuantity
+
+  function addQuantityAndUpdate(id, price) {
+    addQuantity(id, price)
+    getAllItems(user.id)
+  }
+
+  function subQuantityAndUpdate(id, price) {
+    subQuantity(id, price)
+    getAllItems(user.id)
+  }
+
+  function handleClick(item) {
+    console.log(item, 'IM CART')
+    if (!user.id) {
+      subQuantity(item.id)
+    }
+
+    if (item.cart.quantity === 1 && user.id) {
+      removeItem(item.id, item.price)
+      // getAllItems(user.id)
+    } else {
+      subQuantityAndUpdate(item.id, item.price)
+    }
+
+    // user.id ? subQuantityAndUpdate(item.id, item.price): subQuantity(item.id)
+  }
+
+  // console.log(window.location.pathname, "OOP")
+
   return (
     <div>
       {items
-        ? items.map(item => {
+        ? sortBy(items, ['name']).map(item => {
             item.cart
               ? (currQuantity = item.cart.quantity)
               : (currQuantity = null)
@@ -45,9 +75,7 @@ const singleCartItem = props => {
                           id="minus-quantity-btn"
                           type="submit"
                           onClick={() => {
-                            user.id
-                              ? subQuantity(item.id, item.price)
-                              : subQuantity(item.id)
+                            handleClick(item)
                           }}
                         >
                           -
@@ -59,9 +87,8 @@ const singleCartItem = props => {
                           type="submit"
                           onClick={() => {
                             user.id
-                              ? addQuantity(item.id, item.price)
+                              ? addQuantityAndUpdate(item.id, item.price)
                               : addQuantity(item.id)
-                            currQuantity++
                           }}
                         >
                           +

@@ -74,7 +74,7 @@ export const fetchCartFromLocalStorage = () => {
   }
 }
 
-export const fetchCartFromServer = userId => {
+export const fetchCartFromServer = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/orders/me/current')
@@ -82,7 +82,7 @@ export const fetchCartFromServer = userId => {
       if (data[0].products.length > 0) {
         total = data[0].products[0].cart.total
       }
-
+      console.log(data[0].products, 'HELLO')
       dispatch(getCart(data[0].products, total))
       //whats being received from the backend
     } catch (err) {
@@ -213,6 +213,7 @@ export const addQuantityToServer = (productId, price) => {
         orderId
         //whats being sent to the backend
       })
+      console.log(data, 'IM DATA')
       dispatch(addQuantity(data))
       //whats being received from the backend
     } catch (err) {
@@ -245,12 +246,12 @@ const removeItemFromState = (state, action) => {
 //data.productId, data.total on the action
 const subQuantityFromState = (state, action) => {
   let indexOfExistedItem = state.items.findIndex(
-    item => item.id === action.product.id
+    item => item.id === action.product.productId
   )
 
-  if (indexOfExistedItem) {
+  if (indexOfExistedItem >= 0) {
     const copyItems = [...state.items]
-    copyItems[indexOfExistedItem] = action.product
+    copyItems[indexOfExistedItem].cart.quantity = action.product.quantity
     return {...state, items: copyItems, total: action.product.total}
   } else {
     return {state}
@@ -259,11 +260,11 @@ const subQuantityFromState = (state, action) => {
 
 const addQuantityFromState = (state, action) => {
   let indexOfExistedItem = state.items.findIndex(
-    item => item.id === action.product.id
+    item => item.id === action.product.productId
   )
-  if (indexOfExistedItem) {
+  if (indexOfExistedItem >= 0) {
     const copyItems = [...state.items]
-    copyItems[indexOfExistedItem] = action.product
+    copyItems[indexOfExistedItem].cart.quantity = action.product.quantity
     return {...state, items: copyItems, total: action.product.total}
   } else {
     return {state}
