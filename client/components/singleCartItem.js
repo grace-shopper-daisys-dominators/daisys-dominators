@@ -18,22 +18,16 @@ const singleCartItem = props => {
   }
 
   function handleClick(item) {
-    console.log(item, 'IM CART')
     if (!user.id) {
       subQuantity(item.id)
     }
 
     if (item.cart.quantity === 1 && user.id) {
       removeItem(item.id, item.price)
-      // getAllItems(user.id)
     } else {
       subQuantityAndUpdate(item.id, item.price)
     }
-
-    // user.id ? subQuantityAndUpdate(item.id, item.price): subQuantity(item.id)
   }
-
-  // console.log(window.location.pathname, "OOP")
 
   return (
     <div>
