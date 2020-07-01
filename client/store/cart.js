@@ -63,6 +63,7 @@ export const fetchCartFromLocalStorage = () => {
       const items = JSON.parse(localStorage.getItem('cart'))
       if (items) {
         const total = getTotal()
+        console.log(items, 'IM LOCAL ITEMS')
         dispatch(getCart(items, total))
       } else {
         dispatch(getCart([], 0))
@@ -82,7 +83,6 @@ export const fetchCartFromServer = () => {
       if (data[0].products.length > 0) {
         total = data[0].products[0].cart.total
       }
-      console.log(data[0].products, 'HELLO')
       dispatch(getCart(data[0].products, total))
       //whats being received from the backend
     } catch (err) {

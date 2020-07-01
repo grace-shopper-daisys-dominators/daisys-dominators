@@ -7,22 +7,30 @@ const singleCartItem = props => {
   const {items, removeItem, subQuantity, addQuantity, getAllItems, user} = props
   let currQuantity
 
-  function addQuantityAndUpdate(id, price) {
+  const addQuantityAndUpdate = (id, price) => {
     addQuantity(id, price)
     getAllItems(user.id)
   }
 
-  function subQuantityAndUpdate(id, price) {
+  const localStorageAddAndUpdate = id => {
+    addQuantity(id)
+    getAllItems()
+  }
+
+  const subQuantityAndUpdate = (id, price) => {
     subQuantity(id, price)
     getAllItems(user.id)
   }
 
-  function handleClick(item) {
-    if (!user.id) {
-      subQuantity(item.id)
-    }
+  const localStorageSubAndUpdate = id => {
+    subQuantity(id)
+    getAllItems()
+  }
 
-    if (item.cart.quantity === 1 && user.id) {
+  const handleClick = item => {
+    if (!user.id) {
+      localStorageSubAndUpdate(item.id)
+    } else if (item.cart.quantity === 1 && user.id) {
       removeItem(item.id, item.price)
     } else {
       subQuantityAndUpdate(item.id, item.price)
@@ -57,7 +65,8 @@ const singleCartItem = props => {
                     </p>
                     <p>
                       {' '}
-                      <b>Quantity:</b> {currQuantity}
+                      <b>Quantity:</b>{' '}
+                      {currQuantity ? currQuantity : item.quantity}
                     </p>
                     <p>
                       {' '}
@@ -82,7 +91,7 @@ const singleCartItem = props => {
                           onClick={() => {
                             user.id
                               ? addQuantityAndUpdate(item.id, item.price)
-                              : addQuantity(item.id)
+                              : localStorageAddAndUpdate(item.id)
                           }}
                         >
                           +

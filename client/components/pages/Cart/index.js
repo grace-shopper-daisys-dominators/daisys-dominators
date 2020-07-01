@@ -28,7 +28,6 @@ export class Cart extends React.Component {
   }
 
   render() {
-    // console.log(this.props.items, "IM ITEMS")
     const {
       items,
       removeItem,
@@ -68,6 +67,7 @@ export class Cart extends React.Component {
               removeItem={removeItem}
               subQuantity={subQuantity}
               addQuantity={addQuantity}
+              getAllItems={getAllItems}
               user={user}
             />
             <div className="checkout-total">
