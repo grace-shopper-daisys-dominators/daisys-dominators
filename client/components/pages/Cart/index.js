@@ -72,6 +72,7 @@ export class Cart extends React.Component {
             />
             <div className="checkout-total">
               <div className="total-count">Total = ${localTotal}</div>
+              <h1>To checkout please sign up!</h1>
             </div>
           </div>
         )}

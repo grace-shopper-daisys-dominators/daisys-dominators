@@ -7,11 +7,10 @@ import {
   fetchCartFromServer,
   removeItemFromServer,
   subtractQuantityFromServer,
-  addQuantityToServer,
-  removeItemFromStorage,
-  addQuantityToStorage,
-  subtractQuantityFromStorage
+  addQuantityToServer
 } from '../../../store/cart'
+
+//Guest should not have access to checkout unless they sign up!
 export class Checkout extends React.Component {
   componentDidMount() {
     this.props.getAllItems()
@@ -84,8 +83,6 @@ export class Checkout extends React.Component {
               </div>
             </form>
           </div>
-          {/* {
-          user ? ( */}
           <div>
             <SingleCartItem
               orderId={orderId}
@@ -100,13 +97,6 @@ export class Checkout extends React.Component {
               Back to cart
             </Link>
           </div>
-
-          {/* ) : (
-            //ACCESS THE LOCAL STORAGE
-          )
-        } */}
-
-          {/* <button type='submt' onClick={()= > }>Submit Order</button> */}
         </div>
       </div>
     )
@@ -125,27 +115,22 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getAllItems: () => dispatch(fetchCartFromServer()),
+
     removeItem: (itemId, price) => {
       if (price) {
         return dispatch(removeItemFromServer(itemId, price))
-      } else {
-        return dispatch(removeItemFromStorage(itemId))
       }
     },
 
     subQuantity: (itemId, price) => {
       if (price) {
         return dispatch(subtractQuantityFromServer(itemId, price))
-      } else {
-        return dispatch(subtractQuantityFromStorage(itemId))
       }
     },
 
     addQuantity: (itemId, price) => {
       if (price) {
         return dispatch(addQuantityToServer(itemId, price))
-      } else {
-        return dispatch(addQuantityToStorage(itemId))
       }
     }
   }
