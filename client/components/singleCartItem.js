@@ -9,7 +9,6 @@ const singleCartItem = props => {
 
   const addQuantityAndUpdate = (id, price) => {
     addQuantity(id, price)
-    getAllItems(user.id)
   }
 
   const localStorageAddAndUpdate = id => {
@@ -19,7 +18,6 @@ const singleCartItem = props => {
 
   const subQuantityAndUpdate = (id, price) => {
     subQuantity(id, price)
-    getAllItems(user.id)
   }
 
   const localStorageSubAndUpdate = id => {
@@ -33,7 +31,7 @@ const singleCartItem = props => {
     } else if (item.cart.quantity === 1 && user.id) {
       removeItem(item.id, item.price)
     } else {
-      subQuantityAndUpdate(item.id, item.price)
+      subQuantityAndUpdate(item.id, item.price, user.id)
     }
   }
 

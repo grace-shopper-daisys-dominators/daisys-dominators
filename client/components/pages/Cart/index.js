@@ -54,7 +54,7 @@ export class Cart extends React.Component {
               user={user}
             />
             <div className="checkout-total">
-              <div className="total-count">Total = ${total}</div>
+              <p className="total-count">Total = ${total}</p>
               <Link id="link-to-checkout" to="/checkout">
                 Checkout
               </Link>
@@ -71,7 +71,7 @@ export class Cart extends React.Component {
               user={user}
             />
             <div className="checkout-total">
-              <div className="total-count">Total = ${localTotal}</div>
+              <p className="total-count">Total = ${localTotal}</p>
               <h1>To checkout please sign up!</h1>
             </div>
           </div>
