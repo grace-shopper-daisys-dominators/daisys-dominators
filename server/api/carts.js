@@ -11,7 +11,7 @@ router.get('/:id', async (req, res, next) => {
       currentUser = {}
     }
 
-    const cart = Cart.findByPk(req.params.id, {include: User})
+    const cart = await Cart.findByPk(req.params.id, {include: User})
 
     if (currentUser.id === cart.user.id || currentUser.isAdmin) {
       res.json(cart)
