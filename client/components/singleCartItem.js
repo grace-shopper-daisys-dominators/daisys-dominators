@@ -4,36 +4,36 @@ import {sortBy} from 'lodash'
 import './singleCartItem.css'
 
 const singleCartItem = props => {
-  const {items, removeItem, subQuantity, addQuantity, getAllItems, user} = props
+  const {items, removeItem, subQuantity, addQuantity, user} = props
   let currQuantity
 
-  const addQuantityAndUpdate = (id, price) => {
-    addQuantity(id, price)
-  }
+  // const addQuantityAndUpdate = (id, price) => {
+  //   addQuantity(id, price)
+  // }
 
-  const localStorageAddAndUpdate = id => {
-    addQuantity(id)
-    getAllItems()
-  }
+  // const localStorageAddAndUpdate = id => {
+  //   addQuantity(id)
+  //   getAllItems()
+  // }
 
-  const subQuantityAndUpdate = (id, price) => {
-    subQuantity(id, price)
-  }
+  // const subQuantityAndUpdate = (id, price) => {
+  //   subQuantity(id, price)
+  // }
 
-  const localStorageSubAndUpdate = id => {
-    subQuantity(id)
-    getAllItems()
-  }
+  // const localStorageSubAndUpdate = id => {
+  //   subQuantity(id)
+  //   getAllItems()
+  // }
 
-  const handleClick = item => {
-    if (!user.id) {
-      localStorageSubAndUpdate(item.id)
-    } else if (item.cart.quantity === 1 && user.id) {
-      removeItem(item.id, item.price)
-    } else {
-      subQuantityAndUpdate(item.id, item.price, user.id)
-    }
-  }
+  // const handleClick = item => {
+  //   if (!user.id) {
+  //     localStorageSubAndUpdate(item.id)
+  //   } else if (item.cart.quantity === 1 && user.id) {
+  //     removeItem(item.id, item.price)
+  //   } else {
+  //     subQuantityAndUpdate(item.id, item.price, user.id)
+  //   }
+  // }
 
   return (
     <div>
@@ -76,7 +76,9 @@ const singleCartItem = props => {
                           id="minus-quantity-btn"
                           type="submit"
                           onClick={() => {
-                            handleClick(item)
+                            user.id
+                              ? subQuantity(item.id, item.price)
+                              : subQuantity(item.id)
                           }}
                         >
                           -
@@ -88,8 +90,8 @@ const singleCartItem = props => {
                           type="submit"
                           onClick={() => {
                             user.id
-                              ? addQuantityAndUpdate(item.id, item.price)
-                              : localStorageAddAndUpdate(item.id)
+                              ? addQuantity(item.id, item.price)
+                              : addQuantity(item.id)
                           }}
                         >
                           +

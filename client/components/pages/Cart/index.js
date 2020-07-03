@@ -33,7 +33,6 @@ export class Cart extends React.Component {
       removeItem,
       subQuantity,
       addQuantity,
-      getAllItems,
       total,
       user
     } = this.props
@@ -50,7 +49,6 @@ export class Cart extends React.Component {
               removeItem={removeItem}
               subQuantity={subQuantity}
               addQuantity={addQuantity}
-              getAllItems={getAllItems}
               user={user}
             />
             <div className="checkout-total">
@@ -67,7 +65,6 @@ export class Cart extends React.Component {
               removeItem={removeItem}
               subQuantity={subQuantity}
               addQuantity={addQuantity}
-              getAllItems={getAllItems}
               user={user}
             />
             <div className="checkout-total">
