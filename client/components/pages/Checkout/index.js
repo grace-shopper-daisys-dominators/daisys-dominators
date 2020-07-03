@@ -29,9 +29,7 @@ export class Checkout extends React.Component {
       total: this.props.total
     })
     const {status} = response.data
-    console.log(response, 'IM RESPONSE')
     if (status === 'success') {
-      console.log('HARRO')
       toast('Success! Check email for confirmation', {type: 'success'})
     } else {
       toast('Something went wrong', {type: 'error'})
@@ -68,7 +66,6 @@ export class Checkout extends React.Component {
           stripeKey="pk_test_51H0X7QLPmrlWmCJEgVrhZMa4y1ZScSjcsnu11QbgBPe9lHCxkes1UVMqP4emZuVjuuS7DgonroE0MwVxPXRA4x1b00LBInEbGy"
           token={this.handleToken}
           amount={total * 100}
-          // name={items.map(item => item.name)}
           billingAddress
           shippingAddress
         />
