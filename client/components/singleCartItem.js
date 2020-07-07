@@ -1,14 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {sortBy} from 'lodash'
 import './singleCartItem.css'
 
 const singleCartItem = props => {
   const {items, removeItem, subQuantity, addQuantity, user} = props
   let currQuantity
+
   return (
     <div>
       {items
-        ? items.map(item => {
+        ? sortBy(items, ['name']).map(item => {
             item.cart
               ? (currQuantity = item.cart.quantity)
               : (currQuantity = null)
@@ -30,6 +32,11 @@ const singleCartItem = props => {
                     <p>
                       {' '}
                       <b>Price:</b> ${item.price}
+                    </p>
+                    <p>
+                      {' '}
+                      <b>Quantity:</b>{' '}
+                      {currQuantity ? currQuantity : item.quantity}
                     </p>
                     <p>
                       {' '}
@@ -57,7 +64,6 @@ const singleCartItem = props => {
                             user.id
                               ? addQuantity(item.id, item.price)
                               : addQuantity(item.id)
-                            currQuantity++
                           }}
                         >
                           +

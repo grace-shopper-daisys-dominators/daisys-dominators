@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
+const cors = require('cors')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
@@ -62,6 +63,9 @@ const createApp = () => {
   )
   app.use(passport.initialize())
   app.use(passport.session())
+
+  // cors middleware for stripe
+  app.use(cors())
 
   // auth and api routes
   app.use('/auth', require('./auth'))

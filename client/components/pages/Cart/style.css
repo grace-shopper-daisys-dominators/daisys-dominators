@@ -13,9 +13,13 @@
 
 #link-to-checkout {
   color: #db675e;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .checkout-total {
   margin-bottom: 40px;
+}
+
+h1 {
+  color: white;
 }
