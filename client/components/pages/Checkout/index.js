@@ -63,7 +63,7 @@ export class Checkout extends React.Component {
           <div id="total">Total ${total}</div>
         </div>
         <StripeCheckout
-          stripeKey="pk_test_51H0X7QLPmrlWmCJEgVrhZMa4y1ZScSjcsnu11QbgBPe9lHCxkes1UVMqP4emZuVjuuS7DgonroE0MwVxPXRA4x1b00LBInEbGy"
+          stripeKey={process.env.STRIPE_API_KEY}
           token={this.handleToken}
           amount={total * 100}
           billingAddress
