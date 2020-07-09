@@ -1,6 +1,6 @@
 # Daisy's Wine Shop
 
-#### An e-commerce wine shop site
+#### An e-commerce wine shop site.
 
 ## Description
 
