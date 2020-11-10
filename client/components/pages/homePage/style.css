@@ -2,7 +2,11 @@
 @import url(https://fonts.googleapis.com/css?family=Six+Caps);
 
 body {
-  background: url(http://api.thumbr.it/whitenoise-361x370.png?background=15424fff&noise=166f9e&density=100&opacity=61);
+  background: linear-gradient(
+    0deg,
+    rgba(32, 51, 84, 1) 51%,
+    rgba(35, 57, 93, 1) 94%
+  );
   text-align: center;
 }
 
