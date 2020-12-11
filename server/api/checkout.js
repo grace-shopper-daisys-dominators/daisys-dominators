@@ -1,9 +1,9 @@
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const router = require('express').Router()
-const stripe = require('stripe')(
-  process.env.STRIPE_API_KEY || process.env.REACT_APP_STRIPE_API_KEY
-)
-console.log(process.env.STRIPE_API_KEY, 'IM KEY')
+const stripe = require('stripe')(process.env.STRIPE_API_KEY)
+
 const uuid = require('uuid/v4')
 module.exports = router
 

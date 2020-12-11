@@ -36,22 +36,27 @@ export class SingleProduct extends Component {
   isLoggedIn = () => {
     const currProduct = this.props.product
     const {items, addQuantity} = this.props
-    let existedItem = items.find(item => item.id === currProduct.id)
-    if (existedItem) {
-      addQuantity(currProduct.id, currProduct.price)
-    } else {
-      this.props.addToCart(currProduct, currProduct.id, currProduct.price)
+    if (items) {
+      let existedItem = items.find(item => item.id === currProduct.id)
+      if (existedItem) {
+        addQuantity(currProduct.id, currProduct.price)
+      } else {
+        this.props.addToCart(currProduct, currProduct.id, currProduct.price)
+      }
     }
   }
 
   isNotLoggedIn = () => {
     const currProduct = this.props.product
     const {items, addQuantity, addToCart} = this.props
-    let existedItem = items.find(item => item.id === currProduct.id)
-    if (existedItem) {
-      addQuantity(currProduct.id)
-    } else {
-      addToCart(currProduct)
+
+    if (items) {
+      let existedItem = items.find(item => item.id === currProduct.id)
+      if (existedItem) {
+        addQuantity(currProduct.id)
+      } else {
+        addToCart(currProduct)
+      }
     }
   }
 
