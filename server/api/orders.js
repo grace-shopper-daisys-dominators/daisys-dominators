@@ -82,10 +82,7 @@ router.get('/me/current', async (req, res, next) => {
     }
 
     if (currentUser.id) {
-      const cart = await Order.findAll({
-        where: {status: 'pending', userId: currentUser.id},
-        include: Product
-      })
+      const cart = await Order.getCart(currentUser.id)
       console.log(cart)
       res.json(cart)
     } else {

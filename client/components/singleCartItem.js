@@ -4,17 +4,11 @@ import {sortBy} from 'lodash'
 import './singleCartItem.css'
 
 const singleCartItem = props => {
-  const {items, removeItem, subQuantity, addQuantity, user} = props
-  let currQuantity
-  console.log('singleCartItem rendering')
+  const {items, removeItem, subQuantity, addQuantity} = props
   return (
     <div>
       {items
         ? sortBy(items, ['name']).map(item => {
-            console.log(item)
-            item.order_product
-              ? (currQuantity = item.order_product.quantity)
-              : (currQuantity = item.quantity)
             return (
               <div className="cart-container" key={item.id}>
                 <div className="cart-details">
@@ -36,7 +30,7 @@ const singleCartItem = props => {
                     </p>
                     <p>
                       {' '}
-                      <b>Quantity:</b> {currQuantity}
+                      <b>Quantity:</b> {item.quantity}
                     </p>
                     <p>
                       {' '}
@@ -48,9 +42,7 @@ const singleCartItem = props => {
                           id="minus-quantity-btn"
                           type="submit"
                           onClick={() => {
-                            user.id
-                              ? subQuantity(item.id, item.price)
-                              : subQuantity(item.id)
+                            subQuantity(item)
                           }}
                         >
                           -
@@ -61,9 +53,7 @@ const singleCartItem = props => {
                           id="plus-quantity-btn"
                           type="submit"
                           onClick={() => {
-                            user.id
-                              ? addQuantity(item.id, item.price)
-                              : addQuantity(item.id)
+                            addQuantity(item)
                           }}
                         >
                           +
@@ -73,11 +63,7 @@ const singleCartItem = props => {
                         <button
                           id="delete-item-btn"
                           type="submit"
-                          onClick={() =>
-                            user.id
-                              ? removeItem(item.id, item.price)
-                              : removeItem(item.id)
-                          }
+                          onClick={() => removeItem(item.id)}
                         >
                           Delete item
                         </button>

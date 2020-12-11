@@ -2,23 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {
-  fetchCartFromServer,
-  removeItemFromServer,
-  subtractQuantityFromServer,
-  addQuantityToServer,
-  fetchCartFromLocalStorage,
-  removeItemFromStorage,
-  addQuantityToStorage,
-  subtractQuantityFromStorage,
-  fetchCart
+  fetchCart,
+  removeItemFromCart,
+  subtractQuantityFromCart,
+  addQuantityToCart
 } from '../../../store/cart'
 import {me} from '../../../store/user'
 import SingleCartItem from '../../singleCartItem'
-import {getTotal} from '../../../store/localStorage'
 import './style.css'
 export class Cart extends React.Component {
   async componentDidMount() {
-    await this.props.getUser()
     await this.props.getAllItems()
   }
 
@@ -38,42 +31,27 @@ export class Cart extends React.Component {
       user
     } = this.props
 
-    const localTotal = getTotal()
-
     return (
       <div id="main-cart-container">
         <h2 id="cart-title">Cart</h2>
-        {this.props.user.id ? (
-          <div>
-            <SingleCartItem
-              items={items}
-              removeItem={removeItem}
-              subQuantity={subQuantity}
-              addQuantity={addQuantity}
-              user={user}
-            />
-            <div className="checkout-total">
-              <p className="total-count">Total = ${total}</p>
+        <div>
+          <SingleCartItem
+            items={items}
+            removeItem={removeItem}
+            subQuantity={subQuantity}
+            addQuantity={addQuantity}
+          />
+          <div className="checkout-total">
+            <p className="total-count">Total = ${total}</p>
+            {user.id ? (
               <Link id="link-to-checkout" to="/checkout">
                 Checkout
               </Link>
-            </div>
-          </div>
-        ) : (
-          <div>
-            <SingleCartItem
-              items={items}
-              removeItem={removeItem}
-              subQuantity={subQuantity}
-              addQuantity={addQuantity}
-              user={user}
-            />
-            <div className="checkout-total">
-              <p className="total-count">Total = ${localTotal}</p>
+            ) : (
               <h1>To checkout please sign up!</h1>
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     )
   }
@@ -81,9 +59,9 @@ export class Cart extends React.Component {
 
 const mapState = state => {
   return {
-    user: state.user,
     items: state.cart.items,
-    total: state.cart.total
+    total: state.cart.total,
+    user: state.user
   }
 }
 
@@ -93,28 +71,16 @@ const mapDispatch = dispatch => {
       return dispatch(fetchCart())
     },
 
-    removeItem: (itemId, price) => {
-      if (price) {
-        return dispatch(removeItemFromServer(itemId, price))
-      } else {
-        return dispatch(removeItemFromStorage(itemId))
-      }
+    removeItem: itemId => {
+      return dispatch(removeItemFromCart(itemId))
     },
 
-    subQuantity: (itemId, price) => {
-      if (price) {
-        return dispatch(subtractQuantityFromServer(itemId, price))
-      } else {
-        return dispatch(subtractQuantityFromStorage(itemId))
-      }
+    subQuantity: item => {
+      return dispatch(subtractQuantityFromCart(item))
     },
 
-    addQuantity: (itemId, price) => {
-      if (price) {
-        return dispatch(addQuantityToServer(itemId, price))
-      } else {
-        return dispatch(addQuantityToStorage(itemId))
-      }
+    addQuantity: item => {
+      return dispatch(addQuantityToCart(item))
     },
     getUser: () => {
       dispatch(me())

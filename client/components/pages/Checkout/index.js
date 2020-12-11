@@ -8,10 +8,10 @@ import SingleCartItem from '../../singleCartItem'
 import StripeCheckout from 'react-stripe-checkout'
 import './style.css'
 import {
-  fetchCartFromServer,
-  removeItemFromServer,
-  subtractQuantityFromServer,
-  addQuantityToServer
+  fetchCart,
+  removeItemFromCart,
+  addQuantityToCart,
+  subtractQuantityFromCart
 } from '../../../store/cart'
 
 toast.configure()
@@ -90,24 +90,18 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllItems: () => dispatch(fetchCartFromServer()),
+    getAllItems: () => dispatch(fetchCart()),
 
-    removeItem: (itemId, price) => {
-      if (price) {
-        return dispatch(removeItemFromServer(itemId, price))
-      }
+    removeItem: itemId => {
+      return dispatch(removeItemFromCart(itemId))
     },
 
-    subQuantity: (itemId, price) => {
-      if (price) {
-        return dispatch(subtractQuantityFromServer(itemId, price))
-      }
+    subQuantity: item => {
+      return dispatch(subtractQuantityFromCart(item))
     },
 
-    addQuantity: (itemId, price) => {
-      if (price) {
-        return dispatch(addQuantityToServer(itemId, price))
-      }
+    addQuantity: item => {
+      return dispatch(addQuantityToCart(item))
     }
   }
 }
