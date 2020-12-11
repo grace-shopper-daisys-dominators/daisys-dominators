@@ -86,7 +86,7 @@ router.get('/me/current', async (req, res, next) => {
         where: {status: 'pending', userId: currentUser.id},
         include: Product
       })
-
+      console.log(cart)
       res.json(cart)
     } else {
       res.send('Log in to view your cart.')

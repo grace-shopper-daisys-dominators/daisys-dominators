@@ -42,18 +42,20 @@ export const removeItem = (productId, total) => {
 }
 
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const subtractQuantity = product => {
+export const subtractQuantity = (product, total) => {
   return {
     type: SUB_QUANTITY,
-    product
+    product,
+    total
   }
 }
 
 //WHATS SENT BACK FROM BACKEND TO UPDATE STATE
-export const addQuantity = product => {
+export const addQuantity = (product, total) => {
   return {
     type: ADD_QUANTITY,
-    product
+    product,
+    total
   }
 }
 
@@ -63,7 +65,6 @@ export const fetchCartFromLocalStorage = () => {
       const items = JSON.parse(localStorage.getItem('cart'))
       if (items) {
         const total = getTotal()
-        console.log(items, 'IM LOCAL ITEMS')
         dispatch(getCart(items, total))
       } else {
         dispatch(getCart([], 0))
@@ -81,7 +82,7 @@ export const fetchCartFromServer = () => {
       const {data} = await axios.get('/api/orders/me/current')
       let total = 0
       if (data[0].products.length > 0) {
-        total = data[0].products[0].cart.total
+        total = data[0].products[0].order_product.total
       }
       dispatch(getCart(data[0].products, total))
       //whats being received from the backend
@@ -90,6 +91,22 @@ export const fetchCartFromServer = () => {
     }
   }
 }
+
+export const fetchCart = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/auth/me')
+      if (data.id) {
+        dispatch(fetchCartFromServer())
+      } else {
+        dispatch(fetchCartFromLocalStorage())
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 export const addItemToLocalStorage = product => {
   return dispatch => {
     try {
@@ -112,6 +129,7 @@ export const addItemToServer = (product, productId, price) => {
         price
         //whats being sent to the backend
       })
+      product.order_product = data
       dispatch(addToCart(product, data.total))
       //whats being received from the backend
     } catch (err) {
@@ -141,9 +159,9 @@ export const removeItemFromServer = (productId, price) => {
       let item = order.data[0].products.find(product => {
         return product.id === productId
       })
-      let newPrice = item.cart.price
+      let newPrice = item.order_product.price
       await axios.delete(`/api/cart/${orderId}/${productId}`)
-      dispatch(removeItem(productId, item.cart.total - newPrice))
+      dispatch(removeItem(productId, item.order_product.total - newPrice))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T REMOVE ITEM FROM DATABASE")
@@ -163,7 +181,7 @@ export const subtractQuantityFromServer = (productId, price) => {
         productId
         //whats being sent to the backend
       })
-      dispatch(subtractQuantity(data))
+      dispatch(subtractQuantity(productId, data.total))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T SUBTRACT QUANTITY FROM DATABASE")
@@ -214,7 +232,7 @@ export const addQuantityToServer = (productId, price) => {
         //whats being sent to the backend
       })
       console.log(data, 'IM DATA')
-      dispatch(addQuantity(data))
+      dispatch(addQuantity(productId, data.total))
       //whats being received from the backend
     } catch (err) {
       console.log(err, "COULDN'T ADD QUANTITY FROM DATABASE")
@@ -246,13 +264,16 @@ const removeItemFromState = (state, action) => {
 //data.productId, data.total on the action
 const subQuantityFromState = (state, action) => {
   let indexOfExistedItem = state.items.findIndex(
-    item => item.id === action.product.productId
+    item => item.id === action.product
   )
 
   if (indexOfExistedItem >= 0) {
     const copyItems = [...state.items]
-    copyItems[indexOfExistedItem].cart.quantity = action.product.quantity
-    return {...state, items: copyItems, total: action.product.total}
+    const updatedItem = copyItems[indexOfExistedItem]
+    updatedItem.order_product
+      ? updatedItem.order_product.quantity--
+      : updatedItem.quantity--
+    return {...state, items: copyItems, total: action.total}
   } else {
     return {state}
   }
@@ -260,12 +281,15 @@ const subQuantityFromState = (state, action) => {
 
 const addQuantityFromState = (state, action) => {
   let indexOfExistedItem = state.items.findIndex(
-    item => item.id === action.product.productId
+    item => item.id === action.product
   )
   if (indexOfExistedItem >= 0) {
     const copyItems = [...state.items]
-    copyItems[indexOfExistedItem].cart.quantity = action.product.quantity
-    return {...state, items: copyItems, total: action.product.total}
+    const updatedItem = copyItems[indexOfExistedItem]
+    updatedItem.order_product
+      ? updatedItem.order_product.quantity++
+      : updatedItem.quantity++
+    return {...state, items: copyItems, total: action.total}
   } else {
     return {state}
   }
@@ -275,6 +299,7 @@ const addQuantityFromState = (state, action) => {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
+      console.log(action.cart)
       return {...state, items: action.cart, total: action.total}
     case ADD_TO_CART:
       return addCartToState(state, action)

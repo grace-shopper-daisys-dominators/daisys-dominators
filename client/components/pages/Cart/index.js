@@ -9,23 +9,24 @@ import {
   fetchCartFromLocalStorage,
   removeItemFromStorage,
   addQuantityToStorage,
-  subtractQuantityFromStorage
+  subtractQuantityFromStorage,
+  fetchCart
 } from '../../../store/cart'
 import {me} from '../../../store/user'
 import SingleCartItem from '../../singleCartItem'
 import {getTotal} from '../../../store/localStorage'
 import './style.css'
 export class Cart extends React.Component {
-  componentDidMount() {
-    this.props.getUser(this.props.user.id)
-    this.props.getAllItems(this.props.user.id)
+  async componentDidMount() {
+    await this.props.getUser()
+    await this.props.getAllItems()
   }
 
-  componentDidUpdate(prevProp) {
-    if (prevProp.user.id !== this.props.user.id) {
-      this.props.getAllItems(this.props.user.id)
-    }
-  }
+  // componentDidUpdate(prevProp) {
+  //   if (prevProp.user.id !== this.props.user.id) {
+  //     this.props.getAllItems(this.props.user.id)
+  //   }
+  // }
 
   render() {
     const {
@@ -88,12 +89,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllItems: userId => {
-      if (userId) {
-        return dispatch(fetchCartFromServer(userId))
-      } else {
-        return dispatch(fetchCartFromLocalStorage())
-      }
+    getAllItems: () => {
+      return dispatch(fetchCart())
     },
 
     removeItem: (itemId, price) => {

@@ -61,7 +61,7 @@ Order_Product.prototype.remove = async function(price) {
 
 Order_Product.updateTotal = async function(orderId) {
   try {
-    let cartsInOrder = await Cart.findAll({
+    let cartsInOrder = await Order_Product.findAll({
       where: {orderId: orderId}
     })
     let newTotal = 0
@@ -76,4 +76,4 @@ Order_Product.updateTotal = async function(orderId) {
   }
 }
 
-module.exports = Cart
+module.exports = Order_Product

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, User, Cart, Product} = require('../db/models')
+const {Order, User, Order_Product} = require('../db/models')
 module.exports = router
 
 router.get('/:id', async (req, res, next) => {
@@ -11,10 +11,12 @@ router.get('/:id', async (req, res, next) => {
       currentUser = {}
     }
 
-    const cart = await Cart.findByPk(req.params.id, {include: User})
+    const orderProduct = await Order_Product.findByPk(req.params.id, {
+      include: User
+    })
 
-    if (currentUser.id === cart.user.id || currentUser.isAdmin) {
-      res.json(cart)
+    if (currentUser.id === orderProduct.user.id || currentUser.isAdmin) {
+      res.json(orderProduct)
     }
   } catch (err) {
     next(err)
@@ -37,7 +39,7 @@ router.post('/', async (req, res, next) => {
     const {userId} = await Order.findByPk(orderId)
 
     if (currentUser.id === userId) {
-      const newCart = await Cart.create({
+      const newOrderProduct = await Order_Product.create({
         productId: productId,
         quantity: 1,
         price: price,
@@ -45,12 +47,14 @@ router.post('/', async (req, res, next) => {
         total: 0
       })
 
-      if (newCart) {
-        await Cart.updateTotal(orderId)
+      if (newOrderProduct) {
+        await Order_Product.updateTotal(orderId)
 
-        let cart = await Cart.findOne({where: {orderId, productId}})
+        let orderProduct = await Order_Product.findOne({
+          where: {orderId, productId}
+        })
 
-        res.status(201).send(cart)
+        res.status(201).send(orderProduct)
       } else {
         res.status(204).send('Failed to add item.')
       }
@@ -74,7 +78,7 @@ router.put('/:id', async (req, res, next) => {
 
     const orderId = req.params.id
 
-    let cart = await Cart.findOne({
+    let orderProduct = await Order_Product.findOne({
       where: {orderId: orderId, productId: productId}
     })
 
@@ -83,19 +87,19 @@ router.put('/:id', async (req, res, next) => {
     if (userId === currentUser.id) {
       let result
       if (operation === 'add') {
-        result = await cart.add(price)
+        result = await orderProduct.add(price)
       } else if (operation === 'remove') {
-        result = await cart.remove(price)
+        result = await orderProduct.remove(price)
       }
 
       if (result) {
-        await Cart.updateTotal(orderId)
+        await Order_Product.updateTotal(orderId)
 
-        cart = await Cart.findOne({
+        orderProduct = await Order_Product.findOne({
           where: {orderId: orderId, productId: productId}
         })
 
-        res.send(cart)
+        res.send(orderProduct)
       } else {
         res.status(304).send('Failed to edit cart.')
       }
@@ -120,12 +124,12 @@ router.delete('/:orderId/:productId', async (req, res, next) => {
     const {userId} = await Order.findByPk(orderId)
 
     if (userId === currentUser.id) {
-      const deleted = await Cart.destroy({
+      const deleted = await Order_Product.destroy({
         where: {orderId: orderId, productId: productId}
       })
       if (deleted > 0) {
-        Cart.updateTotal(orderId)
-        let newData = await Cart.findOne({where: {orderId: orderId}})
+        Order_Product.updateTotal(orderId)
+        let newData = await Order_Product.findOne({where: {orderId: orderId}})
         let total = 0
         if (newData) {
           total = newData.total

@@ -6,14 +6,15 @@ import './singleCartItem.css'
 const singleCartItem = props => {
   const {items, removeItem, subQuantity, addQuantity, user} = props
   let currQuantity
-
+  console.log('singleCartItem rendering')
   return (
     <div>
       {items
         ? sortBy(items, ['name']).map(item => {
-            item.cart
-              ? (currQuantity = item.cart.quantity)
-              : (currQuantity = null)
+            console.log(item)
+            item.order_product
+              ? (currQuantity = item.order_product.quantity)
+              : (currQuantity = item.quantity)
             return (
               <div className="cart-container" key={item.id}>
                 <div className="cart-details">
@@ -35,8 +36,7 @@ const singleCartItem = props => {
                     </p>
                     <p>
                       {' '}
-                      <b>Quantity:</b>{' '}
-                      {currQuantity ? currQuantity : item.quantity}
+                      <b>Quantity:</b> {currQuantity}
                     </p>
                     <p>
                       {' '}
