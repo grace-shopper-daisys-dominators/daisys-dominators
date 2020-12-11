@@ -93,7 +93,7 @@ export const addItemToCart = product => {
         //if a user is logged in
         let order = await axios.get('/api/orders/me/current')
         let orderId = order.data.id
-        const {data} = await axios.post('/api/cart', {
+        const {data} = await axios.post('/api/orderProducts', {
           productId: product.id,
           price: product.price,
           orderId
@@ -121,7 +121,7 @@ export const removeItemFromCart = productId => {
           return product.id === productId
         })
         let newPrice = item.order_product.price
-        await axios.delete(`/api/cart/${orderId}/${productId}`)
+        await axios.delete(`/api/orderProducts/${orderId}/${productId}`)
         dispatch(removeItem(productId, item.total - newPrice))
       } else {
         //if a user is not logged in
@@ -144,7 +144,7 @@ export const subtractQuantityFromCart = product => {
         let order = await axios.get('/api/orders/me/current')
         let orderId = order.data.id
         let operation = 'remove'
-        const {data} = await axios.put(`/api/cart/${orderId}`, {
+        const {data} = await axios.put(`/api/orderProducts/${orderId}`, {
           price: product.price,
           operation,
           productId: product.id
@@ -179,7 +179,7 @@ export const addQuantityToCart = product => {
         let order = await axios.get('/api/orders/me/current')
         let orderId = order.data.id
         let operation = 'add'
-        const {data} = await axios.put(`/api/cart/${orderId}`, {
+        const {data} = await axios.put(`/api/orderProducts/${orderId}`, {
           price: product.price,
           productId: product.id,
           operation,
