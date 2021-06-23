@@ -18,7 +18,6 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const setNewUser = newUser => ({type: ADD_NEW_USER, newUser})
 /**
  * THUNK CREATORS
  */
@@ -54,13 +53,14 @@ export const auth = (email, password, method) => async dispatch => {
 export const addNewUser = (firstName, lastName, email, password) => {
   return async dispatch => {
     try {
-      const res = await axios.post('api/users', {
+      await axios.post('api/users', {
         firstName,
         lastName,
         email,
         password
       })
-      // dispatch(setNewUser(res.data))
+
+      dispatch(auth(email, password, 'login'))
       history.push('/home')
     } catch (err) {
       console.error(err, 'UNABLE TO CREATE USER')
